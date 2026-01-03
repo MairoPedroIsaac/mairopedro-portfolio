@@ -2,16 +2,45 @@
 
 import { skills } from "@/lib/data";
 import { Code2, Database, Palette, Zap } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export default function About() {
   const [yearsCount, setYearsCount] = useState(0);
   const [projectsCount, setProjectsCount] = useState(0);
   const [satisfactionCount, setSatisfactionCount] = useState(0);
+  const [hasAnimated, setHasAnimated] = useState(false);
+  
+  const statsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Animate counters when component mounts
-    const duration = 2000; // 2 seconds
+    if (!statsRef.current || hasAnimated) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry.isIntersecting && !hasAnimated) {
+          animateCounters();
+          setHasAnimated(true);
+          observer.disconnect();
+        }
+      },
+      {
+        threshold: 0.5, // Trigger when 50% visible
+        rootMargin: "0px 0px -100px 0px" // Trigger a bit early
+      }
+    );
+
+    observer.observe(statsRef.current);
+
+    return () => {
+      if (statsRef.current) {
+        observer.unobserve(statsRef.current);
+      }
+    };
+  }, [hasAnimated]);
+
+  const animateCounters = () => {
+    const duration = 2000;
     const steps = 60;
     const increment = 4 / steps;
     const projectsIncrement = 10 / steps;
@@ -39,9 +68,7 @@ export default function About() {
         setSatisfactionCount(100);
       }
     }, duration / steps);
-
-    return () => clearInterval(timer);
-  }, []);
+  };
 
   const highlights = [
     {
@@ -66,7 +93,6 @@ export default function About() {
     },
   ];
 
-  // Updated skills array with Node.js and another skill
   const updatedSkills = [...skills, "Node.js", "FastAPI"];
 
   return (
@@ -123,8 +149,11 @@ export default function About() {
               ))}
             </div>
 
-            {/* Stats with Animation */}
-            <div className="grid grid-cols-3 gap-4 sm:gap-6 pt-8">
+            {/* Stats with Animation - Ref added here */}
+            <div 
+              ref={statsRef}
+              className="grid grid-cols-3 gap-4 sm:gap-6 pt-8"
+            >
               <div className="text-center">
                 <div className="text-4xl font-bold text-primary">
                   {yearsCount.toFixed(0)}+
