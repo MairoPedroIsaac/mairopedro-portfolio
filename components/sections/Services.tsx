@@ -1,7 +1,7 @@
 "use client";
 
 import { services } from "@/lib/data";
-import { Code, Brain, Settings, ChevronLeft, ChevronRight } from "lucide-react";
+import { Globe, Brain, Settings, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect } from "react";
 
 export default function Services() {
@@ -10,7 +10,7 @@ export default function Services() {
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
 
   const iconMap = {
-    code: <Code className="w-10 h-10" />,
+    code: <Globe className="w-10 h-10" />,
     brain: <Brain className="w-10 h-10" />,
     settings: <Settings className="w-10 h-10" />,
   };
