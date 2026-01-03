@@ -1,7 +1,48 @@
+"use client";
+
 import { skills } from "@/lib/data";
 import { Code2, Database, Palette, Zap } from "lucide-react";
+import { useEffect, useState } from "react";
 
 export default function About() {
+  const [yearsCount, setYearsCount] = useState(0);
+  const [projectsCount, setProjectsCount] = useState(0);
+  const [satisfactionCount, setSatisfactionCount] = useState(0);
+
+  useEffect(() => {
+    // Animate counters when component mounts
+    const duration = 2000; // 2 seconds
+    const steps = 60;
+    const increment = 4 / steps;
+    const projectsIncrement = 10 / steps;
+    const satisfactionIncrement = 100 / steps;
+
+    let years = 0;
+    let projects = 0;
+    let satisfaction = 0;
+    let step = 0;
+
+    const timer = setInterval(() => {
+      step++;
+      years += increment;
+      projects += projectsIncrement;
+      satisfaction += satisfactionIncrement;
+
+      setYearsCount(Math.min(years, 4));
+      setProjectsCount(Math.min(projects, 10));
+      setSatisfactionCount(Math.min(satisfaction, 100));
+
+      if (step >= steps) {
+        clearInterval(timer);
+        setYearsCount(4);
+        setProjectsCount(10);
+        setSatisfactionCount(100);
+      }
+    }, duration / steps);
+
+    return () => clearInterval(timer);
+  }, []);
+
   const highlights = [
     {
       icon: <Code2 className="w-8 h-8" />,
@@ -25,6 +66,9 @@ export default function About() {
     },
   ];
 
+  // Updated skills array with Node.js and another skill
+  const updatedSkills = [...skills, "Node.js", "FastAPI"];
+
   return (
     <section id="about" className="section-padding bg-navy-light">
       <div className="container-custom">
@@ -39,7 +83,7 @@ export default function About() {
                 I'm a software engineer passionate about building solutions that solve real problems. Based in Kigali, Rwanda, I specialize in creating modern, scalable web applications that help businesses grow and succeed.
               </p>
               <p>
-                My expertise spans the full development stack, from crafting intuitive user interfaces with React and Next.js to building robust backends with Django and Python. I focus on delivering high-quality solutions that are both functional and elegant.
+                My expertise spans the full development stack, from crafting intuitive user interfaces with React and Next.js to building robust backends with Django/Python and Node.js. I focus on delivering high-quality solutions that are both functional and elegant.
               </p>
               <p>
                 I specialize in building modern, scalable web applications for businesses. From concept to deployment, I handle the full development process, ensuring your project is delivered on time and exceeds expectations.
@@ -69,9 +113,9 @@ export default function About() {
             </p>
             
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-              {skills.map((skill) => (
+              {updatedSkills.map((skill, index) => (
                 <div
-                  key={skill}
+                  key={index}
                   className="p-4 bg-navy rounded-lg border border-navy-lighter hover:border-primary hover:scale-105 transition-all duration-300 text-center"
                 >
                   <span className="text-gray-200 font-medium">{skill}</span>
@@ -79,18 +123,24 @@ export default function About() {
               ))}
             </div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-6 pt-8">
+            {/* Stats with Animation */}
+            <div className="grid grid-cols-3 gap-4 sm:gap-6 pt-8">
               <div className="text-center">
-                <div className="text-4xl font-bold text-primary">2+</div>
+                <div className="text-4xl font-bold text-primary">
+                  {yearsCount.toFixed(0)}+
+                </div>
                 <div className="text-gray-400 text-sm mt-1">Years Experience</div>
               </div>
               <div className="text-center">
-                <div className="text-4xl font-bold text-primary">10+</div>
+                <div className="text-4xl font-bold text-primary">
+                  {projectsCount.toFixed(0)}+
+                </div>
                 <div className="text-gray-400 text-sm mt-1">Projects Completed</div>
               </div>
               <div className="text-center">
-                <div className="text-4xl font-bold text-primary">100%</div>
+                <div className="text-4xl font-bold text-primary">
+                  {satisfactionCount.toFixed(0)}%
+                </div>
                 <div className="text-gray-400 text-sm mt-1">Client Satisfaction</div>
               </div>
             </div>

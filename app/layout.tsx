@@ -7,12 +7,12 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Mairo Pedro Isaac - Full-Stack Developer",
-  description: "Full-Stack Developer & Software Engineer specializing in Next.js, React, Django, and AI Integration. Building scalable web solutions in Kigali, Rwanda.",
-  keywords: ["Full-Stack Developer", "Web Developer", "Next.js", "React", "Django", "Software Engineer", "Kigali", "Rwanda"],
+  description: "Full-Stack Developer & Software Engineer specializing in Next.js, React, Django, Node.js and AI Integration. Building scalable web solutions in Kigali, Rwanda.",
+  keywords: ["Full-Stack Developer", "Web Developer", "Next.js", "React", "Django", "Node.js", "Software Engineer", "Kigali", "Rwanda"],
   authors: [{ name: "Mairo Pedro Isaac" }],
   openGraph: {
     title: "Mairo Pedro Isaac - Full-Stack Developer",
-    description: "Building modern web solutions with Next.js, React, Django, and AI Integration",
+    description: "Building modern web solutions with Next.js, React, Django, Node.js and AI Integration",
     url: "https://mairopedro.com",
     siteName: "Mairo Pedro Isaac Portfolio",
     locale: "en_US",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Mairo Pedro Isaac - Full-Stack Developer",
-    description: "Building modern web solutions with Next.js, React, Django, and AI Integration",
+    description: "Building modern web solutions with Next.js, React, Django, Node.js and AI Integration",
   },
 };
 

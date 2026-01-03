@@ -21,7 +21,7 @@ export default function Hero() {
               <span className="text-primary">Modern Web Solutions</span>
             </h1>
             <p className="text-xl text-gray-400 leading-relaxed">
-              I build scalable web applications using Next.js, React, Django, and AI integration
+              I build scalable web applications using Next.js, React, Django, Node.js, and AI integration
             </p>
             <div className="flex flex-wrap gap-4 pt-4">
               <a
