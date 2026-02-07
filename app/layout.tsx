@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import TawkToScript from '@/components/TawkToScript';
-import ForceBlackTheme from '@/components/ForceBlackTheme'; // Add this if using nuclear option
 
 const inter = Inter({ subsets: ["latin"] });
 
