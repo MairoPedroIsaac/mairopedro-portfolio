@@ -63,11 +63,11 @@ export default function Services() {
   }, [currentIndex]);
 
   return (
-    <section id="services" className="section-padding bg-navy">
+    <section id="services" className="section-padding bg-black">
       <div className="container-custom">
         <div className="text-center space-y-4 mb-16">
           <h2 className="text-4xl md:text-5xl font-bold">
-            My <span className="text-primary">Services</span>
+            My <span className="text-[#3b82f6]">Services</span>
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
             Professional development services tailored to your business needs
@@ -92,11 +92,13 @@ export default function Services() {
                   key={index}
                   className="w-full flex-shrink-0 px-4 md:px-2"
                 >
-                  <div className="p-8 bg-navy-light rounded-xl border border-navy-lighter hover:border-primary/50 transition-all duration-300 group h-full min-h-[320px] md:min-h-[360px] flex flex-col justify-center">
+                  <div className="p-8 bg-gray-900/50 rounded-xl border border-gray-800 group h-full min-h-[320px] md:min-h-[360px] flex flex-col justify-center">
                     <div className="flex flex-col items-center text-center space-y-6">
-                      {/* Icon */}
-                      <div className="p-4 rounded-full bg-primary/10 text-primary group-hover:scale-110 transition-transform duration-300">
-                        {iconMap[service.icon as keyof typeof iconMap]}
+                      {/* Icon - Professional style */}
+                      <div className="p-5 rounded-full bg-gradient-to-br from-gray-900 to-black border border-gray-800">
+                        <div className="text-[#3b82f6]">
+                          {iconMap[service.icon as keyof typeof iconMap]}
+                        </div>
                       </div>
                       
                       {/* Content */}
@@ -123,8 +125,8 @@ export default function Services() {
               disabled={currentIndex === 0}
               className={`p-3 rounded-full transition-all duration-300 flex items-center justify-center w-12 h-12 ${
                 currentIndex === 0
-                  ? "opacity-30 cursor-not-allowed bg-gray-700"
-                  : "bg-primary/20 hover:bg-primary/40 text-white hover:scale-110"
+                  ? "opacity-30 cursor-not-allowed bg-gray-800"
+                  : "bg-gray-900 hover:bg-gray-800 text-white"
               }`}
               aria-label="Previous service"
             >
@@ -139,8 +141,8 @@ export default function Services() {
                   onClick={() => setCurrentIndex(index)}
                   className={`w-3 h-3 rounded-full transition-all duration-300 ${
                     index === currentIndex 
-                      ? "bg-primary scale-125" 
-                      : "bg-gray-600 hover:bg-gray-500"
+                      ? "bg-[#3b82f6] scale-125" 
+                      : "bg-gray-700 hover:bg-gray-600"
                   }`}
                   aria-label={`Go to service ${index + 1}`}
                 />
@@ -153,8 +155,8 @@ export default function Services() {
               disabled={currentIndex === services.length - 1}
               className={`p-3 rounded-full transition-all duration-300 flex items-center justify-center w-12 h-12 ${
                 currentIndex === services.length - 1
-                  ? "opacity-30 cursor-not-allowed bg-gray-700"
-                  : "bg-primary/20 hover:bg-primary/40 text-white hover:scale-110"
+                  ? "opacity-30 cursor-not-allowed bg-gray-800"
+                  : "bg-gray-900 hover:bg-gray-800 text-white"
               }`}
               aria-label="Next service"
             >
@@ -163,9 +165,9 @@ export default function Services() {
           </div>
         </div>
 
-        {/* Professional Call-to-Action Section */}
+        {/* Professional Call-to-Action Section - Clean & Minimal */}
         <div className="max-w-3xl mx-auto text-center space-y-6 mt-16">
-          <div className="p-8 md:p-12 bg-gradient-to-br from-navy-light to-navy-dark rounded-2xl border border-primary/20">
+          <div className="p-8 md:p-12 bg-gray-900/30 rounded-2xl border border-gray-800">
             <div className="space-y-6">
               <h3 className="text-3xl md:text-4xl font-bold text-white">
                 Ready to Build Something Amazing?
@@ -176,18 +178,18 @@ export default function Services() {
               </p>
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">
-                <div className="p-6 bg-navy/50 rounded-lg border border-navy-lighter text-center">
-                  <div className="text-primary text-xl font-bold mb-2">Free Consultation</div>
+                <div className="p-6 bg-black/50 rounded-lg border border-gray-800 text-center">
+                  <div className="text-[#3b82f6] text-xl font-bold mb-2">Free Consultation</div>
                   <p className="text-gray-400 text-sm">Discuss your project needs with no commitment</p>
                 </div>
                 
-                <div className="p-6 bg-navy/50 rounded-lg border border-navy-lighter text-center">
-                  <div className="text-primary text-xl font-bold mb-2">Clear Scope</div>
+                <div className="p-6 bg-black/50 rounded-lg border border-gray-800 text-center">
+                  <div className="text-[#3b82f6] text-xl font-bold mb-2">Clear Scope</div>
                   <p className="text-gray-400 text-sm">Detailed project plan with timeline & deliverables</p>
                 </div>
                 
-                <div className="p-6 bg-navy/50 rounded-lg border border-navy-lighter text-center">
-                  <div className="text-primary text-xl font-bold mb-2">Transparent Process</div>
+                <div className="p-6 bg-black/50 rounded-lg border border-gray-800 text-center">
+                  <div className="text-[#3b82f6] text-xl font-bold mb-2">Transparent Process</div>
                   <p className="text-gray-400 text-sm">Regular updates and collaborative development</p>
                 </div>
               </div>
@@ -195,7 +197,7 @@ export default function Services() {
               <div className="pt-8">
                 <a
                   href="#contact"
-                  className="inline-block px-10 py-4 bg-primary text-navy font-bold rounded-lg hover:bg-primary-dark transition-all duration-300 hover:scale-105 shadow-lg shadow-primary/30 text-lg"
+                  className="inline-block px-10 py-4 bg-[#3b82f6] text-white font-bold rounded-lg transition-all duration-300 text-lg border border-[#3b82f6]/30"
                 >
                   Start Your Project
                 </a>

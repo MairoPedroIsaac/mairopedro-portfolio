@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { ExternalLink } from "lucide-react";
 
 interface ProjectCardProps {
   title: string;
@@ -9,6 +8,7 @@ interface ProjectCardProps {
   category: string;
   images: string[];
   featured: boolean;
+  link?: string; // Add link prop if you want cards to be clickable
 }
 
 export default function ProjectCard({
@@ -19,31 +19,35 @@ export default function ProjectCard({
   category,
   images,
   featured,
+  link,
 }: ProjectCardProps) {
-  return (
+  // Wrap the entire card in a link if link prop is provided
+  const CardContent = (
     <div
-      className={`bg-navy-light rounded-xl overflow-hidden border border-navy-lighter hover:border-primary/50 transition-all duration-300 hover:scale-[1.02] ${
+      className={`bg-gray-900/50 rounded-xl overflow-hidden border border-gray-800 ${
         featured ? "md:col-span-2" : ""
       }`}
+      style={{ transition: "none" }} // Remove all transitions
     >
       {/* Project Image */}
-      <div className="relative h-64 md:h-80 bg-navy-lighter overflow-hidden group">
+      <div className="relative h-64 md:h-80 bg-gray-900 overflow-hidden">
         {/* PLACEHOLDER - Replace with your actual project screenshot */}
         <Image
-          src={images[0] || "https://via.placeholder.com/800x600/1A2332/00D9FF?text=Project+Screenshot"}
+          src={images[0] || "https://via.placeholder.com/800x600/111827/00D9FF?text=Project+Screenshot"}
           alt={title}
           fill
-          className="object-cover group-hover:scale-110 transition-transform duration-500"
+          className="object-cover"
+          style={{ transition: "none" }} // Remove image hover scale
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-navy via-transparent to-transparent opacity-60"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70"></div>
         
         {/* Status Badge */}
         <div className="absolute top-4 right-4">
           <span
             className={`px-4 py-2 rounded-full text-sm font-semibold ${
               status === "Completed"
-                ? "bg-green-500/20 text-green-400 border border-green-500/50"
-                : "bg-yellow-500/20 text-yellow-400 border border-yellow-500/50"
+                ? "bg-green-900/50 text-green-400 border border-green-700/50"
+                : "bg-blue-900/50 text-blue-400 border border-blue-700/50"
             }`}
           >
             {status}
@@ -57,7 +61,7 @@ export default function ProjectCard({
           <div className="flex items-center justify-between">
             <h3 className="text-2xl font-bold text-white">{title}</h3>
             {featured && (
-              <span className="text-xs px-3 py-1 bg-primary/20 text-primary rounded-full border border-primary/50">
+              <span className="text-xs px-3 py-1 bg-[#00D9FF]/20 text-[#00D9FF] rounded-full border border-[#00D9FF]/50">
                 Featured
               </span>
             )}
@@ -72,7 +76,7 @@ export default function ProjectCard({
           {techStack.map((tech) => (
             <span
               key={tech}
-              className="px-3 py-1 bg-navy-lighter text-primary text-sm rounded-md border border-primary/30"
+              className="px-3 py-1 bg-gray-800 text-[#00D9FF] text-sm rounded-md border border-[#00D9FF]/30"
             >
               {tech}
             </span>
@@ -81,4 +85,19 @@ export default function ProjectCard({
       </div>
     </div>
   );
+
+  // If link is provided, wrap the card in a link
+  if (link) {
+    return (
+      <a 
+        href={link} 
+        className="block no-underline"
+        style={{ textDecoration: "none", transition: "none" }}
+      >
+        {CardContent}
+      </a>
+    );
+  }
+
+  return CardContent;
 }

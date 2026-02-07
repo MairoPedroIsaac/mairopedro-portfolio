@@ -2,12 +2,38 @@
 
 @layer base {
   * {
-    border-color: theme(colors.gray.700);
+    border-color: rgba(255, 255, 255, 0.1);
   }
   
-  body {
-    background-color: theme(colors.slate.950);
-    color: theme(colors.gray.100);
+  body, html {
+    background-color: #000000 !important;
+    color: #FFFFFF !important;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+  }
+  
+  /* Ensure all backgrounds are black */
+  section, div, main, header, footer, aside, article {
+    background-color: #000000 !important;
+  }
+  
+  /* Force white text */
+  h1, h2, h3, h4, h5, h6, p, span, a, li {
+    color: #FFFFFF !important;
+  }
+  
+  /* Remove all hover effects from project cards */
+  .project-card, [class*="project"], .card, [class*="card"] {
+    transition: none !important;
+    transform: none !important;
+  }
+  
+  .project-card:hover, [class*="project"]:hover, .card:hover, [class*="card"]:hover {
+    transform: none !important;
+    box-shadow: none !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
   }
   
   html {
@@ -46,23 +72,79 @@
     margin-left: auto;
     margin-right: auto;
   }
+  
+  /* Simple clean card - NO hover effects */
+  .clean-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.75rem;
+    transition: none;
+  }
+  
+  /* Clickable but no hover animation */
+  .clickable-card {
+    cursor: pointer;
+    transition: none;
+  }
+  
+  .clickable-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
 }
 
-/* Custom scrollbar */
+/* Modern Blue Scrollbar (Matches your Tawk.to widget) */
 ::-webkit-scrollbar {
   width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0A1628;
+  background: #000000;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #00D9FF;
+  background: #3b82f6; /* Matches your widget blue */
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #00B8D4;
+  background: #3b82f6;
 }
 
+/* Blue selection to match */
+::selection {
+  background-color: rgba(59, 130, 246, 0.3); /* #3b82f6 with transparency */
+  color: #FFFFFF;
+}
+
+/* Remove any animation delays for clean experience */
+* {
+  animation-delay: 0ms !important;
+  transition-delay: 0ms !important;
+}
+
+/* Fix links to be clean and clickable */
+a {
+  color: #3b82f6 !important;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #FFFFFF !important;
+  text-decoration: underline;
+}
+
+/* Simple clean button */
+button {
+  background-color: #3b82f6 !important;
+  color: #000000 !important;
+  border: none !important;
+  border-radius: 0.5rem !important;
+  padding: 0.75rem 1.5rem !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+}
+
+button:hover {
+  background-color: #3b82f6 !important;
+}

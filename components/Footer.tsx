@@ -7,7 +7,6 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center gap-8">
           {/* Left - Branding and Social */}
           <div className="flex flex-col items-center md:items-start gap-4">
-            <a href="#home" className="text-2xl font-bold text-primary hover:scale-110 transition-transform duration-300">MP</a>
             <div className="flex gap-4">
               {/* Instagram */}
               <a

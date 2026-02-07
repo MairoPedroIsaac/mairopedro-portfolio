@@ -12,6 +12,8 @@ export const projects = [
       "/images/projects/healthvault-2.png", // REPLACE with your actual screenshot
     ],
     featured: true, // This project will be displayed prominently
+    slug: "health-vault-rwanda", // ADD THIS: URL-friendly name
+    link: "/projects/health-vault-rwanda", // ADD THIS: Case study page link
   },
   {
     id: 2,
@@ -25,11 +27,25 @@ export const projects = [
       "/images/projects/powerhand-2.png", // REPLACE with your actual screenshot
     ],
     featured: false,
+    slug: "powerhand-design", // ADD THIS: URL-friendly name
+    link: "/projects/powerhand-design", // ADD THIS: Case study page link
   },
   // ADD MORE PROJECTS HERE following the same format
+  // {
+  //   id: 3,
+  //   title: "Project Name",
+  //   description: "Project description...",
+  //   techStack: ["Tech 1", "Tech 2"],
+  //   status: "Completed",
+  //   category: "Project Type",
+  //   images: ["/images/projects/image.png"],
+  //   featured: false,
+  //   slug: "project-name", // Always add this
+  //   link: "/projects/project-name", // Always add this
+  // },
 ];
 
-// SERVICES DATA
+// SERVICES DATA (unchanged)
 export const services = [
   {
     title: "Web Development",
@@ -48,7 +64,7 @@ export const services = [
   },
 ];
 
-// SKILLS DATA
+// SKILLS DATA (unchanged)
 export const skills = [
   "Next.js",
   "React",
@@ -64,7 +80,7 @@ export const skills = [
   "Responsive Design",
 ];
 
-// CONTACT DATA - UPDATE WITH YOUR ACTUAL INFORMATION
+// CONTACT DATA - UPDATE WITH YOUR ACTUAL INFORMATION (unchanged)
 export const contact = {
   email: "mairopedroisaac@gmail.com",
   whatsapp: "250798972117", // No + or spaces
