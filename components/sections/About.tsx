@@ -1,7 +1,6 @@
 "use client";
 
 import { skills } from "@/lib/data";
-import { Code2, Database, Palette, Zap } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
 
 export default function About() {
@@ -9,7 +8,7 @@ export default function About() {
   const [projectsCount, setProjectsCount] = useState(0);
   const [satisfactionCount, setSatisfactionCount] = useState(0);
   const [hasAnimated, setHasAnimated] = useState(false);
-  
+
   const statsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -17,88 +16,51 @@ export default function About() {
 
     const observer = new IntersectionObserver(
       (entries) => {
-        const entry = entries[0];
-        if (entry.isIntersecting && !hasAnimated) {
+        if (entries[0].isIntersecting) {
           animateCounters();
           setHasAnimated(true);
           observer.disconnect();
         }
       },
-      {
-        threshold: 0.5, // Trigger when 50% visible
-        rootMargin: "0px 0px -100px 0px" // Trigger a bit early
-      }
+      { threshold: 0.5 }
     );
 
     observer.observe(statsRef.current);
 
-    return () => {
-      if (statsRef.current) {
-        observer.unobserve(statsRef.current);
-      }
-    };
+    return () => observer.disconnect();
   }, [hasAnimated]);
 
   const animateCounters = () => {
     const duration = 2000;
     const steps = 60;
-    const increment = 4 / steps;
-    const projectsIncrement = 10 / steps;
-    const satisfactionIncrement = 100 / steps;
-
-    let years = 0;
-    let projects = 0;
-    let satisfaction = 0;
     let step = 0;
 
     const timer = setInterval(() => {
       step++;
-      years += increment;
-      projects += projectsIncrement;
-      satisfaction += satisfactionIncrement;
+      const progress = step / steps;
 
-      setYearsCount(Math.min(years, 4));
-      setProjectsCount(Math.min(projects, 10));
-      setSatisfactionCount(Math.min(satisfaction, 100));
+      setYearsCount(Math.min(Math.round(4 * progress), 4));
+      setProjectsCount(Math.min(Math.round(3 * progress), 3));
+      setSatisfactionCount(Math.min(Math.round(100 * progress), 100));
 
       if (step >= steps) {
         clearInterval(timer);
         setYearsCount(4);
-        setProjectsCount(10);
+        setProjectsCount(3);
         setSatisfactionCount(100);
       }
     }, duration / steps);
   };
 
-  const highlights = [
-    {
-      icon: <Code2 className="w-8 h-8" />,
-      title: "Full-Stack Development",
-      description: "Building complete web solutions from frontend to backend",
-    },
-    {
-      icon: <Database className="w-8 h-8" />,
-      title: "Database Design",
-      description: "Architecting efficient and scalable database systems",
-    },
-    {
-      icon: <Palette className="w-8 h-8" />,
-      title: "Modern UI/UX",
-      description: "Creating beautiful, responsive user interfaces",
-    },
-    {
-      icon: <Zap className="w-8 h-8" />,
-      title: "Performance",
-      description: "Optimizing applications for speed and efficiency",
-    },
-  ];
-
-  const updatedSkills = [...skills, "Node.js", "FastAPI"];
+  const updatedSkills = [...skills, "Node.js", "Express.js", "MongoDB", "Docker", "AWS", "Git"];
 
   return (
     <section id="about" className="section-padding bg-navy-light">
-      <div className="container-custom">
-        <div className="grid md:grid-cols-2 gap-16 items-center">
+      <div className="container-custom space-y-16">
+
+        {/* Top: 2-column grid */}
+        <div className="grid md:grid-cols-2 gap-16 items-start">
+
           {/* Left Column - Story */}
           <div className="space-y-6">
             <h2 className="text-4xl md:text-5xl font-bold">
@@ -106,38 +68,38 @@ export default function About() {
             </h2>
             <div className="space-y-4 text-gray-300 leading-relaxed">
               <p>
-                I'm a software engineer passionate about building solutions that solve real problems. Based in Kigali, Rwanda, I specialize in creating modern, scalable web applications that help businesses grow and succeed.
+                Full-stack software engineer based in Kigali, Rwanda, building
+                web applications at the intersection of fintech, healthcare, and AI.
               </p>
               <p>
-                My expertise spans the full development stack, from crafting intuitive user interfaces with React and Next.js to building robust backends with Django/Python and Node.js. I focus on delivering high-quality solutions that are both functional and elegant.
+                I work with Next.js, Django, Python, and Node.js to deliver
+                solutions that are fast, scalable, and built for real-world
+                impact. Having developed and tested trading strategies for 5+
+                years, I bring a rare combination: technical expertise plus deep
+                understanding of financial markets, risk management, and
+                quantitative analysis.
               </p>
               <p>
-                I specialize in building modern, scalable web applications for businesses. From concept to deployment, I handle the full development process, ensuring your project is delivered on time and exceeds expectations.
+                Recent work includes HealthVault Rwanda (healthcare platform
+                streamlining patient records) and Powerhand Designs (website for
+                a Pan-African branding agency).
               </p>
-            </div>
-
-            {/* Highlights Grid */}
-            <div className="grid grid-cols-2 gap-4 pt-6">
-              {highlights.map((item, index) => (
-                <div
-                  key={index}
-                  className="p-4 bg-navy rounded-lg border border-navy-lighter hover:border-primary/50 transition-all duration-300"
-                >
-                  <div className="text-primary mb-2">{item.icon}</div>
-                  <h4 className="font-semibold text-white mb-1">{item.title}</h4>
-                  <p className="text-sm text-gray-400">{item.description}</p>
-                </div>
-              ))}
+              <p>
+                If you need a developer who speaks both code and finance, let's
+                build.
+              </p>
             </div>
           </div>
 
           {/* Right Column - Skills */}
           <div className="space-y-6">
-            <h3 className="text-3xl font-bold text-white">Technical Skills</h3>
+            <h3 className="text-4xl md:text-5xl font-bold text-white">
+              Technical <span className="text-primary">Skills</span>
+            </h3>
             <p className="text-gray-400">
               Technologies and tools I work with to bring ideas to life
             </p>
-            
+
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
               {updatedSkills.map((skill, index) => (
                 <div
@@ -148,33 +110,28 @@ export default function About() {
                 </div>
               ))}
             </div>
-
-            {/* Stats with Animation - Ref added here */}
-            <div 
-              ref={statsRef}
-              className="grid grid-cols-3 gap-4 sm:gap-6 pt-8"
-            >
-              <div className="text-center">
-                <div className="text-4xl font-bold text-primary">
-                  {yearsCount.toFixed(0)}+
-                </div>
-                <div className="text-gray-400 text-sm mt-1">Years Experience</div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold text-primary">
-                  {projectsCount.toFixed(0)}+
-                </div>
-                <div className="text-gray-400 text-sm mt-1">Projects Completed</div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold text-primary">
-                  {satisfactionCount.toFixed(0)}%
-                </div>
-                <div className="text-gray-400 text-sm mt-1">Client Satisfaction</div>
-              </div>
-            </div>
           </div>
         </div>
+
+        {/* Bottom: Stats - full width, centered */}
+        <div
+          ref={statsRef}
+          className="grid grid-cols-3 gap-8 max-w-2xl mx-auto text-center"
+        >
+          <div className="flex flex-col items-center">
+            <div className="text-4xl font-bold text-primary">{yearsCount}+</div>
+            <div className="text-gray-400 text-sm mt-1">Years Experience</div>
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="text-4xl font-bold text-primary">{projectsCount}+</div>
+            <div className="text-gray-400 text-sm mt-1">Projects Completed</div>
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="text-4xl font-bold text-primary">{satisfactionCount}%</div>
+            <div className="text-gray-400 text-sm mt-1">Client Satisfaction</div>
+          </div>
+        </div>
+
       </div>
     </section>
   );

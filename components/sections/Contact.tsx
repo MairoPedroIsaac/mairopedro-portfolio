@@ -1,5 +1,5 @@
 import { contact } from "@/lib/data";
-import { Mail, MessageCircle, Linkedin } from "lucide-react";
+import { Mail, MessageCircle, Linkedin, Github } from "lucide-react";
 
 export default function Contact() {
   const whatsappLink = `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(contact.whatsappMessage)}`;
@@ -14,18 +14,25 @@ export default function Contact() {
       color: "from-blue-500 to-cyan-500",
     },
     {
-      icon: <MessageCircle className="w-12 h-12" />,
-      title: "Chat on WhatsApp",
-      description: "Quick response guaranteed",
-      link: whatsappLink,
-      color: "from-green-500 to-emerald-500",
-    },
-    {
       icon: <Linkedin className="w-12 h-12" />,
       title: "Connect on LinkedIn",
       description: "Let's grow our network",
       link: contact.linkedin,
       color: "from-blue-600 to-blue-400",
+    },
+    {
+      icon: <Github className="w-12 h-12" />,
+      title: "View on GitHub",
+      description: "Explore my projects and code",
+      link: "https://github.com/MairoPedroIsaac",
+      color: "from-gray-600 to-gray-400",
+    },
+    {
+      icon: <MessageCircle className="w-12 h-12" />,
+      title: "Chat on WhatsApp",
+      description: "Quick response guaranteed",
+      link: whatsappLink,
+      color: "from-green-500 to-emerald-500",
     },
   ];
 
@@ -37,11 +44,11 @@ export default function Contact() {
             Get In <span className="text-primary">Touch</span>
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Ready to start your project? Reach out through any of these channels and let's discuss how I can help bring your ideas to life.
+            Have a fintech, healthcare, or web project in mind? Let's talk about it.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-12">
+        <div className="grid md:grid-cols-4 gap-8 max-w-5xl mx-auto mb-12">
           {contactMethods.map((method, index) => (
             <a
               key={index}

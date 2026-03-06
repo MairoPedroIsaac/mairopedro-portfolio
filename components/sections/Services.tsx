@@ -1,19 +1,39 @@
 "use client";
 
-import { services } from "@/lib/data";
-import { Globe, Brain, Settings, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect } from "react";
+import { TrendingUp, Heart, Code, ChevronLeft, ChevronRight } from "lucide-react";
+
+const services = [
+  {
+    icon: "TrendingUp",
+    title: "Fintech & Trading Platforms",
+    description:
+      "Build secure, scalable financial applications—from trading dashboards to payment systems. With 5+ years in financial markets, I understand the domain, not just the code.",
+  },
+  {
+    icon: "Heart",
+    title: "Healthcare & Data Systems",
+    description:
+      "HIPAA-compliant platforms for patient records, appointment scheduling, and medical data management. Secure, reliable, and built for healthcare workflows.",
+  },
+  {
+    icon: "Code",
+    title: "Custom Web Development",
+    description:
+      "Full-stack applications tailored to your business needs. From MVP to production-ready platforms, I handle frontend, backend, database, and deployment.",
+  },
+];
+
+const iconMap = {
+  TrendingUp: <TrendingUp className="w-10 h-10" />,
+  Heart: <Heart className="w-10 h-10" />,
+  Code: <Code className="w-10 h-10" />,
+};
 
 export default function Services() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
-
-  const iconMap = {
-    code: <Globe className="w-10 h-10" />,
-    brain: <Brain className="w-10 h-10" />,
-    settings: <Settings className="w-10 h-10" />,
-  };
 
   const nextSlide = () => {
     if (currentIndex < services.length - 1) {
@@ -37,28 +57,26 @@ export default function Services() {
 
   const handleTouchEnd = () => {
     if (!touchStart || !touchEnd) return;
-    
+
     const distance = touchStart - touchEnd;
     const isLeftSwipe = distance > 50;
     const isRightSwipe = distance < -50;
 
     if (isLeftSwipe && currentIndex < services.length - 1) nextSlide();
     if (isRightSwipe && currentIndex > 0) prevSlide();
-    
+
     setTouchStart(null);
     setTouchEnd(null);
   };
 
-  // Auto-rotate for better UX
+  // Auto-rotate
   useEffect(() => {
     const interval = setInterval(() => {
-      if (currentIndex < services.length - 1) {
-        setCurrentIndex(currentIndex + 1);
-      } else {
-        setCurrentIndex(0); // Loop back to start
-      }
+      setCurrentIndex((prev) =>
+        prev < services.length - 1 ? prev + 1 : 0
+      );
     }, 5000);
-    
+
     return () => clearInterval(interval);
   }, [currentIndex]);
 
@@ -77,30 +95,27 @@ export default function Services() {
         {/* Carousel Container */}
         <div className="relative mb-12">
           {/* Carousel Track */}
-          <div 
+          <div
             className="overflow-hidden rounded-xl"
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
           >
-            <div 
+            <div
               className="flex transition-transform duration-500 ease-out"
               style={{ transform: `translateX(-${currentIndex * 100}%)` }}
             >
               {services.map((service, index) => (
-                <div
-                  key={index}
-                  className="w-full flex-shrink-0 px-4 md:px-2"
-                >
+                <div key={index} className="w-full flex-shrink-0 px-4 md:px-2">
                   <div className="p-8 bg-gray-900/50 rounded-xl border border-gray-800 group h-full min-h-[320px] md:min-h-[360px] flex flex-col justify-center">
                     <div className="flex flex-col items-center text-center space-y-6">
-                      {/* Icon - Professional style */}
+                      {/* Icon */}
                       <div className="p-5 rounded-full bg-gradient-to-br from-gray-900 to-black border border-gray-800">
                         <div className="text-[#3b82f6]">
                           {iconMap[service.icon as keyof typeof iconMap]}
                         </div>
                       </div>
-                      
+
                       {/* Content */}
                       <div className="space-y-4">
                         <h3 className="text-2xl md:text-3xl font-bold text-white">
@@ -132,7 +147,7 @@ export default function Services() {
             >
               <ChevronLeft className="w-6 h-6" />
             </button>
-            
+
             {/* Dots Indicator */}
             <div className="flex gap-3">
               {services.map((_, index) => (
@@ -140,15 +155,15 @@ export default function Services() {
                   key={index}
                   onClick={() => setCurrentIndex(index)}
                   className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    index === currentIndex 
-                      ? "bg-[#3b82f6] scale-125" 
+                    index === currentIndex
+                      ? "bg-[#3b82f6] scale-125"
                       : "bg-gray-700 hover:bg-gray-600"
                   }`}
                   aria-label={`Go to service ${index + 1}`}
                 />
               ))}
             </div>
-            
+
             {/* Right Arrow */}
             <button
               onClick={nextSlide}
@@ -165,41 +180,54 @@ export default function Services() {
           </div>
         </div>
 
-        {/* Professional Call-to-Action Section - Clean & Minimal */}
+        {/* Call-to-Action Section */}
         <div className="max-w-3xl mx-auto text-center space-y-6 mt-16">
           <div className="p-8 md:p-12 bg-gray-900/30 rounded-2xl border border-gray-800">
             <div className="space-y-6">
               <h3 className="text-3xl md:text-4xl font-bold text-white">
-                Ready to Build Something Amazing?
+                From Concept to Production. Let's Talk.
               </h3>
-              
+
               <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-                Let's discuss how I can help bring your project to life with clean code, modern design, and reliable solutions.
+                Building a fintech platform, healthcare system, or custom web
+                application? Let's discuss your project.
               </p>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">
                 <div className="p-6 bg-black/50 rounded-lg border border-gray-800 text-center">
-                  <div className="text-[#3b82f6] text-xl font-bold mb-2">Free Consultation</div>
-                  <p className="text-gray-400 text-sm">Discuss your project needs with no commitment</p>
+                  <div className="text-[#3b82f6] text-xl font-bold mb-2">
+                    Free Consultation
+                  </div>
+                  <p className="text-gray-400 text-sm">
+                    Discuss your project needs with no commitment
+                  </p>
                 </div>
-                
+
                 <div className="p-6 bg-black/50 rounded-lg border border-gray-800 text-center">
-                  <div className="text-[#3b82f6] text-xl font-bold mb-2">Clear Scope</div>
-                  <p className="text-gray-400 text-sm">Detailed project plan with timeline & deliverables</p>
+                  <div className="text-[#3b82f6] text-xl font-bold mb-2">
+                    Clear Scope
+                  </div>
+                  <p className="text-gray-400 text-sm">
+                    Detailed project plan with timeline & deliverables
+                  </p>
                 </div>
-                
+
                 <div className="p-6 bg-black/50 rounded-lg border border-gray-800 text-center">
-                  <div className="text-[#3b82f6] text-xl font-bold mb-2">Transparent Process</div>
-                  <p className="text-gray-400 text-sm">Regular updates and collaborative development</p>
+                  <div className="text-[#3b82f6] text-xl font-bold mb-2">
+                    Transparent Process
+                  </div>
+                  <p className="text-gray-400 text-sm">
+                    Regular updates and full project visibility
+                  </p>
                 </div>
               </div>
-              
+
               <div className="pt-8">
                 <a
                   href="#contact"
                   className="inline-block px-10 py-4 bg-[#3b82f6] text-white font-bold rounded-lg transition-all duration-300 text-lg border border-[#3b82f6]/30"
                 >
-                  Start Your Project
+                  Let's Build
                 </a>
               </div>
             </div>

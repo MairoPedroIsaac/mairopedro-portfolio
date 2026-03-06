@@ -17,11 +17,11 @@ export default function Hero() {
           {/* Text Content */}
           <div className="space-y-6 animate-fade-in">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
-              Full-Stack Developer Building{" "}
+              Full-Stack Developer Specializing in Fintech, Healthcare & AI-Driven{" "}
               <span className="text-primary">Modern Web Solutions</span>
             </h1>
             <p className="text-xl text-gray-400 leading-relaxed">
-              I build scalable web applications using Next.js, React, Django, Node.js, and AI integration
+              I build scalable web applications using Next.js, Django, and Node.js with a focus on fintech systems, health infrastructure, and ML-powered features.
             </p>
             <div className="flex flex-wrap gap-4 pt-4">
               <a

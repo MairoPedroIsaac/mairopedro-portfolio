@@ -30,16 +30,15 @@ export default function ProjectCard({
       style={{ transition: "none" }} // Remove all transitions
     >
       {/* Project Image */}
-      <div className="relative h-64 md:h-80 bg-gray-900 overflow-hidden">
+      <div className="relative h-auto bg-gray-900 overflow-hidden">
         {/* PLACEHOLDER - Replace with your actual project screenshot */}
         <Image
-          src={images[0] || "https://via.placeholder.com/800x600/111827/00D9FF?text=Project+Screenshot"}
+          src={images[0] || "..."}
           alt={title}
-          fill
-          className="object-cover"
-          style={{ transition: "none" }} // Remove image hover scale
+          width={1280}
+          height={720}
+          className="w-full object-cover object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70"></div>
         
         {/* Status Badge */}
         <div className="absolute top-4 right-4">

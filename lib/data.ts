@@ -1,4 +1,4 @@
-// PROJECT DATA - EDIT YOUR PROJECT INFORMATION HERE
+// PROJECT DATA
 export const projects = [
   {
     id: 1,
@@ -8,12 +8,11 @@ export const projects = [
     status: "In Development",
     category: "Capstone Project",
     images: [
-      "/images/projects/healthvault-1.png", // REPLACE with your actual screenshot
-      "/images/projects/healthvault-2.png", // REPLACE with your actual screenshot
+      "/images/projects/healthvault-desktop-hero.png",
     ],
-    featured: true, // This project will be displayed prominently
-    slug: "health-vault-rwanda", // ADD THIS: URL-friendly name
-    link: "/projects/health-vault-rwanda", // ADD THIS: Case study page link
+    featured: true,
+    slug: "health-vault-rwanda",
+    link: "/projects/health-vault-rwanda",
   },
   {
     id: 2,
@@ -23,48 +22,48 @@ export const projects = [
     status: "Completed",
     category: "Client Project",
     images: [
-      "/images/projects/powerhand-1.png", // REPLACE with your actual screenshot
-      "/images/projects/powerhand-2.png", // REPLACE with your actual screenshot
+      "/images/projects/powerhand-desktop-hero.png",
     ],
     featured: false,
-    slug: "powerhand-design", // ADD THIS: URL-friendly name
-    link: "/projects/powerhand-design", // ADD THIS: Case study page link
+    slug: "powerhand-design",
+    link: "/projects/powerhand-design",
   },
-  // ADD MORE PROJECTS HERE following the same format
-  // {
-  //   id: 3,
-  //   title: "Project Name",
-  //   description: "Project description...",
-  //   techStack: ["Tech 1", "Tech 2"],
-  //   status: "Completed",
-  //   category: "Project Type",
-  //   images: ["/images/projects/image.png"],
-  //   featured: false,
-  //   slug: "project-name", // Always add this
-  //   link: "/projects/project-name", // Always add this
-  // },
+  {
+    id: 3,
+    title: "Influence Trading House",
+    description: "Trading signals platform with account management, subscription services, and financial education. Built for serious traders.",
+    techStack: ["Next.js", "Node.js", "Express.js", "PostgreSQL"],
+    status: "In Development",
+    category: "Fintech Platform",
+    images: [
+      "https://placehold.co/800x600/111827/00D9FF?text=Influence+Trading+House",
+    ],
+    featured: false,
+    slug: "influence-trading-house",
+    link: "https://influencetradinghouse.com",
+  },
 ];
 
-// SERVICES DATA (unchanged)
+// SERVICES DATA
 export const services = [
   {
-    title: "Web Development",
-    description: "Full-stack web applications built with modern technologies. From concept to deployment, I handle the complete development process.",
-    icon: "code",
+    title: "Fintech & Trading Platforms",
+    description: "Build secure, scalable financial applications—from trading dashboards to payment systems. With 5+ years in financial markets, I understand the domain, not just the code.",
+    icon: "TrendingUp",
   },
   {
-    title: "AI Integration",
-    description: "Implementing AI solutions into existing systems. Enhance your applications with intelligent features and automation.",
-    icon: "brain",
+    title: "Healthcare & Data Systems",
+    description: "HIPAA-compliant platforms for patient records, appointment scheduling, and medical data management. Secure, reliable, and built for healthcare workflows.",
+    icon: "Heart",
   },
   {
-    title: "Custom Solutions",
-    description: "Tailored software for specific business needs. Get exactly what your business requires with custom-built applications.",
-    icon: "settings",
+    title: "Custom Web Development",
+    description: "Full-stack applications tailored to your business needs. From MVP to production-ready platforms, I handle frontend, backend, database, and deployment.",
+    icon: "Code",
   },
 ];
 
-// SKILLS DATA (unchanged)
+// SKILLS DATA
 export const skills = [
   "Next.js",
   "React",
@@ -75,15 +74,15 @@ export const skills = [
   "Tailwind CSS",
   "PostgreSQL",
   "Git",
-  "AI Integration",
+  "Flutter",
   "RESTful APIs",
   "Responsive Design",
 ];
 
-// CONTACT DATA - UPDATE WITH YOUR ACTUAL INFORMATION (unchanged)
+// CONTACT DATA
 export const contact = {
   email: "mairopedroisaac@gmail.com",
-  whatsapp: "250798972117", // No + or spaces
+  whatsapp: "250798972117",
   linkedin: "https://www.linkedin.com/in/mairo-pedro-isaac-3a0b59291/",
   whatsappMessage: "Hi Mairo, I'm interested in your web development services",
 };
