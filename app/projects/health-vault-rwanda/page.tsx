@@ -47,10 +47,10 @@ function DesktopCarousel({ images }: { images: { src: string; label: string }[] 
           <ChevronLeft className="w-5 h-5 text-white" />
         </button>
         <div className="flex-1 rounded-xl overflow-hidden border border-gray-800 bg-gray-900">
-          <div className="relative h-[420px] md:h-[500px] w-full overflow-hidden">
+          <div className="relative w-full aspect-video overflow-hidden">
             {images.map((img, i) => (
               <div key={i} className={`absolute inset-0 transition-opacity duration-700 ${i === current ? "opacity-100 z-10" : "opacity-0 z-0"}`}>
-                <Image src={img.src} alt={img.label} fill className="object-cover object-top" sizes="(max-width: 768px) 100vw, 80vw" priority={i === 0} />
+                <Image src={img.src} alt={img.label} fill className="object-cover object-center" sizes="(max-width: 768px) 100vw, 80vw" priority={i === 0} />
               </div>
             ))}
             <div className="absolute top-3 right-3 z-20 px-2 py-1 bg-black/70 rounded-full text-white text-xs">{current + 1} / {images.length}</div>

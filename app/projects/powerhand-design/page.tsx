@@ -52,7 +52,7 @@ function DesktopCarousel({ images }: { images: { src: string; label: string }[] 
 
         <div className="flex-1 rounded-xl overflow-hidden border border-gray-800 bg-gray-900">
           {/* Fixed height container — images sit naturally inside */}
-          <div className="relative h-[420px] md:h-[500px] w-full overflow-hidden">
+          <div className="relative w-full aspect-video overflow-hidden">
             {images.map((img, i) => (
               <div
                 key={i}
@@ -62,7 +62,7 @@ function DesktopCarousel({ images }: { images: { src: string; label: string }[] 
                   src={img.src}
                   alt={img.label}
                   fill
-                  className="object-cover object-top"
+                  className="object-cover object-center"
                   sizes="(max-width: 768px) 100vw, 80vw"
                   priority={i === 0}
                 />
