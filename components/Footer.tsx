@@ -82,6 +82,12 @@ export default function Footer() {
             >
               About
             </a>
+             <a
+              href="#services"
+              className="text-gray-400 hover:text-primary transition-colors duration-300"
+            >
+              Services
+            </a>
             <a
               href="#contact"
               className="text-gray-400 hover:text-primary transition-colors duration-300"

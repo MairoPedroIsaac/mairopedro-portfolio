@@ -26,7 +26,6 @@ export default function About() {
     );
 
     observer.observe(statsRef.current);
-
     return () => observer.disconnect();
   }, [hasAnimated]);
 
@@ -38,7 +37,6 @@ export default function About() {
     const timer = setInterval(() => {
       step++;
       const progress = step / steps;
-
       setYearsCount(Math.min(Math.round(4 * progress), 4));
       setProjectsCount(Math.min(Math.round(3 * progress), 3));
       setSatisfactionCount(Math.min(Math.round(100 * progress), 100));
@@ -55,7 +53,7 @@ export default function About() {
   const updatedSkills = [...skills, "Node.js", "Express.js", "MongoDB", "Docker", "AWS", "Git"];
 
   return (
-    <section id="about" className="section-padding bg-navy-light">
+    <section id="about" className="section-padding bg-white">
       <div className="container-custom space-y-16">
 
         {/* Top: 2-column grid */}
@@ -63,10 +61,10 @@ export default function About() {
 
           {/* Left Column - Story */}
           <div className="space-y-6">
-            <h2 className="text-4xl md:text-5xl font-bold">
-              About <span className="text-primary">Me</span>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
+              About <span className="text-[#3b82f6]">Me</span>
             </h2>
-            <div className="space-y-4 text-gray-300 leading-relaxed">
+            <div className="space-y-4 text-gray-600 leading-relaxed">
               <p>
                 Full-stack software engineer based in Kigali, Rwanda, building
                 web applications at the intersection of fintech, healthcare, and AI.
@@ -93,42 +91,42 @@ export default function About() {
 
           {/* Right Column - Skills */}
           <div className="space-y-6">
-            <h3 className="text-4xl md:text-5xl font-bold text-white">
-              Technical <span className="text-primary">Skills</span>
+            <h3 className="text-4xl md:text-5xl font-bold text-gray-900">
+              Technical <span className="text-[#3b82f6]">Skills</span>
             </h3>
-            <p className="text-gray-400">
+            <p className="text-gray-500">
               Technologies and tools I work with to bring ideas to life
             </p>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               {updatedSkills.map((skill, index) => (
                 <div
                   key={index}
-                  className="p-4 bg-navy rounded-lg border border-navy-lighter hover:border-primary hover:scale-105 transition-all duration-300 text-center"
+                  className="p-3 bg-gray-50 rounded-lg border border-gray-200 hover:border-[#3b82f6] hover:bg-blue-50 transition-all duration-300 text-center"
                 >
-                  <span className="text-gray-200 font-medium">{skill}</span>
+                  <span className="text-gray-700 font-medium text-sm">{skill}</span>
                 </div>
               ))}
             </div>
           </div>
         </div>
 
-        {/* Bottom: Stats - full width, centered */}
+        {/* Stats */}
         <div
           ref={statsRef}
-          className="grid grid-cols-3 gap-8 max-w-2xl mx-auto text-center"
+          className="grid grid-cols-3 gap-8 max-w-2xl mx-auto text-center border-t border-gray-200 pt-16"
         >
           <div className="flex flex-col items-center">
-            <div className="text-4xl font-bold text-primary">{yearsCount}+</div>
-            <div className="text-gray-400 text-sm mt-1">Years Experience</div>
+            <div className="text-4xl font-bold text-[#3b82f6]">{yearsCount}+</div>
+            <div className="text-gray-500 text-sm mt-1">Years Experience</div>
           </div>
           <div className="flex flex-col items-center">
-            <div className="text-4xl font-bold text-primary">{projectsCount}+</div>
-            <div className="text-gray-400 text-sm mt-1">Projects Completed</div>
+            <div className="text-4xl font-bold text-[#3b82f6]">{projectsCount}+</div>
+            <div className="text-gray-500 text-sm mt-1">Projects Completed</div>
           </div>
           <div className="flex flex-col items-center">
-            <div className="text-4xl font-bold text-primary">{satisfactionCount}%</div>
-            <div className="text-gray-400 text-sm mt-1">Client Satisfaction</div>
+            <div className="text-4xl font-bold text-[#3b82f6]">{satisfactionCount}%</div>
+            <div className="text-gray-500 text-sm mt-1">Client Satisfaction</div>
           </div>
         </div>
 

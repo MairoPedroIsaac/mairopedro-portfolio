@@ -1,90 +1,64 @@
-"use client";
-
-import { useState, useEffect } from "react";
-import { TrendingUp, Heart, Code, ChevronLeft, ChevronRight } from "lucide-react";
+import { TrendingUp, Heart, Code } from "lucide-react";
 
 const services = [
   {
-    icon: "TrendingUp",
+    icon: TrendingUp,
     title: "Fintech & Trading Platforms",
     description:
-      "Build secure, scalable financial applications—from trading dashboards to payment systems. With 5+ years in financial markets, I understand the domain, not just the code.",
+      "Build secure, scalable financial applications — from trading dashboards to payment systems. With 5+ years in financial markets, I understand the domain, not just the code.",
+    color: "border-[#3b82f6]",
+    iconColor: "text-[#3b82f6]",
+    iconBg: "bg-blue-500/10",
+    deliverables: [
+      "Trading signal platforms",
+      "Payment & subscription systems",
+      "Financial dashboards",
+      "Fintech APIs & integrations",
+    ],
   },
   {
-    icon: "Heart",
+    icon: Heart,
     title: "Healthcare & Data Systems",
     description:
       "HIPAA-compliant platforms for patient records, appointment scheduling, and medical data management. Secure, reliable, and built for healthcare workflows.",
+    color: "border-green-500",
+    iconColor: "text-green-400",
+    iconBg: "bg-green-500/10",
+    deliverables: [
+      "Patient record management",
+      "QR code-based access systems",
+      "Multilingual health platforms",
+      "Provider & patient portals",
+    ],
   },
   {
-    icon: "Code",
+    icon: Code,
     title: "Custom Web Development",
     description:
       "Full-stack applications tailored to your business needs. From MVP to production-ready platforms, I handle frontend, backend, database, and deployment.",
+    color: "border-purple-500",
+    iconColor: "text-purple-400",
+    iconBg: "bg-purple-500/10",
+    deliverables: [
+      "Business websites & landing pages",
+      "Full-stack web applications",
+      "REST API development",
+      "Cloud deployment & DevOps",
+    ],
   },
 ];
 
-const iconMap = {
-  TrendingUp: <TrendingUp className="w-10 h-10" />,
-  Heart: <Heart className="w-10 h-10" />,
-  Code: <Code className="w-10 h-10" />,
-};
-
 export default function Services() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [touchStart, setTouchStart] = useState<number | null>(null);
-  const [touchEnd, setTouchEnd] = useState<number | null>(null);
-
-  const nextSlide = () => {
-    if (currentIndex < services.length - 1) {
-      setCurrentIndex(currentIndex + 1);
-    }
-  };
-
-  const prevSlide = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
-    }
-  };
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchStart(e.targetTouches[0].clientX);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX);
-  };
-
-  const handleTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
-
-    const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > 50;
-    const isRightSwipe = distance < -50;
-
-    if (isLeftSwipe && currentIndex < services.length - 1) nextSlide();
-    if (isRightSwipe && currentIndex > 0) prevSlide();
-
-    setTouchStart(null);
-    setTouchEnd(null);
-  };
-
-  // Auto-rotate
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) =>
-        prev < services.length - 1 ? prev + 1 : 0
-      );
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, [currentIndex]);
-
   return (
     <section id="services" className="section-padding bg-black">
       <div className="container-custom">
+
+        {/* Header */}
         <div className="text-center space-y-4 mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold">
+          <span className="text-[#3b82f6] text-xs font-semibold uppercase tracking-widest">
+            What I Do
+          </span>
+          <h2 className="text-4xl md:text-5xl font-bold text-white">
             My <span className="text-[#3b82f6]">Services</span>
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
@@ -92,147 +66,74 @@ export default function Services() {
           </p>
         </div>
 
-        {/* Carousel Container */}
-        <div className="relative mb-12">
-          {/* Carousel Track */}
-          <div
-            className="overflow-hidden rounded-xl"
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
+        {/* 3-Card Grid */}
+        <div className="grid md:grid-cols-3 gap-6">
+          {services.map((service, index) => {
+            const Icon = service.icon;
+            return (
+              <div
+                key={index}
+                className={`p-8 bg-[#0d1117] rounded-xl border-t-4 ${service.color} border-l border-r border-b border-white/10 space-y-6 hover:bg-[#111827] transition-all duration-300`}
+              >
+                {/* Icon */}
+                <div className={`w-12 h-12 rounded-lg ${service.iconBg} flex items-center justify-center`}>
+                  <Icon className={`w-6 h-6 ${service.iconColor}`} />
+                </div>
+
+                {/* Title & Description */}
+                <div className="space-y-3">
+                  <h3 className="text-xl font-bold text-white">{service.title}</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed">{service.description}</p>
+                </div>
+
+                {/* Deliverables */}
+                <div className="space-y-2">
+                  <p className="text-xs text-gray-500 uppercase tracking-wider font-semibold">Deliverables</p>
+                  <ul className="space-y-2">
+                    {service.deliverables.map((item, i) => (
+                      <li key={i} className="flex items-center gap-2 text-gray-300 text-sm">
+                        <span className={`w-1.5 h-1.5 rounded-full ${service.iconColor} bg-current flex-shrink-0`}></span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* CTA */}
+        <div className="mt-16 p-10 bg-[#0d1117] rounded-2xl border border-white/10 text-center space-y-6">
+          <h3 className="text-3xl md:text-4xl font-bold text-white">
+            From Concept to Production.{" "}
+            <span className="text-[#3b82f6]">Let's Talk.</span>
+          </h3>
+          <p className="text-gray-400 max-w-xl mx-auto">
+            Building a fintech platform, healthcare system, or custom web application? Let's discuss your project.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-2xl mx-auto pt-2">
+            <div className="p-4 bg-black/50 rounded-lg border border-white/10 text-center">
+              <div className="text-[#3b82f6] font-bold mb-1">Free Consultation</div>
+              <p className="text-gray-500 text-xs">Discuss your project with no commitment</p>
+            </div>
+            <div className="p-4 bg-black/50 rounded-lg border border-white/10 text-center">
+              <div className="text-[#3b82f6] font-bold mb-1">Clear Scope</div>
+              <p className="text-gray-500 text-xs">Detailed plan with timeline and deliverables</p>
+            </div>
+            <div className="p-4 bg-black/50 rounded-lg border border-white/10 text-center">
+              <div className="text-[#3b82f6] font-bold mb-1">Transparent Process</div>
+              <p className="text-gray-500 text-xs">Regular updates and full project visibility</p>
+            </div>
+          </div>
+          <a
+            href="#contact"
+            className="inline-block px-10 py-4 bg-[#3b82f6] text-white font-bold rounded-lg hover:bg-[#2563eb] transition-all duration-300 no-underline text-lg"
           >
-            <div
-              className="flex transition-transform duration-500 ease-out"
-              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-            >
-              {services.map((service, index) => (
-                <div key={index} className="w-full flex-shrink-0 px-4 md:px-2">
-                  <div className="p-8 bg-gray-900/50 rounded-xl border border-gray-800 group h-full min-h-[320px] md:min-h-[360px] flex flex-col justify-center">
-                    <div className="flex flex-col items-center text-center space-y-6">
-                      {/* Icon */}
-                      <div className="p-5 rounded-full bg-gradient-to-br from-gray-900 to-black border border-gray-800">
-                        <div className="text-[#3b82f6]">
-                          {iconMap[service.icon as keyof typeof iconMap]}
-                        </div>
-                      </div>
-
-                      {/* Content */}
-                      <div className="space-y-4">
-                        <h3 className="text-2xl md:text-3xl font-bold text-white">
-                          {service.title}
-                        </h3>
-                        <p className="text-gray-400 leading-relaxed text-base md:text-lg max-w-xl mx-auto">
-                          {service.description}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Bottom Navigation - Arrows & Dots */}
-          <div className="flex items-center justify-center gap-6 mt-10">
-            {/* Left Arrow */}
-            <button
-              onClick={prevSlide}
-              disabled={currentIndex === 0}
-              className={`p-3 rounded-full transition-all duration-300 flex items-center justify-center w-12 h-12 ${
-                currentIndex === 0
-                  ? "opacity-30 cursor-not-allowed bg-gray-800"
-                  : "bg-gray-900 hover:bg-gray-800 text-white"
-              }`}
-              aria-label="Previous service"
-            >
-              <ChevronLeft className="w-6 h-6" />
-            </button>
-
-            {/* Dots Indicator */}
-            <div className="flex gap-3">
-              {services.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentIndex(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    index === currentIndex
-                      ? "bg-[#3b82f6] scale-125"
-                      : "bg-gray-700 hover:bg-gray-600"
-                  }`}
-                  aria-label={`Go to service ${index + 1}`}
-                />
-              ))}
-            </div>
-
-            {/* Right Arrow */}
-            <button
-              onClick={nextSlide}
-              disabled={currentIndex === services.length - 1}
-              className={`p-3 rounded-full transition-all duration-300 flex items-center justify-center w-12 h-12 ${
-                currentIndex === services.length - 1
-                  ? "opacity-30 cursor-not-allowed bg-gray-800"
-                  : "bg-gray-900 hover:bg-gray-800 text-white"
-              }`}
-              aria-label="Next service"
-            >
-              <ChevronRight className="w-6 h-6" />
-            </button>
-          </div>
+            Let's Build
+          </a>
         </div>
 
-        {/* Call-to-Action Section */}
-        <div className="max-w-3xl mx-auto text-center space-y-6 mt-16">
-          <div className="p-8 md:p-12 bg-gray-900/30 rounded-2xl border border-gray-800">
-            <div className="space-y-6">
-              <h3 className="text-3xl md:text-4xl font-bold text-white">
-                From Concept to Production. Let's Talk.
-              </h3>
-
-              <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-                Building a fintech platform, healthcare system, or custom web
-                application? Let's discuss your project.
-              </p>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">
-                <div className="p-6 bg-black/50 rounded-lg border border-gray-800 text-center">
-                  <div className="text-[#3b82f6] text-xl font-bold mb-2">
-                    Free Consultation
-                  </div>
-                  <p className="text-gray-400 text-sm">
-                    Discuss your project needs with no commitment
-                  </p>
-                </div>
-
-                <div className="p-6 bg-black/50 rounded-lg border border-gray-800 text-center">
-                  <div className="text-[#3b82f6] text-xl font-bold mb-2">
-                    Clear Scope
-                  </div>
-                  <p className="text-gray-400 text-sm">
-                    Detailed project plan with timeline & deliverables
-                  </p>
-                </div>
-
-                <div className="p-6 bg-black/50 rounded-lg border border-gray-800 text-center">
-                  <div className="text-[#3b82f6] text-xl font-bold mb-2">
-                    Transparent Process
-                  </div>
-                  <p className="text-gray-400 text-sm">
-                    Regular updates and full project visibility
-                  </p>
-                </div>
-              </div>
-
-              <div className="pt-8">
-                <a
-                  href="#contact"
-                  className="inline-block px-10 py-4 bg-[#3b82f6] text-white font-bold rounded-lg transition-all duration-300 text-lg border border-[#3b82f6]/30"
-                >
-                  Let's Build
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );

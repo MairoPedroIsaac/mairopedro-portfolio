@@ -4,40 +4,40 @@
   * {
     border-color: rgba(255, 255, 255, 0.1);
   }
-  
+
   body, html {
-    background-color: #000000 !important;
-    color: #FFFFFF !important;
+    background-color: #000000;
+    color: #FFFFFF;
     margin: 0;
     padding: 0;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     overflow-x: hidden;
   }
-  
-  /* Ensure all backgrounds are black */
-  section, div, main, header, footer, aside, article {
-    background-color: #000000 !important;
-  }
-  
-  /* Force white text */
-  h1, h2, h3, h4, h5, h6, p, span, a, li {
-    color: #FFFFFF !important;
-  }
-  
-  /* Remove all hover effects from project cards */
-  .project-card, [class*="project"], .card, [class*="card"] {
-    transition: none !important;
-    transform: none !important;
-  }
-  
-  .project-card:hover, [class*="project"]:hover, .card:hover, [class*="card"]:hover {
-    transform: none !important;
-    box-shadow: none !important;
-    border-color: rgba(255, 255, 255, 0.1) !important;
-  }
-  
+
   html {
     scroll-behavior: smooth;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    color: inherit;
+  }
+
+  p, span, li {
+    color: inherit;
+  }
+
+  a {
+    color: #3b82f6;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+  }
+
+  button {
+    cursor: pointer;
   }
 }
 
@@ -45,55 +45,36 @@
   .text-balance {
     text-wrap: balance;
   }
-  
+
   .section-padding {
     padding-top: 5rem;
     padding-bottom: 5rem;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
   }
-  
+
   @media (min-width: 768px) {
     .section-padding {
       padding-left: 3rem;
       padding-right: 3rem;
     }
   }
-  
+
   @media (min-width: 1024px) {
     .section-padding {
       padding-left: 6rem;
       padding-right: 6rem;
     }
   }
-  
+
   .container-custom {
     max-width: 80rem;
     margin-left: auto;
     margin-right: auto;
   }
-  
-  /* Simple clean card - NO hover effects */
-  .clean-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 0.75rem;
-    transition: none;
-  }
-  
-  /* Clickable but no hover animation */
-  .clickable-card {
-    cursor: pointer;
-    transition: none;
-  }
-  
-  .clickable-card:hover {
-    transform: none;
-    box-shadow: none;
-  }
 }
 
-/* Modern Blue Scrollbar (Matches your Tawk.to widget) */
+/* Scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -103,37 +84,16 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #3b82f6; /* Matches your widget blue */
+  background: #3b82f6;
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #3b82f6;
+  background: #2563eb;
 }
 
-/* Blue selection to match */
+/* Selection */
 ::selection {
-  background-color: rgba(59, 130, 246, 0.3); /* #3b82f6 with transparency */
-  color: #FFFFFF;
-}
-
-/* Remove any animation delays for clean experience */
-* {
-  animation-delay: 0ms !important;
-  transition-delay: 0ms !important;
-}
-
-/* Fix links to be clean and clickable */
-a {
-  color: #3b82f6 !important;
-  text-decoration: none;
-}
-
-a:hover {
-  color: #FFFFFF !important;
-  text-decoration: underline;
-}
-
-button {
-  cursor: pointer !important;
+  background-color: rgba(59, 130, 246, 0.3);
+  color: #ffffff;
 }

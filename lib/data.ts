@@ -13,6 +13,7 @@ export const projects = [
     featured: true,
     slug: "health-vault-rwanda",
     link: "/projects/health-vault-rwanda",
+    externalLink: "https://healthvault-rwanda-s42z.vercel.app/en",
   },
   {
     id: 2,
@@ -27,6 +28,7 @@ export const projects = [
     featured: false,
     slug: "powerhand-design",
     link: "/projects/powerhand-design",
+    externalLink: "https://www.powerhanddesigns.com/",
   },
   {
     id: 3,
@@ -36,11 +38,12 @@ export const projects = [
     status: "In Development",
     category: "Fintech Platform",
     images: [
-      "https://placehold.co/800x600/111827/00D9FF?text=Influence+Trading+House",
+      "/images/projects/influence-trading-desktop-hero.png",
     ],
     featured: false,
     slug: "influence-trading-house",
-    link: "https://influencetradinghouse.com",
+    link: "/projects/influence-trading-house",
+    externalLink: "https://influencetradinghouse.com",
   },
 ];
 
