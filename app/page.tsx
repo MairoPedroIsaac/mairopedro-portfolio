@@ -1,8 +1,11 @@
+"use client";
+
 import Hero from "@/components/sections/Hero";
 import TechTicker from "@/components/sections/TechTicker";
 import HomepageCTA from "@/components/sections/HomepageCTA";
 import Link from "next/link";
 import Image from "next/image";
+import { useEffect, useRef } from "react";
 
 const featuredProjects = [
   {
@@ -29,6 +32,80 @@ const featuredProjects = [
   },
 ];
 
+function ProjectCard({ project, index }: { project: typeof featuredProjects[0]; index: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("opacity-100", "translate-y-0");
+            entry.target.classList.remove("opacity-0", "translate-y-10");
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className={`grid md:grid-cols-2 gap-12 items-center opacity-0 translate-y-10 transition-all duration-700 ease-out ${
+        index % 2 !== 0 ? "md:[&>*:first-child]:order-2" : ""
+      }`}
+    >
+      {/* Image with hover zoom */}
+      <div className="rounded-xl overflow-hidden border border-white/10 group cursor-pointer">
+        <Image
+          src={project.image}
+          alt={project.title}
+          width={1280}
+          height={800}
+          className="w-full h-auto transition-transform duration-500 ease-out group-hover:scale-105"
+        />
+      </div>
+
+      {/* Content */}
+      <div className="space-y-5">
+        <div className="flex items-center gap-3">
+          <span className="text-gray-600 text-sm font-mono">{project.number}</span>
+          <span className="w-8 h-px bg-gray-600"></span>
+          <span className="text-[#3b82f6] text-xs font-semibold uppercase tracking-widest">{project.category}</span>
+        </div>
+        <h3 className="text-3xl md:text-4xl font-bold text-white">{project.title}</h3>
+        <p className="text-gray-400 leading-relaxed">{project.description}</p>
+        <div className="flex flex-wrap gap-2">
+          {project.tech.map((t) => (
+            <span key={t} className="px-3 py-1 bg-white/5 border border-white/10 text-gray-300 text-xs rounded-md">
+              {t}
+            </span>
+          ))}
+        </div>
+        <div className="flex gap-4 pt-2">
+          <Link
+            href={`/projects/${project.slug}`}
+            className="px-5 py-2.5 bg-[#3b82f6] text-white text-sm font-semibold rounded-lg hover:bg-[#2563eb] transition-all no-underline"
+          >
+            View Case Study
+          </Link>
+          <a
+            href={project.externalLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-5 py-2.5 border border-white/20 text-white text-sm font-semibold rounded-lg hover:bg-white/10 transition-all no-underline"
+          >
+            Visit Live Site
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Home() {
   return (
     <main className="min-h-screen">
@@ -53,54 +130,7 @@ export default function Home() {
 
           <div className="space-y-16">
             {featuredProjects.map((project, index) => (
-              <div
-                key={project.slug}
-                className={`grid md:grid-cols-2 gap-12 items-center ${
-                  index % 2 !== 0 ? "md:[&>*:first-child]:order-2" : ""
-                }`}
-              >
-                <div className="rounded-xl overflow-hidden border border-white/10">
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    width={1280}
-                    height={800}
-                    className="w-full h-auto"
-                  />
-                </div>
-                <div className="space-y-5">
-                  <div className="flex items-center gap-3">
-                    <span className="text-gray-600 text-sm font-mono">{project.number}</span>
-                    <span className="w-8 h-px bg-gray-600"></span>
-                    <span className="text-[#3b82f6] text-xs font-semibold uppercase tracking-widest">{project.category}</span>
-                  </div>
-                  <h3 className="text-3xl md:text-4xl font-bold text-white">{project.title}</h3>
-                  <p className="text-gray-400 leading-relaxed">{project.description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tech.map((t) => (
-                      <span key={t} className="px-3 py-1 bg-white/5 border border-white/10 text-gray-300 text-xs rounded-md">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="flex gap-4 pt-2">
-                    <Link
-                      href={`/projects/${project.slug}`}
-                      className="px-5 py-2.5 bg-[#3b82f6] text-white text-sm font-semibold rounded-lg hover:bg-[#2563eb] transition-all no-underline"
-                    >
-                      View Case Study
-                    </Link>
-                    <a
-                      href={project.externalLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-5 py-2.5 border border-white/20 text-white text-sm font-semibold rounded-lg hover:bg-white/10 transition-all no-underline"
-                    >
-                      Visit Live Site
-                    </a>
-                  </div>
-                </div>
-              </div>
+              <ProjectCard key={project.slug} project={project} index={index} />
             ))}
           </div>
         </div>
