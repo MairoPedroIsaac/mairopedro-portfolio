@@ -2,10 +2,13 @@
 
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,11 +19,11 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: "Home", href: "#home" },
-    { name: "Projects", href: "#projects" },
-    { name: "About", href: "#about" },
-    { name: "Services", href: "#services" },
-    { name: "Contact", href: "#contact" },
+    { name: "Home", href: "/" },
+    { name: "Projects", href: "/projects" },
+    { name: "About", href: "/about" },
+    { name: "Services", href: "/services" },
+    { name: "Contact", href: "/contact" },
   ];
 
   return (
@@ -32,20 +35,24 @@ export default function Navbar() {
       <div className="container-custom px-6 md:px-12 lg:px-24">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
-          <a href="#home" className="text-2xl font-bold text-primary">
+          <Link href="/" className="text-2xl font-bold text-primary">
             MP
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-8">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.name}
                 href={link.href}
-                className="text-gray-300 hover:text-primary transition-colors duration-300"
+                className={`transition-colors duration-300 ${
+                  pathname === link.href
+                    ? "text-primary font-semibold"
+                    : "text-gray-300 hover:text-primary"
+                }`}
               >
                 {link.name}
-              </a>
+              </Link>
             ))}
           </div>
 
@@ -62,14 +69,18 @@ export default function Navbar() {
         {isOpen && (
           <div className="md:hidden pb-6">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="block py-3 text-gray-300 hover:text-primary transition-colors duration-300"
+                className={`block py-3 transition-colors duration-300 ${
+                  pathname === link.href
+                    ? "text-primary font-semibold"
+                    : "text-gray-300 hover:text-primary"
+                }`}
               >
                 {link.name}
-              </a>
+              </Link>
             ))}
           </div>
         )}

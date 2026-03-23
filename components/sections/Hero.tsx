@@ -37,13 +37,13 @@ export default function Hero() {
 
             <div className="flex flex-wrap gap-4 pt-4">
               <a
-                href="#projects"
+                href="/projects"
                 className="px-8 py-4 bg-[#3b82f6] text-white font-semibold rounded-lg hover:bg-[#2563eb] transition-all duration-300 hover:scale-105 no-underline"
               >
                 View My Work
               </a>
               <a
-                href="#contact"
+                href="/contact"
                 className="px-8 py-4 border-2 border-[#3b82f6] text-[#3b82f6] font-semibold rounded-lg hover:bg-blue-500/10 transition-all duration-300 no-underline"
               >
                 Get In Touch
@@ -121,7 +121,7 @@ export default function Hero() {
 
         {/* Scroll Indicator */}
         <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <a href="#projects" className="text-[#3b82f6]">
+          <a href="/projects" className="text-[#3b82f6]">
             <ArrowDown size={32} />
           </a>
         </div>
