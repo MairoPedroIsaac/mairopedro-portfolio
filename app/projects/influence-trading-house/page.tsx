@@ -190,8 +190,8 @@ export default function InfluenceTradingHousePage() {
     <main className="min-h-screen bg-black text-white">
 
       {/* BACK LINK */}
-      <div className="container-custom pt-8">
-        <Link href="/#projects" className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors duration-300 no-underline">
+      <div className="container-custom pt-24 px-6 md:px-12 lg:px-24">
+        <Link href="/projects" className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors duration-300 no-underline">
           <ArrowLeft className="w-4 h-4" />
           Back to Projects
         </Link>
