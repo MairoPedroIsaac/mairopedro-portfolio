@@ -67,7 +67,7 @@ export default function Navbar() {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden pb-6">
+          <div className="md:hidden pb-6 bg-black border-t border-white/10">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
