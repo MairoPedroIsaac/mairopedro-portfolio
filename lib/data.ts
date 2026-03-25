@@ -43,7 +43,7 @@ export const projects = [
     featured: false,
     slug: "influence-trading-house",
     link: "/projects/influence-trading-house",
-    externalLink: "https://influencetradinghouse.com",
+    externalLink: "https://influence-trading-house.vercel.app",
   },
 ];
 
