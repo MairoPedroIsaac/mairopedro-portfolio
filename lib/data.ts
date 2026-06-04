@@ -13,7 +13,7 @@ export const projects = [
     featured: true,
     slug: "health-vault-rwanda",
     link: "/projects/health-vault-rwanda",
-    externalLink: "https://healthvault-rwanda-s42z.vercel.app/en",
+    externalLink: "https://nephrosasa-rwanda.vercel.app/en",
   },
   {
     id: 2,

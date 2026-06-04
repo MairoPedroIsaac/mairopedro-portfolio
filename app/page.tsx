@@ -16,7 +16,7 @@ const featuredProjects = [
       "Healthcare data management system giving patients ownership of their medical records. Patients carry their complete health history via QR code and control which doctors can access their records.",
     tech: ["Next.js", "Django", "QR Code Encryption", "PostgreSQL"],
     slug: "health-vault-rwanda",
-    externalLink: "https://healthvault-rwanda-s42z.vercel.app/en",
+    externalLink: "https://nephrosasa-rwanda.vercel.app/en",
     image: "/images/projects/healthvault-desktop-hero.png",
   },
   {
