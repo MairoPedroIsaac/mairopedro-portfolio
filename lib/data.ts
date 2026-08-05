@@ -2,17 +2,19 @@
 export const projects = [
   {
     id: 1,
-    title: "Health Vault Rwanda",
-    description: "Healthcare data management system giving patients ownership of their medical records. Patients carry their complete health history via QR code and control which doctors can access their records. The QR code contains an encrypted patient ID that acts as a key to unlock records.",
-    techStack: ["Next.js", "Django", "QR Code Encryption", "PostgreSQL"],
-    status: "In Development",
+    title: "NephroSasa Rwanda",
+    description: "A web-based kidney risk-classification, health-record tracking, and teleconsultation platform for hypertensive and Type 2 diabetic patients in Rwanda. Features Random Forest ML risk classification (84.94% accuracy), encrypted QR-based medical record sharing, automated email alerts, and teleconsultations with verified nephrologists.",
+    techStack: ["Next.js 16", "Django REST", "Python", "Scikit-Learn", "PostgreSQL", "QR Code", "SendGrid"],
+    status: "Completed",
     category: "Capstone Project",
     images: [
-      "/images/projects/healthvault-desktop-hero.png",
+      "/images/projects/nephrosasa-laptop-homepage.png",
+      "/images/projects/nephrosasa-patient-dashboard.png",
+      "/images/projects/nephrosasa-doctor-dashboard.png",
     ],
     featured: true,
-    slug: "health-vault-rwanda",
-    link: "/projects/health-vault-rwanda",
+    slug: "nephrosasa-rwanda",
+    link: "/projects/nephrosasa-rwanda",
     externalLink: "https://nephrosasa-rwanda.vercel.app/en",
   },
   {

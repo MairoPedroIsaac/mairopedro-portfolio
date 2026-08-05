@@ -78,9 +78,9 @@ export default function About() {
                 quantitative analysis.
               </p>
               <p>
-                Recent work includes HealthVault Rwanda (healthcare platform
-                streamlining patient records) and Powerhand Designs (website for
-                a Pan-African branding agency).
+                Recent work includes NephroSasa Rwanda (an AI-powered kidney
+                risk classification, health tracking, and teleconsultation platform)
+                and Powerhand Designs (website for a Pan-African branding agency).
               </p>
               <p>
                 If you need a developer who speaks both code and finance, let's
