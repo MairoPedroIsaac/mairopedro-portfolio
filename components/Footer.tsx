@@ -31,7 +31,7 @@ export default function Footer() {
           <div className="space-y-4">
             <Link href="/" className="text-2xl font-bold text-[#3b82f6] no-underline">MP</Link>
             <p className="text-gray-400 text-sm leading-relaxed max-w-xs">
-              Full-Stack Developer building scalable web applications for fintech, healthcare, and AI-driven platforms in Kigali, Rwanda.
+              Full-Stack Software Engineer building scalable web applications for fintech, healthcare, and AI-driven platforms in Kigali, Rwanda.
             </p>
             <div className="flex items-center gap-2">
               <span className="relative flex h-2.5 w-2.5">
@@ -149,7 +149,7 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="container-custom px-6 md:px-12 lg:px-24 py-5 flex flex-col md:flex-row justify-between items-center gap-2">
           <p className="text-gray-500 text-xs">© {currentYear} Mairo Pedro Isaac. All rights reserved.</p>
-          <p className="text-gray-500 text-xs">Full-Stack Developer · Kigali, Rwanda</p>
+          <p className="text-gray-500 text-xs">Full-Stack Software Engineer · Kigali, Rwanda</p>
         </div>
       </div>
 

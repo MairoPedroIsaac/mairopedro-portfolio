@@ -50,7 +50,7 @@ export default function About() {
     }, duration / steps);
   };
 
-  const updatedSkills = [...skills, "Node.js", "Express.js", "MongoDB", "Docker", "AWS", "Git"];
+  const updatedSkills = [...skills, "Node.js", "Express.js", "MongoDB", "Docker", "AWS", "Scikit-Learn"];
 
   return (
     <section id="about" className="section-padding bg-white">
@@ -83,7 +83,7 @@ export default function About() {
                 and Powerhand Designs (website for a Pan-African branding agency).
               </p>
               <p>
-                If you need a developer who speaks both code and finance, let's
+                If you need an engineer who speaks both code and finance, let's
                 build.
               </p>
             </div>

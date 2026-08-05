@@ -374,7 +374,7 @@ export default function InfluenceTradingHousePage() {
             <span className="text-[#3b82f6]">Let&apos;s connect.</span>
           </h2>
           <p className="text-gray-400 max-w-xl mx-auto">
-            Building a trading platform, fintech product, or need a full-stack developer?
+            Building a trading platform, fintech product, or need a full-stack engineer?
             Let&apos;s talk.
           </p>
           <a

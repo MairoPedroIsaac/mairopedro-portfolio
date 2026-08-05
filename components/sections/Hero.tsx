@@ -27,7 +27,7 @@ export default function Hero() {
             </div>
 
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-white">
-              Full-Stack Developer Specializing in Fintech, Healthcare{" "}
+              Full-Stack Software Engineer Specializing in Fintech, Healthcare{" "}
               <span className="text-[#3b82f6]">and AI-Driven Solutions</span>
             </h1>
 
@@ -84,7 +84,7 @@ export default function Hero() {
                 </div>
                 <div>
                   <div className="text-white font-semibold text-sm">Mairo Pedro Isaac</div>
-                  <div className="text-gray-400 text-xs">Full-Stack Developer</div>
+                  <div className="text-gray-400 text-xs">Full-Stack Software Engineer</div>
                 </div>
               </div>
 
@@ -94,7 +94,7 @@ export default function Hero() {
                   <span className="text-gray-500 uppercase text-xs tracking-wider flex items-center gap-1">
                     <Briefcase className="w-3 h-3" /> Role
                   </span>
-                  <span className="text-gray-200 text-xs">Freelance Developer</span>
+                  <span className="text-gray-200 text-xs">Full-Stack Software Engineer</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-gray-500 uppercase text-xs tracking-wider flex items-center gap-1">

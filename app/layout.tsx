@@ -6,12 +6,12 @@ import Footer from "@/components/Footer";
 
 
 export const metadata: Metadata = {
-  title: "Mairo Pedro Isaac - Full-Stack Developer",
-  description: "Full-Stack Developer & Software Engineer specializing in Next.js, React, Django, Node.js and AI Integration. Building scalable web solutions in Kigali, Rwanda.",
-  keywords: ["Full-Stack Developer", "Web Developer", "Next.js", "React", "Django", "Node.js", "Software Engineer", "Kigali", "Rwanda"],
+  title: "Mairo Pedro Isaac - Full-Stack Software Engineer",
+  description: "Full-Stack Software Engineer specializing in Next.js, React, Django, Node.js and AI Integration. Building scalable web solutions in Kigali, Rwanda.",
+  keywords: ["Full-Stack Software Engineer", "Software Engineer", "Web Developer", "Next.js", "React", "Django", "Node.js", "Kigali", "Rwanda"],
   authors: [{ name: "Mairo Pedro Isaac" }],
   openGraph: {
-    title: "Mairo Pedro Isaac - Full-Stack Developer",
+    title: "Mairo Pedro Isaac - Full-Stack Software Engineer",
     description: "Building modern web solutions with Next.js, React, Django, Node.js and AI Integration",
     url: "https://mairopedro.com",
     siteName: "Mairo Pedro Isaac Portfolio",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mairo Pedro Isaac - Full-Stack Developer",
+    title: "Mairo Pedro Isaac - Full-Stack Software Engineer",
     description: "Building modern web solutions with Next.js, React, Django, Node.js and AI Integration",
   },
 };

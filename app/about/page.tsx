@@ -10,7 +10,7 @@ export default function AboutPage() {
           <p className="text-[#3b82f6] text-xs font-semibold uppercase tracking-widest mb-4">Background</p>
           <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight">About Me</h1>
           <p className="text-gray-400 mt-4 max-w-xl text-lg leading-relaxed">
-            A full-stack developer at the intersection of software engineering, fintech, and healthcare. Building for real impact in Africa.
+            A full-stack software engineer at the intersection of software engineering, fintech, and healthcare. Building for real impact in Africa.
           </p>
         </div>
       </section>
