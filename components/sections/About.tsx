@@ -102,7 +102,7 @@ export default function About() {
 
             <div className="flex flex-wrap gap-3">
               {updatedSkills.map((skill, index) => (
-                <TechBadge key={index} tech={skill} className="!bg-gray-50 !border-gray-200 hover:!border-[#3b82f6] hover:!bg-blue-50 !text-gray-700 !px-4 !py-2" />
+                <TechBadge key={index} tech={skill} className="!bg-gray-50 !border-gray-200 hover:!border-[#3b82f6] hover:!bg-blue-50 !text-gray-700 !px-4 !py-2 hover:-translate-y-1 transition-transform duration-300" />
               ))}
             </div>
           </div>
