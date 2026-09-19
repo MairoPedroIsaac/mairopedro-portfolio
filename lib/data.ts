@@ -34,6 +34,21 @@ export const projects = [
   },
   {
     id: 3,
+    title: "SwiftBill",
+    description: "A full-stack invoice platform for freelancers. Try it instantly as a guest with PDF-only downloads, or sign up for a full dashboard to save clients, items, and invoice history. Features atomic invoice numbering and client-side PDF generation.",
+    techStack: ["Next.js 15", "TypeScript", "Tailwind CSS", "PostgreSQL", "Prisma", "Supabase", "NextAuth", "jspdf/jspdf-autotable"],
+    status: "Completed",
+    category: "Full-Stack Application",
+    images: [
+      "/images/projects/swiftbill-landing_page.png",
+    ],
+    featured: true,
+    slug: "swiftbill",
+    link: "/projects/swiftbill",
+    externalLink: "https://swiftbill-swart.vercel.app/",
+  },
+  {
+    id: 4,
     title: "Influence Trading House",
     description: "Trading signals platform with account management, subscription services, and financial education. Built for serious traders.",
     techStack: ["Next.js", "Node.js", "Express.js", "PostgreSQL"],

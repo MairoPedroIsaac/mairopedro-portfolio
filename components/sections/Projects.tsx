@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { projects } from "@/lib/data";
 import { useEffect, useRef } from "react";
+import TechBadge from "@/components/ui/TechBadge";
 
 function ProjectItem({ project, index }: { project: typeof projects[0]; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -44,18 +45,6 @@ function ProjectItem({ project, index }: { project: typeof projects[0]; index: n
           sizes="(max-width: 768px) 100vw, 50vw"
           quality={100}
         />
-        {/* Status badge */}
-        <div className="absolute top-4 right-4">
-          <span
-            className={`px-3 py-1 rounded-full text-xs font-semibold ${
-              project.status === "Completed"
-                ? "bg-green-900/80 text-green-400 border border-green-700/50"
-                : "bg-blue-900/80 text-blue-400 border border-blue-700/50"
-            }`}
-          >
-            {project.status}
-          </span>
-        </div>
       </div>
 
       {/* Details */}
@@ -80,12 +69,7 @@ function ProjectItem({ project, index }: { project: typeof projects[0]; index: n
 
         <div className="flex flex-wrap gap-2">
           {project.techStack.map((tech) => (
-            <span
-              key={tech}
-              className="px-3 py-1 bg-gray-900 text-gray-300 rounded-md border border-white/10 text-xs font-medium"
-            >
-              {tech}
-            </span>
+            <TechBadge key={tech} tech={tech} />
           ))}
         </div>
 

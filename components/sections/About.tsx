@@ -2,6 +2,7 @@
 
 import { skills } from "@/lib/data";
 import { useEffect, useState, useRef } from "react";
+import TechBadge from "@/components/ui/TechBadge";
 
 export default function About() {
   const [yearsCount, setYearsCount] = useState(0);
@@ -38,13 +39,13 @@ export default function About() {
       step++;
       const progress = step / steps;
       setYearsCount(Math.min(Math.round(4 * progress), 4));
-      setProjectsCount(Math.min(Math.round(3 * progress), 3));
+      setProjectsCount(Math.min(Math.round(4 * progress), 4));
       setSatisfactionCount(Math.min(Math.round(100 * progress), 100));
 
       if (step >= steps) {
         clearInterval(timer);
         setYearsCount(4);
-        setProjectsCount(3);
+        setProjectsCount(4);
         setSatisfactionCount(100);
       }
     }, duration / steps);
@@ -79,8 +80,9 @@ export default function About() {
               </p>
               <p>
                 Recent work includes NephroSasa Rwanda (an AI-powered kidney
-                risk classification, health tracking, and teleconsultation platform)
-                and Powerhand Designs (website for a Pan-African branding agency).
+                risk classification, health tracking, and teleconsultation platform),
+                Powerhand Designs (website for a Pan-African branding agency), and
+                SwiftBill (a full-stack invoice platform for freelancers).
               </p>
               <p>
                 If you need an engineer who speaks both code and finance, let's
@@ -98,14 +100,9 @@ export default function About() {
               Technologies and tools I work with to bring ideas to life
             </p>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            <div className="flex flex-wrap gap-3">
               {updatedSkills.map((skill, index) => (
-                <div
-                  key={index}
-                  className="p-3 bg-gray-50 rounded-lg border border-gray-200 hover:border-[#3b82f6] hover:bg-blue-50 transition-all duration-300 text-center"
-                >
-                  <span className="text-gray-700 font-medium text-sm">{skill}</span>
-                </div>
+                <TechBadge key={index} tech={skill} className="!bg-gray-50 !border-gray-200 hover:!border-[#3b82f6] hover:!bg-blue-50 !text-gray-700 !px-4 !py-2" />
               ))}
             </div>
           </div>

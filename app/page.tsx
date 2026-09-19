@@ -6,6 +6,7 @@ import HomepageCTA from "@/components/sections/HomepageCTA";
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
+import TechBadge from "@/components/ui/TechBadge";
 
 const featuredProjects = [
   {
@@ -73,16 +74,12 @@ function ProjectCard({ project, index }: { project: typeof featuredProjects[0]; 
       <div className="space-y-5">
         <div className="flex items-center gap-3">
           <span className="text-gray-600 text-sm font-mono">{project.number}</span>
-          <span className="w-8 h-px bg-gray-600"></span>
-          <span className="text-[#3b82f6] text-xs font-semibold uppercase tracking-widest">{project.category}</span>
         </div>
         <h3 className="text-3xl md:text-4xl font-bold text-white">{project.title}</h3>
         <p className="text-gray-400 leading-relaxed">{project.description}</p>
         <div className="flex flex-wrap gap-2">
           {project.tech.map((t) => (
-            <span key={t} className="px-3 py-1 bg-white/5 border border-white/10 text-gray-300 text-xs rounded-md">
-              {t}
-            </span>
+            <TechBadge key={t} tech={t} />
           ))}
         </div>
         <div className="flex gap-4 pt-2">

@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Github, ExternalLink, ArrowLeft, ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useState, useRef, useCallback } from "react";
+import TechBadge from "@/components/ui/TechBadge";
 
 const desktopImages = [
   { src: "/images/projects/influence-trading-desktop-hero.png", label: "Landing Page — Hero Section" },
@@ -126,7 +127,7 @@ function MobileCarousel({ images }: { images: { src: string; label: string }[] }
 }
 
 export default function InfluenceTradingHousePage() {
-  const techStack = ["Next.js 15", "TypeScript", "TailwindCSS v4", "Vercel", "Mock AuthContext"];
+  const techStack = ["Next.js 15", "TypeScript", "TailwindCSS v4", "Vercel"];
 
   const [pagesCount, setPagesCount] = useState(0);
   const [hasAnimated, setHasAnimated] = useState(false);
@@ -200,14 +201,6 @@ export default function InfluenceTradingHousePage() {
       {/* HERO */}
       <section className="section-padding">
         <div className="container-custom space-y-6">
-          <div className="flex flex-wrap gap-3 items-center">
-            <span className="px-3 py-1 bg-blue-900/50 text-blue-400 border border-blue-700/50 rounded-full text-sm font-semibold">
-              Fintech Platform
-            </span>
-            <span className="px-3 py-1 bg-gray-800 text-gray-300 rounded-full text-sm">
-              Portfolio Project
-            </span>
-          </div>
           <h1 className="text-4xl md:text-6xl font-bold">
             Influence <span className="text-[#3b82f6]">Trading House</span>
           </h1>
@@ -322,9 +315,7 @@ export default function InfluenceTradingHousePage() {
           <h2 className="text-2xl font-bold text-white">Tech Stack</h2>
           <div className="flex flex-wrap gap-3">
             {techStack.map((tech) => (
-              <span key={tech} className="px-4 py-2 bg-gray-800 text-[#3b82f6] rounded-md border border-[#3b82f6]/30 text-sm font-medium">
-                {tech}
-              </span>
+              <TechBadge key={tech} tech={tech} />
             ))}
           </div>
         </div>

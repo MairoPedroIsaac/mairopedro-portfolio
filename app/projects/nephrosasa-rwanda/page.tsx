@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Github, ExternalLink, ArrowLeft, ChevronLeft, ChevronRight, Activity, ShieldCheck, QrCode, Stethoscope, Sparkles } from "lucide-react";
 import { useEffect, useState, useRef, useCallback } from "react";
+import TechBadge from "@/components/ui/TechBadge";
 
 const desktopImages = [
   { src: "/images/projects/nephrosasa-laptop-homepage.png", label: "Homepage — Hero & Value Proposition" },
@@ -242,18 +243,6 @@ export default function NephroSasaRwandaPage() {
       {/* HERO */}
       <section className="section-padding">
         <div className="container-custom space-y-6">
-          <div className="flex flex-wrap gap-3 items-center">
-            <span className="px-3 py-1 bg-green-900/50 text-green-400 border border-green-700/50 rounded-full text-xs font-semibold uppercase tracking-wider">
-              Completed & Defended
-            </span>
-            <span className="px-3 py-1 bg-blue-900/50 text-blue-400 border border-blue-700/50 rounded-full text-xs font-semibold uppercase tracking-wider">
-              Capstone Project
-            </span>
-            <span className="px-3 py-1 bg-purple-900/50 text-purple-400 border border-purple-700/50 rounded-full text-xs font-semibold uppercase tracking-wider">
-              AI & HealthTech
-            </span>
-          </div>
-
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
             NephroSasa <span className="text-[#3b82f6]">Rwanda</span>
           </h1>
@@ -426,9 +415,7 @@ export default function NephroSasaRwandaPage() {
           </div>
           <div className="flex flex-wrap gap-3">
             {techStack.map((tech) => (
-              <span key={tech} className="px-4 py-2.5 bg-gray-900 text-[#3b82f6] rounded-lg border border-[#3b82f6]/30 text-sm font-medium hover:border-[#3b82f6] transition-colors">
-                {tech}
-              </span>
+              <TechBadge key={tech} tech={tech} />
             ))}
           </div>
         </div>

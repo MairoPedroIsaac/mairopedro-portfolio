@@ -16,7 +16,7 @@ export default function ProjectsPage() {
               </p>
             </div>
             <div className="text-right flex-shrink-0">
-              <p className="text-7xl font-bold text-white">3</p>
+              <p className="text-7xl font-bold text-white">4</p>
               <p className="text-gray-500 text-sm mt-1">Live Platforms</p>
             </div>
           </div>
