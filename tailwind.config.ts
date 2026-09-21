@@ -22,7 +22,7 @@ const config: Config = {
       animation: {
         'fade-in': 'fadeIn 0.6s ease-in',
         'slide-up': 'slideUp 0.6s ease-out',
-        'ticker': 'ticker 25s linear infinite',
+        'ticker': 'ticker 20s linear infinite',
       },
       keyframes: {
         fadeIn: {

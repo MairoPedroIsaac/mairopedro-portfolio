@@ -11,7 +11,7 @@ const techs = [
 export default function TechTicker() {
   return (
     <section className="bg-black border-t border-b border-white/10 py-5 overflow-hidden">
-      <div className="flex animate-ticker whitespace-nowrap">
+      <div className="flex w-max animate-ticker whitespace-nowrap">
         {[...techs, ...techs].map((tech, index) => (
           <TechBadge 
             key={index} 
