@@ -14,8 +14,8 @@ const desktopImages = [
 ];
 
 const mobileImages = [
-  { src: "/images/projects/swiftbill-mobile_landing_page.jpeg", label: "Mobile Landing Page" },
-  { src: "/images/projects/swiftbill-mobile_dashboard.jpeg", label: "Mobile Dashboard" },
+  { src: "/images/projects/swiftbill-mobile-hero.jpeg", label: "Mobile Landing Page" },
+  { src: "/images/projects/swiftbill-mobile-dashboard.jpeg", label: "Mobile Dashboard" },
   { src: "/images/projects/swiftbill-mobile_invoice_builder.jpeg", label: "Mobile Invoice Builder" },
 ];
 
