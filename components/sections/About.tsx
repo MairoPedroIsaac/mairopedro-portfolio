@@ -1,132 +1,53 @@
-"use client";
-
-import { skills } from "@/lib/data";
-import { useEffect, useState, useRef } from "react";
-import TechBadge from "@/components/ui/TechBadge";
+import Image from "next/image";
+import { ArrowDown } from "lucide-react";
+import Reveal from "@/components/ui/Reveal";
+import SectionHeader from "@/components/ui/SectionHeader";
+import { contact, skills } from "@/lib/data";
 
 export default function About() {
-  const [yearsCount, setYearsCount] = useState(0);
-  const [projectsCount, setProjectsCount] = useState(0);
-  const [satisfactionCount, setSatisfactionCount] = useState(0);
-  const [hasAnimated, setHasAnimated] = useState(false);
-
-  const statsRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!statsRef.current || hasAnimated) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          animateCounters();
-          setHasAnimated(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.5 }
-    );
-
-    observer.observe(statsRef.current);
-    return () => observer.disconnect();
-  }, [hasAnimated]);
-
-  const animateCounters = () => {
-    const duration = 2000;
-    const steps = 60;
-    let step = 0;
-
-    const timer = setInterval(() => {
-      step++;
-      const progress = step / steps;
-      setYearsCount(Math.min(Math.round(4 * progress), 4));
-      setProjectsCount(Math.min(Math.round(4 * progress), 4));
-      setSatisfactionCount(Math.min(Math.round(100 * progress), 100));
-
-      if (step >= steps) {
-        clearInterval(timer);
-        setYearsCount(4);
-        setProjectsCount(4);
-        setSatisfactionCount(100);
-      }
-    }, duration / steps);
-  };
-
-  const updatedSkills = [...skills, "Node.js", "Express.js", "MongoDB", "Docker", "AWS", "Scikit-Learn"];
-
   return (
-    <section id="about" className="section-padding bg-white">
-      <div className="container-custom space-y-16">
+    <section id="about" className="py-28 md:py-40 scroll-mt-16">
+      <div className="container-site">
+        <SectionHeader index="03" label="About" title="Calm. Clear. Built to last." />
 
-        {/* Top: 2-column grid */}
-        <div className="grid md:grid-cols-2 gap-16 items-start">
-
-          {/* Left Column - Story */}
-          <div className="space-y-6">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
-              About <span className="text-[#3b82f6]">Me</span>
-            </h2>
-            <div className="space-y-4 text-gray-600 leading-relaxed">
-              <p>
-                Full-stack software engineer based in Kigali, Rwanda, building
-                web applications at the intersection of fintech, healthcare, and AI.
-              </p>
-              <p>
-                I work with Next.js, Django, Python, and Node.js to deliver
-                solutions that are fast, scalable, and built for real-world
-                impact. Having developed and tested trading strategies for 5+
-                years, I bring a rare combination: technical expertise plus deep
-                understanding of financial markets, risk management, and
-                quantitative analysis.
-              </p>
-              <p>
-                Recent work includes NephroSasa Rwanda (an AI-powered kidney
-                risk classification, health tracking, and teleconsultation platform),
-                Powerhand Designs (website for a Pan-African branding agency), and
-                SwiftBill (a full-stack invoice platform for freelancers).
-              </p>
-              <p>
-                If you need an engineer who speaks both code and finance, let's
-                build.
-              </p>
+        <div className="grid gap-12 md:grid-cols-12 md:gap-10">
+          <Reveal className="md:col-span-5 lg:col-span-4 md:col-start-1">
+            <div className="relative aspect-[4/5] overflow-hidden bg-coal">
+              <Image
+                src="/images/profile.jpg"
+                alt="Portrait of Mairo Pedro Isaac"
+                fill
+                sizes="(max-width: 768px) 100vw, 33vw"
+                className="object-cover grayscale contrast-[1.08]"
+              />
             </div>
-          </div>
+          </Reveal>
 
-          {/* Right Column - Skills */}
-          <div className="space-y-6">
-            <h3 className="text-4xl md:text-5xl font-bold text-gray-900">
-              Technical <span className="text-[#3b82f6]">Skills</span>
-            </h3>
-            <p className="text-gray-500">
-              Technologies and tools I work with to bring ideas to life
+          <Reveal delay={100} className="md:col-span-7 lg:col-span-6 lg:col-start-6 space-y-6 text-lg leading-relaxed">
+            <p className="text-2xl md:text-3xl leading-snug text-white">
+              I&apos;m Mairo, a full-stack developer who builds websites, web apps and mobile apps for small and growing businesses.
+            </p>
+            <p className="text-mist">
+              I care about two things: work that looks premium, and work that brings you results. I handle everything from design to launch,
+              so you have one person to talk to and nothing gets lost along the way.
+            </p>
+            <p className="text-mist">
+              I&apos;ve shipped invoicing software, business websites, an AI health platform and a trading dashboard. Each one fast, clean and
+              built to grow with the people using it.
             </p>
 
-            <div className="flex flex-wrap gap-3">
-              {updatedSkills.map((skill, index) => (
-                <TechBadge key={index} tech={skill} className="!bg-gray-50 !border-gray-200 hover:!border-[#3b82f6] hover:!bg-blue-50 !text-gray-700 !px-4 !py-2 hover:-translate-y-1 transition-transform duration-300" />
-              ))}
+            <div className="pt-6 border-t border-smoke/40">
+              <p className="label mb-4">Tools I use</p>
+              <p className="text-ash text-base">{skills.join("  /  ")}</p>
             </div>
-          </div>
-        </div>
 
-        {/* Stats */}
-        <div
-          ref={statsRef}
-          className="grid grid-cols-3 gap-8 max-w-2xl mx-auto text-center border-t border-gray-200 pt-16"
-        >
-          <div className="flex flex-col items-center">
-            <div className="text-4xl font-bold text-[#3b82f6]">{yearsCount}+</div>
-            <div className="text-gray-500 text-sm mt-1">Years Experience</div>
-          </div>
-          <div className="flex flex-col items-center">
-            <div className="text-4xl font-bold text-[#3b82f6]">{projectsCount}+</div>
-            <div className="text-gray-500 text-sm mt-1">Projects Completed</div>
-          </div>
-          <div className="flex flex-col items-center">
-            <div className="text-4xl font-bold text-[#3b82f6]">{satisfactionCount}%</div>
-            <div className="text-gray-500 text-sm mt-1">Client Satisfaction</div>
-          </div>
+            {contact.cv && (
+              <a href={contact.cv} download className="btn-ghost mt-4">
+                Download CV <ArrowDown className="h-4 w-4" aria-hidden />
+              </a>
+            )}
+          </Reveal>
         </div>
-
       </div>
     </section>
   );

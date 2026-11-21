@@ -1,108 +1,126 @@
-// PROJECT DATA
-export const projects = [
+// SITE CONTENT
+// Edit this file to update copy across the site.
+
+export const site = {
+  name: "Mairo Pedro Isaac",
+  role: "Full-Stack Developer",
+  tagline: "Websites, web apps & mobile apps that bring your business more customers.",
+  url: "https://mairopedro.com",
+};
+
+export type Project = {
+  slug: string;
+  number: string;
+  title: string;
+  category: string;
+  status?: string;
+  summary: string;
+  stack: string[];
+  image: string;
+  live?: string;
+  github?: string;
+};
+
+export const projects: Project[] = [
   {
-    id: 1,
-    title: "NephroSasa Rwanda",
-    description: "A web-based kidney risk-classification, health-record tracking, and teleconsultation platform for hypertensive and Type 2 diabetic patients in Rwanda. Features Random Forest ML risk classification (84.94% accuracy), encrypted QR-based medical record sharing, automated email alerts, and teleconsultations with verified nephrologists.",
-    techStack: ["Next.js 16", "Django REST", "Python", "Scikit-Learn", "PostgreSQL", "QR Code", "SendGrid"],
-    status: "Completed",
-    category: "Capstone Project",
-    images: [
-      "/images/projects/nephrosasa-laptop-homepage.png",
-      "/images/projects/nephrosasa-patient-dashboard.png",
-      "/images/projects/nephrosasa-doctor-dashboard.png",
-    ],
-    featured: true,
-    slug: "nephrosasa-rwanda",
-    link: "/projects/nephrosasa-rwanda",
-    externalLink: "https://nephrosasa-rwanda.vercel.app/en",
-  },
-  {
-    id: 2,
-    title: "Powerhand Design Website",
-    description: "A professional business website for Powerhand Design, featuring a modern interface, responsive design, and seamless user experience. Built with Django to deliver a robust and scalable web solution.",
-    techStack: ["Django", "HTML", "CSS", "JavaScript"],
-    status: "Completed",
-    category: "Client Project",
-    images: [
-      "/images/projects/powerhand-desktop-hero.png",
-    ],
-    featured: false,
-    slug: "powerhand-design",
-    link: "/projects/powerhand-design",
-    externalLink: "https://www.powerhanddesigns.com/",
-  },
-  {
-    id: 3,
-    title: "SwiftBill",
-    description: "A full-stack invoice platform for freelancers. Try it instantly as a guest with PDF-only downloads, or sign up for a full dashboard to save clients, items, and invoice history. Features atomic invoice numbering and client-side PDF generation.",
-    techStack: ["Next.js 15", "TypeScript", "Tailwind CSS", "PostgreSQL", "Prisma", "Supabase", "NextAuth", "jspdf/jspdf-autotable"],
-    status: "Completed",
-    category: "Full-Stack Application",
-    images: [
-      "/images/projects/swiftbill-landing_page.png",
-    ],
-    featured: true,
     slug: "swiftbill",
-    link: "/projects/swiftbill",
-    externalLink: "https://swiftbill-swart.vercel.app/",
+    number: "01",
+    title: "SwiftBill",
+    category: "Invoicing web app",
+    summary:
+      "Freelancers create and download a professional invoice in seconds, with no sign-up needed. Optional accounts save clients, items and full invoice history.",
+    stack: ["Next.js", "TypeScript", "PostgreSQL", "Prisma"],
+    image: "/images/projects/swiftbill-landing_page.png",
+    live: "https://swiftbill-swart.vercel.app/",
+    github: "https://github.com/MairoPedroIsaac/swiftbill",
   },
   {
-    id: 4,
-    title: "Influence Trading House",
-    description: "Trading signals platform with account management, subscription services, and financial education. Built for serious traders.",
-    techStack: ["Next.js", "Node.js", "Express.js", "PostgreSQL"],
-    status: "In Development",
-    category: "Fintech Platform",
-    images: [
-      "/images/projects/influence-trading-desktop-hero.png",
-    ],
-    featured: false,
+    slug: "powerhand-design",
+    number: "02",
+    title: "Powerhand Designs",
+    category: "Business website",
+    summary:
+      "A complete website for a Pan-African branding agency, with live chat, a custom domain and professional email, so new clients can find them and get in touch right away.",
+    stack: ["Django", "Python", "HTML", "CSS"],
+    image: "/images/projects/powerhand-desktop-hero.png",
+    live: "https://www.powerhanddesigns.com/",
+    github: "https://github.com/MairoPedroIsaac/powerhanddesigns",
+  },
+  {
+    slug: "nephrosasa-rwanda",
+    number: "03",
+    title: "NephroSasa",
+    category: "AI health platform · Capstone",
+    summary:
+      "Spots kidney disease risk early for high-risk patients using a machine learning model with 84.94% accuracy, and lets doctors open records securely with a QR code.",
+    stack: ["Next.js", "Django REST", "Scikit-Learn", "PostgreSQL"],
+    image: "/images/projects/nephrosasa-laptop-homepage.png",
+    live: "https://nephrosasa-rwanda.vercel.app/en",
+    github: "https://github.com/MairoPedroIsaac/healthvault-rwanda",
+  },
+  {
     slug: "influence-trading-house",
-    link: "/projects/influence-trading-house",
-    externalLink: "https://influence-trading-house.vercel.app",
+    number: "04",
+    title: "Influence Trading House",
+    category: "Trading analytics platform",
+    status: "In progress",
+    summary:
+      "Live trading signals, subscriptions and trader education in one focused dashboard, built to feel fast and trustworthy for serious traders.",
+    stack: ["Next.js", "TypeScript", "Node.js", "PostgreSQL"],
+    image: "/images/projects/influence-trading-desktop-hero.png",
+    live: "https://influence-trading-house.vercel.app",
+    github: "https://github.com/MairoPedroIsaac/influence-trading-house",
   },
 ];
 
-// SERVICES DATA
 export const services = [
   {
-    title: "Fintech & Trading Platforms",
-    description: "Build secure, scalable financial applications—from trading dashboards to payment systems. With 5+ years in financial markets, I understand the domain, not just the code.",
-    icon: "TrendingUp",
+    number: "01",
+    title: "Websites",
+    description:
+      "Fast, polished business websites that make a strong first impression and turn visitors into enquiries.",
   },
   {
-    title: "Healthcare & Data Systems",
-    description: "HIPAA-compliant platforms for patient records, appointment scheduling, and medical data management. Secure, reliable, and built for healthcare workflows.",
-    icon: "Heart",
+    number: "02",
+    title: "Web apps",
+    description:
+      "Custom tools like dashboards, booking systems and client portals, built around how your business actually works.",
   },
   {
-    title: "Custom Web Development",
-    description: "Full-stack applications tailored to your business needs. From MVP to production-ready platforms, I handle frontend, backend, database, and deployment.",
-    icon: "Code",
+    number: "03",
+    title: "Mobile apps",
+    description:
+      "Smooth, reliable apps for iPhone and Android that keep your customers coming back.",
   },
 ];
 
-// SKILLS DATA
 export const skills = [
   "Next.js",
   "React",
+  "TypeScript",
+  "Node.js",
   "Django",
   "Python",
-  "JavaScript",
-  "TypeScript",
-  "Tailwind CSS",
   "PostgreSQL",
-  "Git",
   "Flutter",
-  "RESTful APIs",
-  "Responsive Design",
+  "Tailwind CSS",
 ];
 
-// CONTACT DATA
+// TESTIMONIAL
+// Fill in the client's real words. The section stays hidden while quote is empty.
+export const testimonial = {
+  quote: "",
+  name: "",
+  role: "Powerhand Designs",
+};
+
+// CONTACT
+// Never add a phone number, city or country here.
 export const contact = {
   email: "mairopedroisaac@gmail.com",
-  whatsapp: "250798972117",
+  facebook: { label: "Mairo Pedro Dev", url: "" }, // add the Facebook Page URL
   linkedin: "https://www.linkedin.com/in/mairo-pedro-isaac-3a0b59291/",
-  whatsappMessage: "Hi Mairo, I'm interested in your web development services",
+  github: "https://github.com/MairoPedroIsaac",
+  // Put the PDF at public/cv/Mairo-Pedro-Isaac-CV.pdf, then set this to "/cv/Mairo-Pedro-Isaac-CV.pdf".
+  cv: "",
 };

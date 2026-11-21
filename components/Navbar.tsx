@@ -1,90 +1,91 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+
+const links = [
+  { name: "Work", href: "/#work" },
+  { name: "Services", href: "/#services" },
+  { name: "About", href: "/#about" },
+  { name: "Contact", href: "/#contact" },
+];
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const pathname = usePathname();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "Projects", href: "/projects" },
-    { name: "About", href: "/about" },
-    { name: "Services", href: "/services" },
-    { name: "Contact", href: "/contact" },
-  ];
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
 
   return (
-    <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? "bg-navy/95 backdrop-blur-sm shadow-lg" : "bg-transparent"
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color] duration-500 border-b ${
+        scrolled || open ? "bg-ink/90 backdrop-blur-md border-smoke/30" : "bg-transparent border-transparent"
       }`}
     >
-      <div className="container-custom px-6 md:px-12 lg:px-24">
-        <div className="flex justify-between items-center h-20">
-          {/* Logo */}
-          <Link href="/" className="text-2xl font-bold text-primary">
-            MP
+      <nav className="container-site flex h-18 md:h-20 items-center justify-between" aria-label="Main">
+        <Link href="/" className="font-display text-xl tracking-[0.08em] text-white uppercase" onClick={() => setOpen(false)}>
+          Mairo Pedro
+        </Link>
+
+        <div className="hidden md:flex items-center gap-10">
+          {links.map((l) => (
+            <Link key={l.name} href={l.href} className="label link-line hover:text-white">
+              {l.name}
+            </Link>
+          ))}
+          <Link href="/#contact" className="btn-ghost !py-3 !px-5">
+            Work with me
           </Link>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className={`transition-colors duration-300 ${
-                  pathname === link.href
-                    ? "text-primary font-semibold"
-                    : "text-gray-300 hover:text-primary"
-                }`}
-              >
-                {link.name}
-              </Link>
-            ))}
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-gray-300 hover:text-primary transition-colors"
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
         </div>
 
-        {/* Mobile Navigation */}
-        {isOpen && (
-          <div className="md:hidden pb-6 bg-black border-t border-white/10">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className={`block py-3 transition-colors duration-300 ${
-                  pathname === link.href
-                    ? "text-primary font-semibold"
-                    : "text-gray-300 hover:text-primary"
-                }`}
-              >
-                {link.name}
-              </Link>
+        <button
+          type="button"
+          onClick={() => setOpen((o) => !o)}
+          className="md:hidden relative h-10 w-10 -mr-2"
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
+        >
+          <span className={`absolute left-2 right-2 h-px bg-white transition-transform duration-300 ${open ? "top-1/2 rotate-45" : "top-[15px]"}`} />
+          <span className={`absolute left-2 right-2 h-px bg-white transition-transform duration-300 ${open ? "top-1/2 -rotate-45" : "top-[25px]"}`} />
+        </button>
+      </nav>
+
+      <div
+        className={`md:hidden fixed inset-x-0 top-18 bottom-0 bg-ink transition-opacity duration-300 ${
+          open ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+      >
+        <div className="container-site flex h-full flex-col justify-between pt-10 pb-12">
+          <ul className="space-y-2">
+            {links.map((l, i) => (
+              <li key={l.name}>
+                <Link
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  className="display block text-6xl py-2 text-white"
+                  tabIndex={open ? 0 : -1}
+                >
+                  <span className="label mr-4 align-middle">0{i + 1}</span>
+                  {l.name}
+                </Link>
+              </li>
             ))}
-          </div>
-        )}
+          </ul>
+          <Link href="/#contact" onClick={() => setOpen(false)} className="btn-primary justify-center" tabIndex={open ? 0 : -1}>
+            Work with me
+          </Link>
+        </div>
       </div>
-    </nav>
+    </header>
   );
 }
