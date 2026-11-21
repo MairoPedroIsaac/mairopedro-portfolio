@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: var(--font-body), system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-heading), var(--font-body), system-ui, sans-serif;
+}
+
 @layer base {
   * {
     border-color: rgba(255, 255, 255, 0.1);
@@ -10,7 +15,8 @@
     color: #FFFFFF;
     margin: 0;
     padding: 0;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: var(--font-body), system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
 
@@ -20,6 +26,8 @@
 
   h1, h2, h3, h4, h5, h6 {
     color: inherit;
+    font-family: var(--font-heading), var(--font-body), system-ui, sans-serif;
+    letter-spacing: -0.02em;
   }
 
   p, span, li {

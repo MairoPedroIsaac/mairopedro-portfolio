@@ -1,12 +1,14 @@
 import Link from "next/link";
-import { Mail, Linkedin, Facebook, Github, Instagram, Download, ArrowRight } from "lucide-react";
+import { Mail, Download, ArrowRight } from "lucide-react";
+import { FaWhatsapp, FaFacebookF, FaLinkedinIn, FaGithub, FaInstagram } from "react-icons/fa";
 import { contact } from "@/lib/data";
 
 const socials = [
-  { label: "Facebook", href: contact.facebook, Icon: Facebook },
-  { label: "LinkedIn", href: contact.linkedin, Icon: Linkedin },
-  { label: "GitHub", href: contact.github, Icon: Github },
-  { label: "Instagram", href: contact.instagram, Icon: Instagram },
+  { label: "WhatsApp", href: contact.whatsapp, Icon: FaWhatsapp },
+  { label: "Facebook", href: contact.facebook, Icon: FaFacebookF },
+  { label: "LinkedIn", href: contact.linkedin, Icon: FaLinkedinIn },
+  { label: "GitHub", href: contact.github, Icon: FaGithub },
+  { label: "Instagram", href: contact.instagram, Icon: FaInstagram },
 ];
 
 export default function Footer() {
@@ -37,7 +39,7 @@ export default function Footer() {
 
           {/* Branding */}
           <div className="space-y-4">
-            <Link href="/" className="text-2xl font-extrabold tracking-tight text-white no-underline">MP</Link>
+            <Link href="/" className="font-display text-2xl font-extrabold tracking-tight text-white no-underline">MP</Link>
             <p className="text-neutral-400 text-sm leading-relaxed max-w-xs">
               Full-Stack Developer building websites, web apps and mobile apps for small and growing businesses.
             </p>
@@ -96,7 +98,7 @@ export default function Footer() {
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <Facebook className="w-4 h-4 text-[#9A9A9A] mt-0.5 flex-shrink-0" />
+                <FaFacebookF className="w-4 h-4 text-[#9A9A9A] mt-0.5 flex-shrink-0" />
                 <div>
                   <a href={contact.facebook} target="_blank" rel="noopener noreferrer" className="text-neutral-200 text-sm hover:text-white transition-colors no-underline">
                     {contact.facebookName}

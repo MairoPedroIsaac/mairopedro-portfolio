@@ -100,8 +100,9 @@ export const skills = [
 ];
 
 // CONTACT DATA
-// Never add a phone number, city or country here.
+// Never DISPLAY the phone number, city or country. The WhatsApp number is only used inside the chat link.
 export const contact = {
+  whatsapp: "https://wa.me/250798972117?text=Hi%20Mairo%2C%20I%20found%20your%20portfolio%20and%20I%27d%20like%20to%20work%20with%20you",
   email: "mairopedroisaac@gmail.com",
   linkedin: "https://www.linkedin.com/in/mairo-pedro-isaac-3a0b59291/",
   github: "https://github.com/MairoPedroIsaac",

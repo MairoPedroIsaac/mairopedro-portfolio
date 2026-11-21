@@ -1,12 +1,13 @@
 import { contact } from "@/lib/data";
-import { Mail, Linkedin, Github, Facebook, Clock, Download, ArrowUpRight } from "lucide-react";
+import { Mail, Clock, Download, ArrowUpRight } from "lucide-react";
+import { FaWhatsapp, FaFacebookF, FaLinkedinIn } from "react-icons/fa";
 
 export default function Contact() {
   const contactMethods = [
-    { icon: <Mail className="w-5 h-5" />, title: "Email Me", description: contact.email, link: `mailto:${contact.email}` },
-    { icon: <Facebook className="w-5 h-5" />, title: "Facebook Page", description: contact.facebookName, link: contact.facebook },
-    { icon: <Linkedin className="w-5 h-5" />, title: "Connect on LinkedIn", description: "Let's grow our network", link: contact.linkedin },
-    { icon: <Github className="w-5 h-5" />, title: "View on GitHub", description: "Explore my projects and code", link: contact.github },
+    { icon: <Mail className="w-5 h-5" />, title: "Email Me", description: contact.email, link: `mailto:${contact.email}`, hover: "group-hover:bg-black" },
+    { icon: <FaWhatsapp className="w-5 h-5" />, title: "Chat on WhatsApp", description: "Quick replies, any time", link: contact.whatsapp, hover: "group-hover:bg-[#25D366]" },
+    { icon: <FaFacebookF className="w-5 h-5" />, title: "Facebook Page", description: contact.facebookName, link: contact.facebook, hover: "group-hover:bg-[#1877F2]" },
+    { icon: <FaLinkedinIn className="w-5 h-5" />, title: "Connect on LinkedIn", description: "Let's grow our network", link: contact.linkedin, hover: "group-hover:bg-[#0A66C2]" },
   ];
 
   return (
@@ -83,7 +84,7 @@ export default function Contact() {
                 className="group relative p-5 bg-neutral-50 rounded-xl border border-neutral-200 hover:border-black hover:-translate-y-1 hover:shadow-lg transition-all duration-300 no-underline space-y-3"
               >
                 <ArrowUpRight className="absolute top-4 right-4 w-4 h-4 text-neutral-400 group-hover:text-black transition-colors" />
-                <div className="w-10 h-10 rounded-lg bg-black text-white flex items-center justify-center">
+                <div className={`w-11 h-11 rounded-xl bg-black text-white flex items-center justify-center transition-colors duration-300 ${method.hover}`}>
                   {method.icon}
                 </div>
                 <div>

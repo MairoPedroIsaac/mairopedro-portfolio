@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
+import { Plus_Jakarta_Sans, DM_Sans } from "next/font/google";
 import "./globals.css";
+
+const heading = Plus_Jakarta_Sans({ subsets: ["latin"], weight: ["600", "700", "800"], variable: "--font-heading", display: "swap" });
+const body = DM_Sans({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-body", display: "swap" });
 import TawkToScript from '@/components/TawkToScript';
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -33,13 +37,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="bg-black">
+    <html lang="en" className={`bg-black ${heading.variable} ${body.variable}`}>
       <head>
         <meta name="theme-color" content="#000000" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
-          rel="stylesheet"
-        />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       </head>
       <body className="font-sans bg-black text-white min-h-screen">

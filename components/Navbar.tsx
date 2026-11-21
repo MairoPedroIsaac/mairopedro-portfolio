@@ -36,7 +36,7 @@ export default function Navbar() {
       <div className="container-custom px-6 md:px-12 lg:px-24">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
-          <Link href="/" className="text-2xl font-extrabold tracking-tight text-white no-underline">
+          <Link href="/" className="font-display text-2xl font-extrabold tracking-tight text-white no-underline">
             MP
           </Link>
 

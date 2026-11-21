@@ -26,9 +26,15 @@ export default function Hero() {
               <span className="text-[#CFCFCF] text-sm font-medium">Available for work</span>
             </div>
 
-            <p className="text-[#9A9A9A] text-xs md:text-sm font-semibold uppercase tracking-[0.3em]">
-              Mairo Pedro Isaac &nbsp;/&nbsp; Full-Stack Developer
-            </p>
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+              <span className="font-display text-white text-lg md:text-xl font-extrabold uppercase tracking-[0.18em]">
+                Mairo Pedro Isaac
+              </span>
+              <span className="hidden sm:block h-5 w-px bg-white/30" aria-hidden></span>
+              <span className="text-[#CFCFCF] text-sm md:text-base font-semibold uppercase tracking-[0.18em]">
+                Full-Stack Developer
+              </span>
+            </div>
 
             <h1 className="text-[2.6rem] sm:text-5xl lg:text-6xl font-bold leading-[1.08] tracking-tight text-white">
               Websites, web apps &amp; mobile apps that bring your business{" "}
