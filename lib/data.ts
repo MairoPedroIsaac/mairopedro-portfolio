@@ -109,8 +109,9 @@ export const skills = [
 // TESTIMONIAL
 // Fill in the client's real words. The section stays hidden while quote is empty.
 export const testimonial = {
-  quote: "",
-  name: "",
+  quote:
+    "It was a pleasure working with Mairo. I truly appreciate his dedication, willingness to listen, and attention to detail. His delivery was excellent, on point, and right on time. I highly recommend working with him!",
+  name: "Augustine Moses",
   role: "Powerhand Designs",
 };
 
@@ -118,9 +119,9 @@ export const testimonial = {
 // Never add a phone number, city or country here.
 export const contact = {
   email: "mairopedroisaac@gmail.com",
-  facebook: { label: "Mairo Pedro Dev", url: "" }, // add the Facebook Page URL
+  facebook: { label: "Mairo Pedro Dev", url: "https://www.facebook.com/profile.php?id=61596953393480" },
   linkedin: "https://www.linkedin.com/in/mairo-pedro-isaac-3a0b59291/",
   github: "https://github.com/MairoPedroIsaac",
   // Put the PDF at public/cv/Mairo-Pedro-Isaac-CV.pdf, then set this to "/cv/Mairo-Pedro-Isaac-CV.pdf".
-  cv: "",
+  cv: "/cv/Mairo-Pedro-Isaac-CV.pdf",
 };
