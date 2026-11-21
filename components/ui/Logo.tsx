@@ -9,7 +9,7 @@ export function LogoMark({ size = 36, inverted = false, className = "" }: { size
     <svg width={size} height={size} viewBox="0 0 48 48" className={className} role="img" aria-label="MP logo">
       <rect width="48" height="48" rx="11" fill={bg} />
       <path
-        d="M8 35V13.5L14.25 25L20.5 13.5V35M28 35V13.5H33A6.5 6.5 0 0 1 33 26.5H28"
+        d="M7 36.5V11.5L15.25 24.5L23.5 11.5V36.5M30.5 36.5V18H34.5A5 5 0 0 1 34.5 28H30.5"
         fill="none"
         stroke={fg}
         strokeWidth="4.2"
