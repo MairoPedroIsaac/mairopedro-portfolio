@@ -117,5 +117,7 @@ export const testimonial = {
   quote:
     "It was a pleasure working with Mairo. I truly appreciate his dedication, willingness to listen, and attention to detail. His delivery was excellent, on point, and right on time. I highly recommend working with him!",
   name: "Augustine Moses",
-  company: "Powerhand Designs",
+  role: "Owner, Powerhand Designs",
+  photo: "/images/testimonials/augustine-moses.jpg",
+  caseStudy: "/projects/powerhand-design",
 };
