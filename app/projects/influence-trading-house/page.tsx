@@ -7,11 +7,11 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import TechBadge from "@/components/ui/TechBadge";
 
 const desktopImages = [
-  { src: "/images/projects/influence-trading-desktop-hero.png", label: "Landing Page — Hero Section" },
-  { src: "/images/projects/influence-trading-desktop-dashboard.png", label: "Dashboard — Live Signals & Stats" },
-  { src: "/images/projects/influence-trading-desktop-signals.png", label: "Signals — Entry, TP, SL Cards" },
-  { src: "/images/projects/influence-trading-desktop-education.png", label: "Education — Course Library" },
-  { src: "/images/projects/influence-trading-desktop-login.png", label: "Login — Auth UI" },
+  { src: "/images/projects/influence-trading-desktop-hero.png", label: "Landing Page: Hero Section" },
+  { src: "/images/projects/influence-trading-desktop-dashboard.png", label: "Dashboard: Live Signals & Stats" },
+  { src: "/images/projects/influence-trading-desktop-signals.png", label: "Signals: Entry, TP, SL Cards" },
+  { src: "/images/projects/influence-trading-desktop-education.png", label: "Education: Course Library" },
+  { src: "/images/projects/influence-trading-desktop-login.png", label: "Login: Auth UI" },
 ];
 
 const mobileImages = [
@@ -44,10 +44,10 @@ function DesktopCarousel({ images }: { images: { src: string; label: string }[] 
   return (
     <div className="space-y-3">
       <div className="flex items-center gap-3">
-        <button onClick={prev} className="flex-shrink-0 w-11 h-11 rounded-full bg-gray-800 hover:bg-[#3b82f6] border border-gray-700 flex items-center justify-center transition-all duration-300">
+        <button onClick={prev} className="flex-shrink-0 w-11 h-11 rounded-full bg-neutral-800 hover:bg-white/15 border border-neutral-700 flex items-center justify-center transition-all duration-300">
           <ChevronLeft className="w-5 h-5 text-white" />
         </button>
-        <div className="flex-1 rounded-xl overflow-hidden border border-gray-800 bg-gray-900">
+        <div className="flex-1 overflow-hidden border border-neutral-800 bg-neutral-900">
           <div className="relative w-full aspect-video overflow-hidden">
             {images.map((img, i) => (
               <div key={i} className={`absolute inset-0 transition-opacity duration-700 ${i === current ? "opacity-100 z-10" : "opacity-0 z-0"}`}>
@@ -56,18 +56,18 @@ function DesktopCarousel({ images }: { images: { src: string; label: string }[] 
             ))}
             <div className="absolute top-3 right-3 z-20 px-2 py-1 bg-black/70 rounded-full text-white text-xs">{current + 1} / {images.length}</div>
           </div>
-          <div className="px-4 py-3 bg-gray-900 border-t border-gray-800">
-            <span className="text-gray-400 text-sm">{images[current].label}</span>
+          <div className="px-4 py-3 bg-neutral-900 border-t border-neutral-800">
+            <span className="text-neutral-400 text-sm">{images[current].label}</span>
           </div>
         </div>
-        <button onClick={next} className="flex-shrink-0 w-11 h-11 rounded-full bg-gray-800 hover:bg-[#3b82f6] border border-gray-700 flex items-center justify-center transition-all duration-300">
+        <button onClick={next} className="flex-shrink-0 w-11 h-11 rounded-full bg-neutral-800 hover:bg-white/15 border border-neutral-700 flex items-center justify-center transition-all duration-300">
           <ChevronRight className="w-5 h-5 text-white" />
         </button>
       </div>
       <div className="flex justify-center gap-2">
         {images.map((_, i) => (
           <button key={i} onClick={() => { setCurrent(i); resetTimer(); }}
-            className={`transition-all duration-300 rounded-full ${i === current ? "w-6 h-2 bg-[#3b82f6]" : "w-2 h-2 bg-gray-600 hover:bg-gray-400"}`} />
+            className={`transition-all duration-300 rounded-full ${i === current ? "w-6 h-2 bg-white" : "w-2 h-2 bg-neutral-600 hover:bg-neutral-400"}`} />
         ))}
       </div>
     </div>
@@ -96,10 +96,10 @@ function MobileCarousel({ images }: { images: { src: string; label: string }[] }
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-center gap-4">
-        <button onClick={prev} className="flex-shrink-0 w-11 h-11 rounded-full bg-gray-800 hover:bg-[#3b82f6] border border-gray-700 flex items-center justify-center transition-all duration-300">
+        <button onClick={prev} className="flex-shrink-0 w-11 h-11 rounded-full bg-neutral-800 hover:bg-white/15 border border-neutral-700 flex items-center justify-center transition-all duration-300">
           <ChevronLeft className="w-5 h-5 text-white" />
         </button>
-        <div className="w-[280px] rounded-2xl overflow-hidden border border-gray-800 bg-gray-900">
+        <div className="w-[280px] rounded-2xl overflow-hidden border border-neutral-800 bg-neutral-900">
           <div className="relative h-[500px] w-full overflow-hidden">
             {images.map((img, i) => (
               <div key={i} className={`absolute inset-0 transition-opacity duration-700 ${i === current ? "opacity-100 z-10" : "opacity-0 z-0"}`}>
@@ -108,18 +108,18 @@ function MobileCarousel({ images }: { images: { src: string; label: string }[] }
             ))}
             <div className="absolute top-3 right-3 z-20 px-2 py-1 bg-black/70 rounded-full text-white text-xs">{current + 1} / {images.length}</div>
           </div>
-          <div className="px-3 py-3 bg-gray-900 border-t border-gray-800 text-center">
-            <span className="text-gray-400 text-sm">{images[current].label}</span>
+          <div className="px-3 py-3 bg-neutral-900 border-t border-neutral-800 text-center">
+            <span className="text-neutral-400 text-sm">{images[current].label}</span>
           </div>
         </div>
-        <button onClick={next} className="flex-shrink-0 w-11 h-11 rounded-full bg-gray-800 hover:bg-[#3b82f6] border border-gray-700 flex items-center justify-center transition-all duration-300">
+        <button onClick={next} className="flex-shrink-0 w-11 h-11 rounded-full bg-neutral-800 hover:bg-white/15 border border-neutral-700 flex items-center justify-center transition-all duration-300">
           <ChevronRight className="w-5 h-5 text-white" />
         </button>
       </div>
       <div className="flex justify-center gap-2">
         {images.map((_, i) => (
           <button key={i} onClick={() => { setCurrent(i); resetTimer(); }}
-            className={`transition-all duration-300 rounded-full ${i === current ? "w-6 h-2 bg-[#3b82f6]" : "w-2 h-2 bg-gray-600 hover:bg-gray-400"}`} />
+            className={`transition-all duration-300 rounded-full ${i === current ? "w-6 h-2 bg-white" : "w-2 h-2 bg-neutral-600 hover:bg-neutral-400"}`} />
         ))}
       </div>
     </div>
@@ -162,16 +162,16 @@ export default function InfluenceTradingHousePage() {
 
   const challenges = [
     {
-      problem: "TailwindCSS v4 breaking changes — npx tailwindcss init no longer exists, @tailwind directives removed entirely",
-      solution: "Replaced all three @tailwind directives with a single @import \"tailwindcss\" and removed tailwind.config.ts dependency entirely — v4 reads config from CSS",
+      problem: "TailwindCSS v4 breaking changes: npx tailwindcss init no longer exists, @tailwind directives removed entirely",
+      solution: "Replaced all three @tailwind directives with a single @import \"tailwindcss\" and removed tailwind.config.ts dependency entirely: v4 reads config from CSS",
     },
     {
       problem: "@apply inside @layer base threw build error: \"Cannot apply unknown utility class\" after switching to v4 import syntax",
-      solution: "Replaced every @apply rule with equivalent plain CSS properties — background-color, color, font-family, -webkit-font-smoothing — making styles more explicit and debuggable",
+      solution: "Replaced every @apply rule with equivalent plain CSS properties: background-color, color, font-family, -webkit-font-smoothing: making styles more explicit and debuggable",
     },
     {
-      problem: "Google Fonts @import caused build failure at line 1248 — but globals.css only had 98 lines",
-      solution: "Removed Google Fonts @import url() entirely since Inter and JetBrains Mono were already loaded via next/font/google in layout.tsx — two font systems were running in parallel",
+      problem: "Google Fonts @import caused build failure at line 1248: but globals.css only had 98 lines",
+      solution: "Removed Google Fonts @import url() entirely since Inter and JetBrains Mono were already loaded via next/font/google in layout.tsx: two font systems were running in parallel",
     },
     {
       problem: "Next.js 15 App Router hydration errors from components using useState, useEffect, and useRouter without 'use client' directive",
@@ -179,11 +179,11 @@ export default function InfluenceTradingHousePage() {
     },
     {
       problem: "All components depended on auth state (nav behavior, CTA buttons, plan badges) but no backend existed for Phase 1",
-      solution: "Built a mock AuthContext mirroring the exact TypeScript interface of a real auth system — user, profile, loading, openAuthModal, signOut. Swapping in real Supabase only requires changing the context file",
+      solution: "Built a mock AuthContext mirroring the exact TypeScript interface of a real auth system: user, profile, loading, openAuthModal, signOut. Swapping in real Supabase only requires changing the context file",
     },
     {
       problem: "Git push to GitHub failed with fatal TLS error: \"error:0A000152:SSL routines::unsafe legacy renegotiation disabled\"",
-      solution: "Updated Git SSL backend with git config --global http.sslBackend schannel — instructs Git to use Windows native SChannel instead of the OpenSSL library bundled with Git for Windows",
+      solution: "Updated Git SSL backend with git config --global http.sslBackend schannel: instructs Git to use Windows native SChannel instead of the OpenSSL library bundled with Git for Windows",
     },
   ];
 
@@ -191,8 +191,8 @@ export default function InfluenceTradingHousePage() {
     <main className="min-h-screen bg-black text-white">
 
       {/* BACK LINK */}
-      <div className="container-custom pt-24 px-6 md:px-12 lg:px-24">
-        <Link href="/projects" className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors duration-300 no-underline">
+      <div className="container-custom pt-28">
+        <Link href="/#work" className="inline-flex items-center gap-2 text-neutral-400 hover:text-white transition-colors duration-300 no-underline">
           <ArrowLeft className="w-4 h-4" />
           Back to Projects
         </Link>
@@ -201,10 +201,10 @@ export default function InfluenceTradingHousePage() {
       {/* HERO */}
       <section className="section-padding">
         <div className="container-custom space-y-6">
-          <h1 className="text-4xl md:text-6xl font-bold">
-            Influence <span className="text-[#3b82f6]">Trading House</span>
+          <h1 className="display text-6xl md:text-8xl">
+            Influence <span className="text-ash">Trading House</span>
           </h1>
-          <p className="text-gray-400 text-lg max-w-2xl">
+          <p className="text-neutral-400 text-lg max-w-2xl">
             AI-powered trading intelligence platform built to institutional standards —
             dark luxury design with glassmorphism, live signal dashboards, backtesting,
             and financial education. Built for serious traders.
@@ -214,7 +214,7 @@ export default function InfluenceTradingHousePage() {
               href="https://influence-trading-house.vercel.app"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-[#3b82f6] text-white font-bold rounded-lg hover:opacity-90 transition-opacity no-underline"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-white text-ink font-bold hover:opacity-90 transition-opacity no-underline"
             >
               <ExternalLink className="w-4 h-4" /> Visit Live Site
             </a>
@@ -222,7 +222,7 @@ export default function InfluenceTradingHousePage() {
               href="https://github.com/MairoPedroIsaac/influence-trading-house"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 border border-gray-600 text-white rounded-lg hover:border-[#3b82f6] transition-colors no-underline"
+              className="inline-flex items-center gap-2 px-6 py-3 border border-neutral-600 text-white hover:border-white transition-colors no-underline"
             >
               <Github className="w-4 h-4" /> GitHub
             </a>
@@ -231,13 +231,13 @@ export default function InfluenceTradingHousePage() {
       </section>
 
       {/* STATS */}
-      <section className="py-8 border-y border-gray-800">
+      <section className="py-8 border-y border-neutral-800">
         <div className="container-custom">
           <div ref={statsRef} className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            <div><div className="text-3xl font-bold text-blue-400">2025</div><div className="text-gray-400 text-sm mt-1">Year Built</div></div>
-            <div><div className="text-3xl font-bold text-blue-400">Next.js 15</div><div className="text-gray-400 text-sm mt-1">Primary Stack</div></div>
-            <div><div className="text-3xl font-bold text-blue-400">{pagesCount}+</div><div className="text-gray-400 text-sm mt-1">Pages Built</div></div>
-            <div><div className="text-3xl font-bold text-blue-400">Phase 1</div><div className="text-gray-400 text-sm mt-1">Frontend Complete</div></div>
+            <div><div className="text-3xl font-bold text-white">2025</div><div className="text-neutral-400 text-sm mt-1">Year Built</div></div>
+            <div><div className="text-3xl font-bold text-white">Next.js 15</div><div className="text-neutral-400 text-sm mt-1">Primary Stack</div></div>
+            <div><div className="text-3xl font-bold text-white">{pagesCount}+</div><div className="text-neutral-400 text-sm mt-1">Pages Built</div></div>
+            <div><div className="text-3xl font-bold text-white">Phase 1</div><div className="text-neutral-400 text-sm mt-1">Frontend Complete</div></div>
           </div>
         </div>
       </section>
@@ -245,27 +245,27 @@ export default function InfluenceTradingHousePage() {
       {/* DESKTOP SCREENSHOTS */}
       <section className="section-padding">
         <div className="container-custom space-y-4">
-          <h2 className="text-2xl font-bold text-white">Desktop Views</h2>
+          <h2 className="display text-3xl md:text-4xl">Desktop Views</h2>
           <DesktopCarousel images={desktopImages} />
         </div>
       </section>
 
       {/* MOBILE SCREENSHOTS */}
-      <section className="section-padding border-t border-gray-800">
+      <section className="section-padding border-t border-neutral-800">
         <div className="container-custom space-y-4">
-          <h2 className="text-2xl font-bold text-white">Mobile Views</h2>
+          <h2 className="display text-3xl md:text-4xl">Mobile Views</h2>
           <MobileCarousel images={mobileImages} />
         </div>
       </section>
 
       {/* CHALLENGE & SOLUTION */}
-      <section className="section-padding border-t border-gray-800">
+      <section className="section-padding border-t border-neutral-800">
         <div className="container-custom">
           <div className="grid md:grid-cols-2 gap-16">
             <div className="space-y-4">
-              <h2 className="text-2xl font-bold text-white">The Problem</h2>
-              <p className="text-gray-400 leading-relaxed">
-                Most retail trading platforms suffer from the same issues — cluttered interfaces,
+              <h2 className="display text-3xl md:text-4xl">The Problem</h2>
+              <p className="text-neutral-400 leading-relaxed">
+                Most retail trading platforms suffer from the same issues: cluttered interfaces,
                 generic design, and no clear signal methodology. Traders are either overwhelmed
                 with noise or undersupported with tools that institutional players take for
                 granted. The goal was to build something that feels like it belongs in a
@@ -273,8 +273,8 @@ export default function InfluenceTradingHousePage() {
               </p>
             </div>
             <div className="space-y-4">
-              <h2 className="text-2xl font-bold text-white">The Solution</h2>
-              <p className="text-gray-400 leading-relaxed">
+              <h2 className="display text-3xl md:text-4xl">The Solution</h2>
+              <p className="text-neutral-400 leading-relaxed">
                 Built a premium frontend in Next.js 15 with TypeScript and TailwindCSS v4 —
                 dark navy and metallic gold brand identity, glassmorphism card system, live
                 signal dashboards with confidence scores, backtest configuration panels, and
@@ -289,18 +289,18 @@ export default function InfluenceTradingHousePage() {
       {/* TECHNICAL CHALLENGES */}
       <section className="py-8">
         <div className="container-custom space-y-6">
-          <h2 className="text-2xl font-bold text-white">Problems Solved</h2>
+          <h2 className="display text-3xl md:text-4xl">Problems Solved</h2>
           <div className="space-y-4">
             {challenges.map((item, index) => (
-              <div key={index} className="p-6 bg-gray-900/50 rounded-xl border border-gray-800">
+              <div key={index} className="p-6 bg-neutral-900/50 border border-neutral-800">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <div className="text-xs text-red-400 font-semibold uppercase tracking-wider mb-2">Problem</div>
-                    <p className="text-gray-300 text-sm">{item.problem}</p>
+                    <div className="text-xs text-ash font-semibold uppercase tracking-wider mb-2">Problem</div>
+                    <p className="text-neutral-300 text-sm">{item.problem}</p>
                   </div>
                   <div>
-                    <div className="text-xs text-green-400 font-semibold uppercase tracking-wider mb-2">Solution</div>
-                    <p className="text-gray-300 text-sm">{item.solution}</p>
+                    <div className="text-xs text-ash font-semibold uppercase tracking-wider mb-2">Solution</div>
+                    <p className="text-neutral-300 text-sm">{item.solution}</p>
                   </div>
                 </div>
               </div>
@@ -310,9 +310,9 @@ export default function InfluenceTradingHousePage() {
       </section>
 
       {/* TECH STACK */}
-      <section className="section-padding border-t border-gray-800">
+      <section className="section-padding border-t border-neutral-800">
         <div className="container-custom space-y-4">
-          <h2 className="text-2xl font-bold text-white">Tech Stack</h2>
+          <h2 className="display text-3xl md:text-4xl">Tech Stack</h2>
           <div className="flex flex-wrap gap-3">
             {techStack.map((tech) => (
               <TechBadge key={tech} tech={tech} />
@@ -322,11 +322,11 @@ export default function InfluenceTradingHousePage() {
       </section>
 
       {/* THE RESULT */}
-      <section className="section-padding border-t border-gray-800">
+      <section className="section-padding border-t border-neutral-800">
         <div className="container-custom space-y-4">
-          <h2 className="text-2xl font-bold text-white">The Result</h2>
-          <p className="text-gray-400 leading-relaxed max-w-2xl">
-            Influence Trading House Phase 1 is fully deployed on Vercel — a complete,
+          <h2 className="display text-3xl md:text-4xl">The Result</h2>
+          <p className="text-neutral-400 leading-relaxed max-w-2xl">
+            Influence Trading House Phase 1 is fully deployed on Vercel: a complete,
             responsive fintech frontend demonstrating institutional-grade design at retail
             access. The platform features a glassmorphism design system, live signal UI,
             backtest panel, education module, and mock auth context ready for real backend
@@ -338,19 +338,19 @@ export default function InfluenceTradingHousePage() {
       </section>
 
       {/* WHAT'S NEXT */}
-      <section className="section-padding border-t border-gray-800">
+      <section className="section-padding border-t border-neutral-800">
         <div className="container-custom space-y-4">
-          <h2 className="text-2xl font-bold text-white">What&apos;s Next</h2>
+          <h2 className="display text-3xl md:text-4xl">What&apos;s Next</h2>
           <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
             {[
               { phase: "Phase 2", label: "Django + PostgreSQL backend with real signal data" },
-              { phase: "Phase 3", label: "ML pipeline — scikit-learn, XGBoost, FinBERT sentiment" },
+              { phase: "Phase 3", label: "ML pipeline: scikit-learn, XGBoost, FinBERT sentiment" },
               { phase: "Phase 4", label: "Stripe + MTN MoMo payment integration" },
               { phase: "Phase 5", label: "QuantConnect strategy integration and live trading" },
             ].map((item) => (
-              <div key={item.phase} className="p-4 bg-gray-900/50 rounded-xl border border-gray-800 space-y-2">
-                <div className="text-sm font-bold text-[#3b82f6]">{item.phase}</div>
-                <p className="text-gray-400 text-sm">{item.label}</p>
+              <div key={item.phase} className="p-4 bg-neutral-900/50 border border-neutral-800 space-y-2">
+                <div className="text-sm font-bold text-ash">{item.phase}</div>
+                <p className="text-neutral-400 text-sm">{item.label}</p>
               </div>
             ))}
           </div>
@@ -358,21 +358,21 @@ export default function InfluenceTradingHousePage() {
       </section>
 
       {/* CTA */}
-      <section className="section-padding border-t border-gray-800">
+      <section className="section-padding border-t border-neutral-800">
         <div className="container-custom text-center space-y-6">
-          <h2 className="text-3xl md:text-4xl font-bold">
+          <h2 className="display text-5xl md:text-7xl">
             Interested in fintech?{" "}
-            <span className="text-[#3b82f6]">Let&apos;s connect.</span>
+            <span className="text-ash">Let&apos;s connect.</span>
           </h2>
-          <p className="text-gray-400 max-w-xl mx-auto">
+          <p className="text-neutral-400 max-w-xl mx-auto">
             Building a trading platform, fintech product, or need a full-stack engineer?
             Let&apos;s talk.
           </p>
           <a
             href="/#contact"
-            className="inline-block px-10 py-4 bg-[#3b82f6] text-white font-bold rounded-lg hover:opacity-90 transition-opacity no-underline text-lg"
+            className="inline-block px-10 py-4 bg-white text-ink font-bold hover:opacity-90 transition-opacity no-underline text-lg"
           >
-            Get In Touch
+            Work with me
           </a>
         </div>
       </section>

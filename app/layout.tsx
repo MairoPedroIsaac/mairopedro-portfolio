@@ -1,51 +1,48 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import { Anton, Inter } from "next/font/google";
 import "./globals.css";
-import TawkToScript from '@/components/TawkToScript';
+import TawkToScript from "@/components/TawkToScript";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
+const anton = Anton({ weight: "400", subsets: ["latin"], variable: "--font-anton", display: "swap" });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
+
+const title = "Mairo Pedro Isaac | Full-Stack Developer";
+const description =
+  "Full-stack developer building websites, web apps and mobile apps that bring small and growing businesses more customers.";
 
 export const metadata: Metadata = {
-  title: "Mairo Pedro Isaac - Full-Stack Software Engineer",
-  description: "Full-Stack Software Engineer specializing in Next.js, React, Django, Node.js and AI Integration. Building scalable web solutions in Kigali, Rwanda.",
-  keywords: ["Full-Stack Software Engineer", "Software Engineer", "Web Developer", "Next.js", "React", "Django", "Node.js", "Kigali", "Rwanda"],
+  metadataBase: new URL("https://mairopedro.com"),
+  title: { default: title, template: "%s | Mairo Pedro Isaac" },
+  description,
+  keywords: ["Full-Stack Developer", "Web Developer", "Website Developer", "Web Apps", "Mobile Apps", "Next.js", "React", "Django", "Freelance Developer"],
   authors: [{ name: "Mairo Pedro Isaac" }],
+  alternates: { canonical: "/" },
   openGraph: {
-    title: "Mairo Pedro Isaac - Full-Stack Software Engineer",
-    description: "Building modern web solutions with Next.js, React, Django, Node.js and AI Integration",
+    title,
+    description,
     url: "https://mairopedro.com",
-    siteName: "Mairo Pedro Isaac Portfolio",
+    siteName: "Mairo Pedro Isaac",
     locale: "en_US",
     type: "website",
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Mairo Pedro Isaac - Full-Stack Software Engineer",
-    description: "Building modern web solutions with Next.js, React, Django, Node.js and AI Integration",
-  },
+  twitter: { card: "summary_large_image", title, description },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export const viewport: Viewport = {
+  themeColor: "#050505",
+};
+
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className="bg-black">
-      <head>
-        <meta name="theme-color" content="#000000" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
-          rel="stylesheet"
-        />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-      </head>
-      <body className="font-sans bg-black text-white min-h-screen">
-        <div className="fixed inset-0 bg-black -z-10" />
+    <html lang="en" className={`${anton.variable} ${inter.variable}`}>
+      <body className="min-h-screen bg-ink text-mist font-sans">
+        <noscript>
+          <style>{`.reveal{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
         <Navbar />
-        <main className="relative z-10">
-          {children}
-        </main>
+        <main>{children}</main>
         <Footer />
         <TawkToScript />
       </body>
