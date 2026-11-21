@@ -7,9 +7,9 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import TechBadge from "@/components/ui/TechBadge";
 
 const desktopImages = [
-  { src: "/images/projects/nephrosasa-laptop-homepage.png", label: "Homepage — Hero & Value Proposition" },
+  { src: "/images/projects/nephrosasa-laptop-homepage.png", label: "Homepage: Hero & Value Proposition" },
   { src: "/images/projects/nephrosasa-laptop-login.png", label: "Authentication & Role-Based Access" },
-  { src: "/images/projects/nephrosasa-patient-dashboard.png", label: "Patient Dashboard — Longitudinal Risk Score" },
+  { src: "/images/projects/nephrosasa-patient-dashboard.png", label: "Patient Dashboard: Longitudinal Risk Score" },
   { src: "/images/projects/nephrosasa-patient-vital-log.png", label: "Vital Signs Logging (BP, Blood Sugar, HbA1c)" },
   { src: "/images/projects/nephrosasa-patient-qrcode-sharing.png", label: "Patient Encrypted QR Code Record Sharing" },
   { src: "/images/projects/nephrosasa-doctor-dashboard.png", label: "Doctor Dashboard & Consultation Schedule" },
@@ -48,10 +48,10 @@ function DesktopCarousel({ images }: { images: { src: string; label: string }[] 
   return (
     <div className="space-y-3">
       <div className="flex items-center gap-3">
-        <button onClick={prev} aria-label="Previous image" className="flex-shrink-0 w-11 h-11 rounded-full bg-gray-800 hover:bg-[#3b82f6] border border-gray-700 flex items-center justify-center transition-all duration-300">
+        <button onClick={prev} aria-label="Previous image" className="flex-shrink-0 w-11 h-11 rounded-full bg-neutral-800 hover:bg-white/15 border border-neutral-700 flex items-center justify-center transition-all duration-300">
           <ChevronLeft className="w-5 h-5 text-white" />
         </button>
-        <div className="flex-1 rounded-xl overflow-hidden border border-gray-800 bg-gray-900 shadow-2xl">
+        <div className="flex-1 rounded-xl overflow-hidden border border-neutral-800 bg-neutral-900 shadow-2xl">
           <div className="relative w-full aspect-video overflow-hidden">
             {images.map((img, i) => (
               <div key={i} className={`absolute inset-0 transition-opacity duration-700 ${i === current ? "opacity-100 z-10" : "opacity-0 z-0"}`}>
@@ -60,19 +60,19 @@ function DesktopCarousel({ images }: { images: { src: string; label: string }[] 
             ))}
             <div className="absolute top-3 right-3 z-20 px-3 py-1 bg-black/80 backdrop-blur-sm rounded-full text-white text-xs font-mono">{current + 1} / {images.length}</div>
           </div>
-          <div className="px-4 py-3 bg-gray-900/90 border-t border-gray-800 flex items-center justify-between">
-            <span className="text-gray-300 text-sm font-medium">{images[current].label}</span>
-            <span className="text-xs text-blue-400 font-mono">Desktop View</span>
+          <div className="px-4 py-3 bg-neutral-900/90 border-t border-neutral-800 flex items-center justify-between">
+            <span className="text-neutral-300 text-sm font-medium">{images[current].label}</span>
+            <span className="text-xs text-white font-mono">Desktop View</span>
           </div>
         </div>
-        <button onClick={next} aria-label="Next image" className="flex-shrink-0 w-11 h-11 rounded-full bg-gray-800 hover:bg-[#3b82f6] border border-gray-700 flex items-center justify-center transition-all duration-300">
+        <button onClick={next} aria-label="Next image" className="flex-shrink-0 w-11 h-11 rounded-full bg-neutral-800 hover:bg-white/15 border border-neutral-700 flex items-center justify-center transition-all duration-300">
           <ChevronRight className="w-5 h-5 text-white" />
         </button>
       </div>
       <div className="flex justify-center gap-2">
         {images.map((_, i) => (
           <button key={i} onClick={() => { setCurrent(i); resetTimer(); }} aria-label={`Go to slide ${i + 1}`}
-            className={`transition-all duration-300 rounded-full ${i === current ? "w-7 h-2 bg-[#3b82f6]" : "w-2 h-2 bg-gray-600 hover:bg-gray-400"}`} />
+            className={`transition-all duration-300 rounded-full ${i === current ? "w-7 h-2 bg-white" : "w-2 h-2 bg-neutral-600 hover:bg-neutral-400"}`} />
         ))}
       </div>
     </div>
@@ -101,10 +101,10 @@ function MobileCarousel({ images }: { images: { src: string; label: string }[] }
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-center gap-4">
-        <button onClick={prev} aria-label="Previous mobile screenshot" className="flex-shrink-0 w-11 h-11 rounded-full bg-gray-800 hover:bg-[#3b82f6] border border-gray-700 flex items-center justify-center transition-all duration-300">
+        <button onClick={prev} aria-label="Previous mobile screenshot" className="flex-shrink-0 w-11 h-11 rounded-full bg-neutral-800 hover:bg-white/15 border border-neutral-700 flex items-center justify-center transition-all duration-300">
           <ChevronLeft className="w-5 h-5 text-white" />
         </button>
-        <div className="w-[290px] rounded-3xl overflow-hidden border border-gray-800 bg-gray-900 shadow-2xl">
+        <div className="w-[290px] rounded-3xl overflow-hidden border border-neutral-800 bg-neutral-900 shadow-2xl">
           <div className="relative h-[540px] w-full overflow-hidden bg-black">
             {images.map((img, i) => (
               <div key={i} className={`absolute inset-0 transition-opacity duration-700 ${i === current ? "opacity-100 z-10" : "opacity-0 z-0"}`}>
@@ -113,18 +113,18 @@ function MobileCarousel({ images }: { images: { src: string; label: string }[] }
             ))}
             <div className="absolute top-3 right-3 z-20 px-3 py-1 bg-black/80 backdrop-blur-sm rounded-full text-white text-xs font-mono">{current + 1} / {images.length}</div>
           </div>
-          <div className="px-3 py-3 bg-gray-900 border-t border-gray-800 text-center">
-            <span className="text-gray-300 text-sm font-medium">{images[current].label}</span>
+          <div className="px-3 py-3 bg-neutral-900 border-t border-neutral-800 text-center">
+            <span className="text-neutral-300 text-sm font-medium">{images[current].label}</span>
           </div>
         </div>
-        <button onClick={next} aria-label="Next mobile screenshot" className="flex-shrink-0 w-11 h-11 rounded-full bg-gray-800 hover:bg-[#3b82f6] border border-gray-700 flex items-center justify-center transition-all duration-300">
+        <button onClick={next} aria-label="Next mobile screenshot" className="flex-shrink-0 w-11 h-11 rounded-full bg-neutral-800 hover:bg-white/15 border border-neutral-700 flex items-center justify-center transition-all duration-300">
           <ChevronRight className="w-5 h-5 text-white" />
         </button>
       </div>
       <div className="flex justify-center gap-2">
         {images.map((_, i) => (
           <button key={i} onClick={() => { setCurrent(i); resetTimer(); }} aria-label={`Go to mobile slide ${i + 1}`}
-            className={`transition-all duration-300 rounded-full ${i === current ? "w-7 h-2 bg-[#3b82f6]" : "w-2 h-2 bg-gray-600 hover:bg-gray-400"}`} />
+            className={`transition-all duration-300 rounded-full ${i === current ? "w-7 h-2 bg-white" : "w-2 h-2 bg-neutral-600 hover:bg-neutral-400"}`} />
         ))}
       </div>
     </div>
@@ -234,7 +234,7 @@ export default function NephroSasaRwandaPage() {
 
       {/* Back navigation */}
       <div className="container-custom pt-24 px-6 md:px-12 lg:px-24">
-        <Link href="/projects" className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors duration-300 no-underline">
+        <Link href="/projects" className="inline-flex items-center gap-2 text-neutral-400 hover:text-white transition-colors duration-300 no-underline">
           <ArrowLeft className="w-4 h-4" />
           Back to Projects
         </Link>
@@ -244,14 +244,14 @@ export default function NephroSasaRwandaPage() {
       <section className="section-padding">
         <div className="container-custom space-y-6">
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
-            NephroSasa <span className="text-[#3b82f6]">Rwanda</span>
+            NephroSasa
           </h1>
 
-          <p className="text-gray-300 text-lg md:text-xl max-w-3xl leading-relaxed">
-            A Web-Based Longitudinal Kidney Risk-Classification, Health-Record Tracking, and Teleconsultation Platform for Hypertensive and Type 2 Diabetic Patients in Rwanda.
+          <p className="text-neutral-300 text-lg md:text-xl max-w-3xl leading-relaxed">
+            A Web-Based Longitudinal Kidney Risk-Classification, Health-Record Tracking, and Teleconsultation Platform for Hypertensive and Type 2 Diabetic Patients.
           </p>
 
-          <p className="text-gray-400 text-base max-w-2xl">
+          <p className="text-neutral-400 text-base max-w-2xl">
             Powered by a Random Forest machine learning pipeline (84.94% accuracy), encrypted QR-code medical history exchange, automated clinical email alerts, and seamless nephrologist teleconsultations.
           </p>
 
@@ -260,7 +260,7 @@ export default function NephroSasaRwandaPage() {
               href="https://nephrosasa-rwanda.vercel.app/en"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-[#3b82f6] text-white font-bold rounded-lg hover:bg-[#2563eb] transition-all duration-300 no-underline shadow-lg shadow-blue-500/20"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-white text-black font-bold rounded-lg hover:bg-[#CFCFCF] transition-all duration-300 no-underline"
             >
               <ExternalLink className="w-4 h-4" /> Live Platform
             </a>
@@ -268,7 +268,7 @@ export default function NephroSasaRwandaPage() {
               href="https://github.com/MairoPedroIsaac/healthvault-rwanda"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 border border-gray-700 hover:border-[#3b82f6] text-white rounded-lg transition-colors no-underline bg-gray-900/50"
+              className="inline-flex items-center gap-2 px-6 py-3 border border-neutral-700 hover:border-white text-white rounded-lg transition-colors no-underline bg-neutral-900/50"
             >
               <Github className="w-4 h-4" /> View on GitHub
             </a>
@@ -277,24 +277,24 @@ export default function NephroSasaRwandaPage() {
       </section>
 
       {/* STATS & METRICS */}
-      <section className="py-10 border-y border-gray-800 bg-gray-950/50">
+      <section className="py-10 border-y border-neutral-800 bg-neutral-950/50">
         <div className="container-custom">
           <div ref={statsRef} className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            <div className="p-4 rounded-xl bg-gray-900/40 border border-gray-800">
-              <div className="text-3xl md:text-4xl font-bold text-blue-400 font-mono">{accuracyCount}%</div>
-              <div className="text-gray-400 text-xs md:text-sm mt-1">Model Accuracy (Random Forest)</div>
+            <div className="p-4 rounded-xl bg-neutral-900/40 border border-neutral-800">
+              <div className="text-3xl md:text-4xl font-bold text-white font-mono">{accuracyCount}%</div>
+              <div className="text-neutral-400 text-xs md:text-sm mt-1">Model Accuracy (Random Forest)</div>
             </div>
-            <div className="p-4 rounded-xl bg-gray-900/40 border border-gray-800">
-              <div className="text-3xl md:text-4xl font-bold text-blue-400 font-mono">{datasetCount}</div>
-              <div className="text-gray-400 text-xs md:text-sm mt-1">Clinical Training Records</div>
+            <div className="p-4 rounded-xl bg-neutral-900/40 border border-neutral-800">
+              <div className="text-3xl md:text-4xl font-bold text-white font-mono">{datasetCount}</div>
+              <div className="text-neutral-400 text-xs md:text-sm mt-1">Clinical Training Records</div>
             </div>
-            <div className="p-4 rounded-xl bg-gray-900/40 border border-gray-800">
-              <div className="text-3xl md:text-4xl font-bold text-blue-400 font-mono">10</div>
-              <div className="text-gray-400 text-xs md:text-sm mt-1">Clinical Biomarkers Tracked</div>
+            <div className="p-4 rounded-xl bg-neutral-900/40 border border-neutral-800">
+              <div className="text-3xl md:text-4xl font-bold text-white font-mono">10</div>
+              <div className="text-neutral-400 text-xs md:text-sm mt-1">Clinical Biomarkers Tracked</div>
             </div>
-            <div className="p-4 rounded-xl bg-gray-900/40 border border-gray-800">
-              <div className="text-3xl md:text-4xl font-bold text-green-400 font-mono">100%</div>
-              <div className="text-gray-400 text-xs md:text-sm mt-1">Integration Tests Passed</div>
+            <div className="p-4 rounded-xl bg-neutral-900/40 border border-neutral-800">
+              <div className="text-3xl md:text-4xl font-bold text-[#CFCFCF] font-mono">100%</div>
+              <div className="text-neutral-400 text-xs md:text-sm mt-1">Integration Tests Passed</div>
             </div>
           </div>
         </div>
@@ -304,7 +304,7 @@ export default function NephroSasaRwandaPage() {
       <section className="section-padding">
         <div className="container-custom space-y-12">
           <div className="space-y-3">
-            <p className="text-[#3b82f6] text-xs font-semibold uppercase tracking-widest">System Capabilities</p>
+            <p className="text-[#9A9A9A] text-xs font-semibold uppercase tracking-widest">System Capabilities</p>
             <h2 className="text-3xl md:text-4xl font-bold text-white">Core Architectural Features</h2>
           </div>
 
@@ -312,12 +312,12 @@ export default function NephroSasaRwandaPage() {
             {keyFeatures.map((feat, idx) => {
               const Icon = feat.icon;
               return (
-                <div key={idx} className="p-6 rounded-2xl bg-gray-900/50 border border-gray-800 hover:border-blue-500/40 transition-all duration-300 space-y-3">
-                  <div className="w-12 h-12 rounded-xl bg-blue-900/30 border border-blue-700/50 flex items-center justify-center text-blue-400">
+                <div key={idx} className="p-6 rounded-2xl bg-neutral-900/50 border border-neutral-800 hover:border-[#9A9A9A] transition-all duration-300 space-y-3">
+                  <div className="w-12 h-12 rounded-xl bg-[#9A9A9A] border border-[#9A9A9A] flex items-center justify-center text-white">
                     <Icon className="w-6 h-6" />
                   </div>
                   <h3 className="text-xl font-bold text-white">{feat.title}</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed">{feat.desc}</p>
+                  <p className="text-neutral-400 text-sm leading-relaxed">{feat.desc}</p>
                 </div>
               );
             })}
@@ -326,11 +326,11 @@ export default function NephroSasaRwandaPage() {
       </section>
 
       {/* DESKTOP SCREENSHOTS */}
-      <section className="section-padding border-t border-gray-800">
+      <section className="section-padding border-t border-neutral-800">
         <div className="container-custom space-y-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-[#3b82f6] text-xs font-semibold uppercase tracking-widest">User Experience</p>
+              <p className="text-[#9A9A9A] text-xs font-semibold uppercase tracking-widest">User Experience</p>
               <h2 className="text-2xl md:text-3xl font-bold text-white mt-1">Desktop Interface</h2>
             </div>
           </div>
@@ -339,42 +339,42 @@ export default function NephroSasaRwandaPage() {
       </section>
 
       {/* MOBILE SCREENSHOTS */}
-      <section className="section-padding border-t border-gray-800 bg-gray-950/40">
+      <section className="section-padding border-t border-neutral-800 bg-neutral-950/40">
         <div className="container-custom space-y-6">
           <div className="text-center space-y-2">
-            <p className="text-[#3b82f6] text-xs font-semibold uppercase tracking-widest">Responsive & Portable</p>
+            <p className="text-[#9A9A9A] text-xs font-semibold uppercase tracking-widest">Responsive & Portable</p>
             <h2 className="text-2xl md:text-3xl font-bold text-white">Mobile Views</h2>
-            <p className="text-gray-400 text-sm max-w-md mx-auto">Designed for on-the-go patient vital logging and quick QR scanning in Rwandan clinical environments.</p>
+            <p className="text-neutral-400 text-sm max-w-md mx-auto">Designed for on-the-go patient vital logging and quick QR scanning in busy clinical environments.</p>
           </div>
           <MobileCarousel images={mobileImages} />
         </div>
       </section>
 
       {/* CHALLENGE & SOLUTION */}
-      <section className="section-padding border-t border-gray-800">
+      <section className="section-padding border-t border-neutral-800">
         <div className="container-custom">
           <div className="grid md:grid-cols-2 gap-16">
             <div className="space-y-4">
-              <div className="flex items-center gap-2 text-red-400 font-semibold text-sm uppercase tracking-wider">
+              <div className="flex items-center gap-2 text-[#9A9A9A] font-semibold text-sm uppercase tracking-wider">
                 <span>The Healthcare Problem</span>
               </div>
               <h2 className="text-2xl md:text-3xl font-bold text-white">Silent Progression & Specialist Shortage</h2>
-              <p className="text-gray-400 leading-relaxed">
-                Chronic Kidney Disease (CKD) often develops without early symptoms among hypertensive and diabetic adults. In Rwanda, with fewer than 15 nephrologists nationwide, primary care centers face immense barriers to early detection.
+              <p className="text-neutral-400 leading-relaxed">
+                Chronic Kidney Disease (CKD) often develops without early symptoms among hypertensive and diabetic adults. With very few nephrologists available, primary care centers face immense barriers to early detection.
               </p>
-              <p className="text-gray-400 leading-relaxed">
+              <p className="text-neutral-400 leading-relaxed">
                 Patients visiting different district clinics carry paper notes or no records at all, preventing doctors from detecting longitudinal renal decline until patients reach catastrophic End-Stage Renal Disease (ESRD).
               </p>
             </div>
             <div className="space-y-4">
-              <div className="flex items-center gap-2 text-green-400 font-semibold text-sm uppercase tracking-wider">
+              <div className="flex items-center gap-2 text-[#CFCFCF] font-semibold text-sm uppercase tracking-wider">
                 <span>The Technical Solution</span>
               </div>
               <h2 className="text-2xl md:text-3xl font-bold text-white">AI-Powered Longitudinal Closed-Loop Care</h2>
-              <p className="text-gray-400 leading-relaxed">
-                NephroSasa Rwanda connects patients and nephrologists into a unified, digital ecosystem. Patients log vitals (Blood Pressure, Fasting Blood Sugar, HbA1c, Creatinine, GFR, BUN) over time, and an integrated Random Forest model continuously generates risk classifications.
+              <p className="text-neutral-400 leading-relaxed">
+                NephroSasa connects patients and nephrologists into a unified, digital ecosystem. Patients log vitals (Blood Pressure, Fasting Blood Sugar, HbA1c, Creatinine, GFR, BUN) over time, and an integrated Random Forest model continuously generates risk classifications.
               </p>
-              <p className="text-gray-400 leading-relaxed">
+              <p className="text-neutral-400 leading-relaxed">
                 When risk escalates, automated email notifications alert the care team, and the patient generates an encrypted QR code for instant, zero-friction medical record sharing during doctor consultations.
               </p>
             </div>
@@ -383,22 +383,22 @@ export default function NephroSasaRwandaPage() {
       </section>
 
       {/* TECHNICAL CHALLENGES & ENGINEERING SOLUTIONS */}
-      <section className="py-12 border-t border-gray-800 bg-gray-950/60">
+      <section className="py-12 border-t border-neutral-800 bg-neutral-950/60">
         <div className="container-custom space-y-8">
           <div className="space-y-2">
-            <p className="text-[#3b82f6] text-xs font-semibold uppercase tracking-widest">Engineering Rigor</p>
+            <p className="text-[#9A9A9A] text-xs font-semibold uppercase tracking-widest">Engineering Rigor</p>
             <h2 className="text-2xl md:text-3xl font-bold text-white">Technical Problems Solved</h2>
           </div>
           <div className="grid md:grid-cols-2 gap-4">
             {challenges.map((item, index) => (
-              <div key={index} className="p-6 bg-gray-900/70 rounded-xl border border-gray-800 hover:border-gray-700 transition-all space-y-3">
+              <div key={index} className="p-6 bg-neutral-900/70 rounded-xl border border-neutral-800 hover:border-neutral-700 transition-all space-y-3">
                 <div>
-                  <div className="text-xs text-red-400 font-semibold uppercase tracking-wider mb-1">Challenge</div>
-                  <p className="text-gray-200 font-medium text-sm">{item.problem}</p>
+                  <div className="text-xs text-[#9A9A9A] font-semibold uppercase tracking-wider mb-1">Challenge</div>
+                  <p className="text-neutral-200 font-medium text-sm">{item.problem}</p>
                 </div>
-                <div className="pt-2 border-t border-gray-800/80">
-                  <div className="text-xs text-green-400 font-semibold uppercase tracking-wider mb-1">Engineered Solution</div>
-                  <p className="text-gray-400 text-sm leading-relaxed">{item.solution}</p>
+                <div className="pt-2 border-t border-neutral-800/80">
+                  <div className="text-xs text-[#CFCFCF] font-semibold uppercase tracking-wider mb-1">Engineered Solution</div>
+                  <p className="text-neutral-400 text-sm leading-relaxed">{item.solution}</p>
                 </div>
               </div>
             ))}
@@ -407,10 +407,10 @@ export default function NephroSasaRwandaPage() {
       </section>
 
       {/* TECH STACK */}
-      <section className="section-padding border-t border-gray-800">
+      <section className="section-padding border-t border-neutral-800">
         <div className="container-custom space-y-6">
           <div className="space-y-2">
-            <p className="text-[#3b82f6] text-xs font-semibold uppercase tracking-widest">Architecture</p>
+            <p className="text-[#9A9A9A] text-xs font-semibold uppercase tracking-widest">Architecture</p>
             <h2 className="text-2xl md:text-3xl font-bold text-white">Production Tech Stack</h2>
           </div>
           <div className="flex flex-wrap gap-3">
@@ -422,27 +422,27 @@ export default function NephroSasaRwandaPage() {
       </section>
 
       {/* THE RESULT */}
-      <section className="section-padding border-t border-gray-800 bg-gray-950/40">
+      <section className="section-padding border-t border-neutral-800 bg-neutral-950/40">
         <div className="container-custom space-y-4">
-          <p className="text-[#3b82f6] text-xs font-semibold uppercase tracking-widest">Academic & Clinical Impact</p>
+          <p className="text-[#9A9A9A] text-xs font-semibold uppercase tracking-widest">Academic & Clinical Impact</p>
           <h2 className="text-2xl md:text-3xl font-bold text-white">Project Outcome & Defense</h2>
-          <p className="text-gray-300 leading-relaxed max-w-3xl text-base md:text-lg">
-            NephroSasa Rwanda was developed and successfully defended as a BSc (Hons) Software Engineering Capstone Project at the African Leadership University (ALU). The project demonstrated how combining lightweight machine learning models with accessible mobile-first web technologies can provide proactive, life-saving pre-dialysis kidney monitoring in resource-constrained healthcare environments.
+          <p className="text-neutral-300 leading-relaxed max-w-3xl text-base md:text-lg">
+            NephroSasa was developed and successfully defended as a BSc (Hons) Software Engineering Capstone Project. The project demonstrated how combining lightweight machine learning models with accessible mobile-first web technologies can provide proactive, life-saving pre-dialysis kidney monitoring in resource-constrained healthcare environments.
           </p>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="section-padding border-t border-gray-800">
+      <section className="section-padding border-t border-neutral-800">
         <div className="container-custom text-center space-y-6">
           <h2 className="text-3xl md:text-4xl font-bold">
             Interested in healthtech, AI, or full-stack engineering?{" "}
-            <span className="text-[#3b82f6]">Let's connect.</span>
+            <span className="text-[#9A9A9A]">Let's connect.</span>
           </h2>
-          <p className="text-gray-400 max-w-xl mx-auto">
+          <p className="text-neutral-400 max-w-xl mx-auto">
             Building something in healthcare, fintech, or scalable web platforms? Let's build together.
           </p>
-          <Link href="/contact" className="inline-block px-10 py-4 bg-[#3b82f6] hover:bg-[#2563eb] text-white font-bold rounded-lg transition-all duration-300 no-underline text-lg shadow-lg shadow-blue-500/20">
+          <Link href="/contact" className="inline-block px-10 py-4 bg-white hover:bg-[#CFCFCF] text-white font-bold rounded-lg transition-all duration-300 no-underline text-lg">
             Get In Touch
           </Link>
         </div>

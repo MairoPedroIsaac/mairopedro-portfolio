@@ -24,13 +24,13 @@ export default function ProjectCard({
   // Wrap the entire card in a link if link prop is provided
   const CardContent = (
     <div
-      className={`bg-gray-900/50 rounded-xl overflow-hidden border border-gray-800 ${
+      className={`bg-neutral-900/50 rounded-xl overflow-hidden border border-neutral-800 ${
         featured ? "md:col-span-2" : ""
       }`}
       style={{ transition: "none" }} // Remove all transitions
     >
       {/* Project Image */}
-      <div className="relative h-auto bg-gray-900 overflow-hidden">
+      <div className="relative h-auto bg-neutral-900 overflow-hidden">
         {/* PLACEHOLDER - Replace with your actual project screenshot */}
         <Image
           src={images[0] || "..."}
@@ -45,8 +45,8 @@ export default function ProjectCard({
           <span
             className={`px-4 py-2 rounded-full text-sm font-semibold ${
               status === "Completed"
-                ? "bg-green-900/50 text-green-400 border border-green-700/50"
-                : "bg-blue-900/50 text-blue-400 border border-blue-700/50"
+                ? "bg-[#9A9A9A] text-[#CFCFCF] border border-[#9A9A9A]"
+                : "bg-[#9A9A9A] text-white border border-[#9A9A9A]"
             }`}
           >
             {status}
@@ -65,17 +65,17 @@ export default function ProjectCard({
               </span>
             )}
           </div>
-          <p className="text-sm text-gray-400">{category}</p>
+          <p className="text-sm text-neutral-400">{category}</p>
         </div>
 
-        <p className="text-gray-300 leading-relaxed">{description}</p>
+        <p className="text-neutral-300 leading-relaxed">{description}</p>
 
         {/* Tech Stack */}
         <div className="flex flex-wrap gap-2">
           {techStack.map((tech) => (
             <span
               key={tech}
-              className="px-3 py-1 bg-gray-800 text-[#00D9FF] text-sm rounded-md border border-[#00D9FF]/30"
+              className="px-3 py-1 bg-neutral-800 text-[#00D9FF] text-sm rounded-md border border-[#00D9FF]/30"
             >
               {tech}
             </span>

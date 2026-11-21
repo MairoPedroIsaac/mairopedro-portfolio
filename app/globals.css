@@ -27,13 +27,12 @@
   }
 
   a {
-    color: #3b82f6;
+    color: inherit;
     text-decoration: none;
   }
 
   a:hover {
     color: #ffffff;
-    text-decoration: underline;
   }
 
   button {
@@ -84,18 +83,18 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #3b82f6;
+  background: #5E5E5E;
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #2563eb;
+  background: #9A9A9A;
 }
 
 /* Selection */
 ::selection {
-  background-color: rgba(59, 130, 246, 0.3);
-  color: #ffffff;
+  background-color: #ffffff;
+  color: #000000;
 }
 
 @keyframes ticker {
@@ -105,4 +104,10 @@
 
 .animate-ticker {
   animation: ticker 20s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .animate-ticker { animation-duration: 120s; }
+  *, *::before, *::after { transition-duration: 0.01ms !important; }
+  .animate-ping, .animate-bounce { animation: none !important; }
 }

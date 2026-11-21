@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowDown, MapPin, Code2, Briefcase, Circle } from "lucide-react";
+import { Code2, Briefcase, Users, Rocket } from "lucide-react";
 
 export default function Hero() {
   return (
@@ -9,55 +9,59 @@ export default function Hero() {
       id="home"
       className="min-h-screen flex items-center justify-center section-padding pt-32 relative overflow-hidden bg-black"
     >
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0a0f1a] via-black to-black opacity-80"></div>
-      <div className="absolute top-20 right-20 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-20 left-20 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0d0d0d] via-black to-black opacity-80"></div>
+      <div className="absolute top-20 right-20 w-72 h-72 bg-white/[0.04] rounded-full blur-3xl"></div>
+      <div className="absolute bottom-20 left-20 w-96 h-96 bg-white/[0.03] rounded-full blur-3xl"></div>
 
       <div className="container-custom relative z-10">
         <div className="grid md:grid-cols-2 gap-12 items-start">
 
-          {/* Left — Text Content */}
+          {/* Left: Text Content */}
           <div className="space-y-6 pt-8">
             <div className="flex items-center gap-2">
               <span className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
               </span>
-              <span className="text-green-400 text-sm font-medium">Available for work</span>
+              <span className="text-[#CFCFCF] text-sm font-medium">Available for work</span>
             </div>
 
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-white">
-              Full-Stack Software Engineer Specializing in Fintech, Healthcare{" "}
-              <span className="text-[#3b82f6]">and AI-Driven Solutions</span>
+            <p className="text-[#9A9A9A] text-xs md:text-sm font-semibold uppercase tracking-[0.3em]">
+              Mairo Pedro Isaac &nbsp;/&nbsp; Full-Stack Developer
+            </p>
+
+            <h1 className="text-[2.6rem] sm:text-5xl lg:text-6xl font-bold leading-[1.08] tracking-tight text-white">
+              Websites, web apps &amp; mobile apps that bring your business{" "}
+              <span className="text-[#9A9A9A]">more customers.</span>
             </h1>
 
-            <p className="text-xl text-gray-400 leading-relaxed">
-              I build scalable web applications using Next.js, Django, and Node.js with a focus on fintech systems, health infrastructure, and ML-powered features.
+            <p className="text-lg md:text-xl text-neutral-400 leading-relaxed max-w-xl">
+              I design and build fast, modern products for small and growing businesses, from first idea to launch, with Next.js, Django and Node.js.
             </p>
 
             <div className="flex flex-wrap gap-4 pt-4">
               <a
-                href="/projects"
-                className="px-8 py-4 bg-[#3b82f6] text-white font-semibold rounded-lg hover:bg-[#2563eb] transition-all duration-300 hover:scale-105 no-underline"
+                href="/contact"
+                className="group inline-flex items-center gap-2 px-8 py-4 bg-white text-black font-semibold rounded-lg hover:bg-[#CFCFCF] transition-all duration-300 no-underline"
               >
-                View My Work
+                Work With Me <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
               </a>
               <a
-                href="/contact"
-                className="px-8 py-4 border-2 border-[#3b82f6] text-[#3b82f6] font-semibold rounded-lg hover:bg-blue-500/10 transition-all duration-300 no-underline"
+                href="/projects"
+                className="px-8 py-4 border-2 border-white/25 text-white font-semibold rounded-lg hover:border-white hover:bg-white/5 transition-all duration-300 no-underline"
               >
-                Get In Touch
+                View My Work
               </a>
             </div>
           </div>
 
-          {/* Right — Photo + Info Card */}
+          {/* Right: Photo + Info Card */}
           <div className="flex flex-col items-center gap-6 mt-8">
 
             {/* Profile Circle */}
             <div className="relative w-72 h-72 md:w-80 md:h-80">
-              <div className="absolute inset-0 bg-gradient-to-r from-[#3b82f6] to-blue-400 rounded-full blur-xl opacity-30"></div>
-              <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-[#3b82f6]/50">
+              <div className="absolute inset-0 bg-gradient-to-r from-white/40 to-neutral-600 rounded-full blur-xl opacity-30"></div>
+              <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white/25">
                 <Image
                   src="/images/profile.jpg"
                   alt="Mairo Pedro Isaac"
@@ -69,62 +73,39 @@ export default function Hero() {
             </div>
 
             {/* Info Card */}
-            <div className="w-full max-w-sm bg-[#0d1117] border border-white/10 rounded-2xl p-5 space-y-3">
+            <div className="w-full max-w-sm bg-[#0d0d0d] border border-white/10 rounded-2xl p-5 space-y-3">
 
               {/* Card Header */}
-              <div className="flex items-center gap-3 pb-3 border-b border-white/10">
-                <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 border-2 border-[#3b82f6]/50">
-                  <Image
-                    src="/images/profile.jpg"
-                    alt="Mairo Pedro Isaac"
-                    width={96}
-                    height={96}
-                    className="object-cover object-[center_50%] w-full h-full"
-                  />
-                </div>
+              <div className="flex items-center justify-between pb-3 border-b border-white/10">
                 <div>
                   <div className="text-white font-semibold text-sm">Mairo Pedro Isaac</div>
-                  <div className="text-gray-400 text-xs">Full-Stack Software Engineer</div>
+                  <div className="text-neutral-400 text-xs">Full-Stack Developer</div>
                 </div>
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-white/15 text-[10px] uppercase tracking-widest text-[#CFCFCF]">
+                  <span className="h-1.5 w-1.5 rounded-full bg-white"></span> Available
+                </span>
               </div>
 
               {/* Card Details */}
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-500 uppercase text-xs tracking-wider flex items-center gap-1">
-                    <Briefcase className="w-3 h-3" /> Role
-                  </span>
-                  <span className="text-gray-200 text-xs">Full-Stack Software Engineer</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-500 uppercase text-xs tracking-wider flex items-center gap-1">
-                    <MapPin className="w-3 h-3" /> Location
-                  </span>
-                  <span className="text-gray-200 text-xs">Kigali, Rwanda</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-500 uppercase text-xs tracking-wider flex items-center gap-1">
-                    <Code2 className="w-3 h-3" /> Focus
-                  </span>
-                  <span className="text-gray-200 text-xs">Fintech · Healthcare · AI</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-500 uppercase text-xs tracking-wider flex items-center gap-1">
-                    <Circle className="w-3 h-3" /> Status
-                  </span>
-                  <span className="text-green-400 text-xs font-medium">Available for work</span>
-                </div>
+              <div className="space-y-2.5 text-sm">
+                {[
+                  { Icon: Briefcase, label: "Builds", value: "Websites · Web apps · Mobile apps" },
+                  { Icon: Users, label: "For", value: "Small & growing businesses" },
+                  { Icon: Code2, label: "Stack", value: "Next.js · Django · Node.js" },
+                  { Icon: Rocket, label: "Shipped", value: "4 live platforms" },
+                ].map(({ Icon, label, value }) => (
+                  <div key={label} className="flex justify-between items-center gap-4">
+                    <span className="text-neutral-500 uppercase text-xs tracking-wider flex items-center gap-1.5">
+                      <Icon className="w-3 h-3" /> {label}
+                    </span>
+                    <span className="text-neutral-200 text-xs text-right">{value}</span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
         </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <a href="/projects" className="text-[#3b82f6]">
-            <ArrowDown size={32} />
-          </a>
-        </div>
       </div>
     </section>
   );

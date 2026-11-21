@@ -5,24 +5,26 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 
+const title = "Mairo Pedro Isaac | Full-Stack Developer";
+const description =
+  "Full-stack developer building websites, web apps and mobile apps that bring small and growing businesses more customers.";
+
 export const metadata: Metadata = {
-  title: "Mairo Pedro Isaac - Full-Stack Software Engineer",
-  description: "Full-Stack Software Engineer specializing in Next.js, React, Django, Node.js and AI Integration. Building scalable web solutions in Kigali, Rwanda.",
-  keywords: ["Full-Stack Software Engineer", "Software Engineer", "Web Developer", "Next.js", "React", "Django", "Node.js", "Kigali", "Rwanda"],
+  metadataBase: new URL("https://mairopedro.com"),
+  title,
+  description,
+  keywords: ["Full-Stack Developer", "Web Developer", "Website Developer", "Web Apps", "Mobile Apps", "Next.js", "React", "Django", "Node.js", "Freelance Developer"],
   authors: [{ name: "Mairo Pedro Isaac" }],
+  alternates: { canonical: "/" },
   openGraph: {
-    title: "Mairo Pedro Isaac - Full-Stack Software Engineer",
-    description: "Building modern web solutions with Next.js, React, Django, Node.js and AI Integration",
+    title,
+    description,
     url: "https://mairopedro.com",
-    siteName: "Mairo Pedro Isaac Portfolio",
+    siteName: "Mairo Pedro Isaac",
     locale: "en_US",
     type: "website",
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Mairo Pedro Isaac - Full-Stack Software Engineer",
-    description: "Building modern web solutions with Next.js, React, Django, Node.js and AI Integration",
-  },
+  twitter: { card: "summary_large_image", title, description },
 };
 
 export default function RootLayout({

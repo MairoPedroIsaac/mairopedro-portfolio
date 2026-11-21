@@ -16,7 +16,7 @@ export default function TechTicker() {
           <TechBadge 
             key={index} 
             tech={tech} 
-            className="mx-6 !bg-transparent !border-none !text-gray-400 !text-sm !font-medium !uppercase !tracking-widest"
+            className="mx-6 !bg-transparent !border-none !text-neutral-400 !text-sm !font-medium !uppercase !tracking-widest"
           />
         ))}
       </div>

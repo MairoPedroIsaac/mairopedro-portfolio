@@ -3,6 +3,8 @@
 import { skills } from "@/lib/data";
 import { useEffect, useState, useRef } from "react";
 import TechBadge from "@/components/ui/TechBadge";
+import { contact } from "@/lib/data";
+import { Download } from "lucide-react";
 
 export default function About() {
   const [yearsCount, setYearsCount] = useState(0);
@@ -62,13 +64,13 @@ export default function About() {
 
           {/* Left Column - Story */}
           <div className="space-y-6">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
-              About <span className="text-[#3b82f6]">Me</span>
+            <h2 className="text-4xl md:text-5xl font-bold text-black">
+              About <span className="text-[#5E5E5E]">Me</span>
             </h2>
-            <div className="space-y-4 text-gray-600 leading-relaxed">
+            <div className="space-y-4 text-neutral-600 leading-relaxed">
               <p>
-                Full-stack software engineer based in Kigali, Rwanda, building
-                web applications at the intersection of fintech, healthcare, and AI.
+                Full-stack developer building websites, web apps and mobile apps
+                for small and growing businesses, with deep experience in fintech, healthcare, and AI.
               </p>
               <p>
                 I work with Next.js, Django, Python, and Node.js to deliver
@@ -79,30 +81,37 @@ export default function About() {
                 quantitative analysis.
               </p>
               <p>
-                Recent work includes NephroSasa Rwanda (an AI-powered kidney
+                Recent work includes NephroSasa (an AI-powered kidney
                 risk classification, health tracking, and teleconsultation platform),
                 Powerhand Designs (website for a Pan-African branding agency), and
                 SwiftBill (a full-stack invoice platform for freelancers).
               </p>
               <p>
-                If you need an engineer who speaks both code and finance, let's
+                If you need an engineer who speaks both code and business, let's
                 build.
               </p>
             </div>
+            <a
+              href={contact.cv}
+              download
+              className="group inline-flex items-center gap-2 px-6 py-3 bg-black text-white font-semibold rounded-lg hover:bg-[#5E5E5E] transition-colors duration-300 no-underline"
+            >
+              <Download className="w-4 h-4 transition-transform group-hover:translate-y-0.5" /> Download CV
+            </a>
           </div>
 
           {/* Right Column - Skills */}
           <div className="space-y-6">
-            <h3 className="text-4xl md:text-5xl font-bold text-gray-900">
-              Technical <span className="text-[#3b82f6]">Skills</span>
+            <h3 className="text-4xl md:text-5xl font-bold text-black">
+              Technical <span className="text-[#5E5E5E]">Skills</span>
             </h3>
-            <p className="text-gray-500">
+            <p className="text-neutral-500">
               Technologies and tools I work with to bring ideas to life
             </p>
 
             <div className="flex flex-wrap gap-3">
               {updatedSkills.map((skill, index) => (
-                <TechBadge key={index} tech={skill} className="!bg-gray-50 !border-gray-200 hover:!border-[#3b82f6] hover:!bg-blue-50 !text-gray-700 !px-4 !py-2 hover:-translate-y-1 transition-transform duration-300" />
+                <TechBadge key={index} tech={skill} className="!bg-neutral-50 !border-neutral-200 hover:!border-black hover:!bg-white !text-neutral-700 !px-4 !py-2 hover:-translate-y-1 transition-transform duration-300" />
               ))}
             </div>
           </div>
@@ -111,19 +120,19 @@ export default function About() {
         {/* Stats */}
         <div
           ref={statsRef}
-          className="grid grid-cols-3 gap-8 max-w-2xl mx-auto text-center border-t border-gray-200 pt-16"
+          className="grid grid-cols-3 gap-8 max-w-2xl mx-auto text-center border-t border-neutral-200 pt-16"
         >
           <div className="flex flex-col items-center">
-            <div className="text-4xl font-bold text-[#3b82f6]">{yearsCount}+</div>
-            <div className="text-gray-500 text-sm mt-1">Years Experience</div>
+            <div className="text-4xl font-bold text-black">{yearsCount}+</div>
+            <div className="text-neutral-500 text-sm mt-1">Years Experience</div>
           </div>
           <div className="flex flex-col items-center">
-            <div className="text-4xl font-bold text-[#3b82f6]">{projectsCount}+</div>
-            <div className="text-gray-500 text-sm mt-1">Projects Completed</div>
+            <div className="text-4xl font-bold text-black">{projectsCount}+</div>
+            <div className="text-neutral-500 text-sm mt-1">Projects Completed</div>
           </div>
           <div className="flex flex-col items-center">
-            <div className="text-4xl font-bold text-[#3b82f6]">{satisfactionCount}%</div>
-            <div className="text-gray-500 text-sm mt-1">Client Satisfaction</div>
+            <div className="text-4xl font-bold text-black">{satisfactionCount}%</div>
+            <div className="text-neutral-500 text-sm mt-1">Client Satisfaction</div>
           </div>
         </div>
 

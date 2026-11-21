@@ -7,14 +7,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import TechBadge from "@/components/ui/TechBadge";
+import Testimonial from "@/components/sections/Testimonial";
 
 const featuredProjects = [
   {
     number: "01",
     category: "CAPSTONE PROJECT",
-    title: "NephroSasa Rwanda",
+    title: "NephroSasa",
     description:
-      "A web-based kidney risk-classification, health-record tracking, and teleconsultation platform for hypertensive and Type 2 diabetic patients in Rwanda. Features Random Forest ML risk classification (84.94% accuracy), encrypted QR-based medical record sharing, automated email alerts, and teleconsultations with verified nephrologists.",
+      "A web-based kidney risk-classification, health-record tracking, and teleconsultation platform for hypertensive and Type 2 diabetic patients. Features Random Forest ML risk classification (84.94% accuracy), encrypted QR-based medical record sharing, automated email alerts, and teleconsultations with verified nephrologists.",
     tech: ["Next.js 16", "Django REST", "Python", "Scikit-Learn", "PostgreSQL", "QR Code", "SendGrid"],
     slug: "nephrosasa-rwanda",
     externalLink: "https://nephrosasa-rwanda.vercel.app/en",
@@ -25,7 +26,7 @@ const featuredProjects = [
     category: "CLIENT PROJECT",
     title: "Powerhand Designs",
     description:
-      "Full branding agency website for a Pan-African design firm with offices in Port Harcourt and Kigali. Built with Django, featuring live chat integration, custom domain, and professional email setup.",
+      "Full branding agency website for a Pan-African design firm. Built with Django, featuring live chat integration, custom domain, and professional email setup.",
     tech: ["Django", "HTML", "CSS", "JavaScript"],
     slug: "powerhand-design",
     externalLink: "https://www.powerhanddesigns.com/",
@@ -73,10 +74,10 @@ function ProjectCard({ project, index }: { project: typeof featuredProjects[0]; 
       {/* Content */}
       <div className="space-y-5">
         <div className="flex items-center gap-3">
-          <span className="text-gray-600 text-sm font-mono">{project.number}</span>
+          <span className="text-neutral-600 text-sm font-mono">{project.number}</span>
         </div>
         <h3 className="text-3xl md:text-4xl font-bold text-white">{project.title}</h3>
-        <p className="text-gray-400 leading-relaxed">{project.description}</p>
+        <p className="text-neutral-400 leading-relaxed">{project.description}</p>
         <div className="flex flex-wrap gap-2">
           {project.tech.map((t) => (
             <TechBadge key={t} tech={t} />
@@ -85,7 +86,7 @@ function ProjectCard({ project, index }: { project: typeof featuredProjects[0]; 
         <div className="flex gap-4 pt-2">
           <Link
             href={`/projects/${project.slug}`}
-            className="px-5 py-2.5 bg-[#3b82f6] text-white text-sm font-semibold rounded-lg hover:bg-[#2563eb] transition-all no-underline"
+            className="px-5 py-2.5 bg-white text-black text-sm font-semibold rounded-lg hover:bg-[#CFCFCF] transition-all no-underline"
           >
             View Case Study
           </Link>
@@ -114,12 +115,12 @@ export default function Home() {
         <div className="container-custom px-6 md:px-12 lg:px-24">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-16">
             <div>
-              <p className="text-[#3b82f6] text-xs font-semibold uppercase tracking-widest mb-3">Selected Work</p>
+              <p className="text-[#9A9A9A] text-xs font-semibold uppercase tracking-widest mb-3">Selected Work</p>
               <h2 className="text-4xl md:text-5xl font-bold text-white">Featured Projects</h2>
             </div>
             <Link
               href="/projects"
-              className="text-[#3b82f6] font-semibold hover:underline no-underline text-sm"
+              className="text-[#9A9A9A] font-semibold hover:underline no-underline text-sm"
             >
               View All Projects →
             </Link>
@@ -133,6 +134,7 @@ export default function Home() {
         </div>
       </section>
 
+      <Testimonial />
       <HomepageCTA />
     </main>
   );

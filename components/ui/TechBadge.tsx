@@ -56,18 +56,12 @@ const techMap: Record<string, IconConfig> = {
 };
 
 export default function TechBadge({ tech, className = "" }: { tech: string; className?: string }) {
-  const config = techMap[tech] || {};
-  const Icon = config.icon;
+  const Icon = techMap[tech]?.icon;
 
+  // Monochrome on purpose: the site palette is black, white and grey only.
   return (
-    <span className={`inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 text-gray-300 text-xs rounded-md font-medium cursor-default select-none ${className}`}>
-      {Icon && (
-        <Icon 
-          className="w-4 h-4" 
-          style={{ color: config.isDarkBrand ? "currentColor" : config.color }} 
-        />
-      )}
-      {!Icon && <span className="w-1.5 h-1.5 rounded-full bg-[#3b82f6] flex-shrink-0 mr-0.5"></span>}
+    <span className={`inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 text-neutral-300 text-xs rounded-md font-medium cursor-default select-none ${className}`}>
+      {Icon ? <Icon className="w-4 h-4 opacity-80" aria-hidden /> : <span className="w-1.5 h-1.5 rounded-full bg-current opacity-60 flex-shrink-0 mr-0.5"></span>}
       {tech}
     </span>
   );

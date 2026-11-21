@@ -50,11 +50,11 @@ function ProjectItem({ project, index }: { project: typeof projects[0]; index: n
       {/* Details */}
       <div className="space-y-6">
         <div className="flex items-center gap-4">
-          <span className="text-gray-600 text-sm font-mono">
+          <span className="text-neutral-600 text-sm font-mono">
             {String(index + 1).padStart(2, "0")}
           </span>
-          <div className="h-px w-8 bg-gray-700"></div>
-          <span className="text-[#3b82f6] text-xs font-semibold uppercase tracking-widest">
+          <div className="h-px w-8 bg-neutral-700"></div>
+          <span className="text-[#9A9A9A] text-xs font-semibold uppercase tracking-widest">
             {project.category}
           </span>
         </div>
@@ -63,7 +63,7 @@ function ProjectItem({ project, index }: { project: typeof projects[0]; index: n
           {project.title}
         </h3>
 
-        <p className="text-gray-400 leading-relaxed">
+        <p className="text-neutral-400 leading-relaxed">
           {project.description}
         </p>
 
@@ -76,7 +76,7 @@ function ProjectItem({ project, index }: { project: typeof projects[0]; index: n
         <div className="flex flex-wrap gap-4 pt-2">
           <Link
             href={project.link}
-            className="inline-flex items-center gap-2 px-6 py-3 bg-[#3b82f6] text-white font-semibold rounded-lg hover:bg-[#2563eb] transition-all duration-300 no-underline text-sm"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-white text-black font-semibold rounded-lg hover:bg-[#CFCFCF] transition-all duration-300 no-underline text-sm"
           >
             View Case Study
           </Link>
@@ -85,7 +85,7 @@ function ProjectItem({ project, index }: { project: typeof projects[0]; index: n
               href={project.externalLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 border border-white/20 text-white font-semibold rounded-lg hover:border-[#3b82f6] transition-all duration-300 no-underline text-sm"
+              className="inline-flex items-center gap-2 px-6 py-3 border border-white/20 text-white font-semibold rounded-lg hover:border-white transition-all duration-300 no-underline text-sm"
             >
               Visit Live Site
             </a>
@@ -104,9 +104,9 @@ export default function Projects() {
         {/* Header */}
         <div className="text-center space-y-4 mb-20">
           <h2 className="text-4xl md:text-5xl font-bold text-white">
-            Featured <span className="text-[#3b82f6]">Projects</span>
+            Featured <span className="text-[#9A9A9A]">Projects</span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          <p className="text-neutral-400 text-lg max-w-2xl mx-auto">
             A selection of projects showcasing my expertise in building modern web applications
           </p>
         </div>

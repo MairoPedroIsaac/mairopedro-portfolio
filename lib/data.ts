@@ -2,8 +2,8 @@
 export const projects = [
   {
     id: 1,
-    title: "NephroSasa Rwanda",
-    description: "A web-based kidney risk-classification, health-record tracking, and teleconsultation platform for hypertensive and Type 2 diabetic patients in Rwanda. Features Random Forest ML risk classification (84.94% accuracy), encrypted QR-based medical record sharing, automated email alerts, and teleconsultations with verified nephrologists.",
+    title: "NephroSasa",
+    description: "A web-based kidney risk-classification, health-record tracking, and teleconsultation platform for hypertensive and Type 2 diabetic patients. Features Random Forest ML risk classification (84.94% accuracy), encrypted QR-based medical record sharing, automated email alerts, and teleconsultations with verified nephrologists.",
     techStack: ["Next.js 16", "Django REST", "Python", "Scikit-Learn", "PostgreSQL", "QR Code", "SendGrid"],
     status: "Completed",
     category: "Capstone Project",
@@ -100,9 +100,21 @@ export const skills = [
 ];
 
 // CONTACT DATA
+// Never add a phone number, city or country here.
 export const contact = {
   email: "mairopedroisaac@gmail.com",
-  whatsapp: "250798972117",
   linkedin: "https://www.linkedin.com/in/mairo-pedro-isaac-3a0b59291/",
-  whatsappMessage: "Hi Mairo, I'm interested in your web development services",
+  github: "https://github.com/MairoPedroIsaac",
+  facebook: "https://www.facebook.com/profile.php?id=61596953393480",
+  facebookName: "Mairo Pedro Dev",
+  instagram: "https://www.instagram.com/mairo.codes",
+  cv: "/cv/Mairo-Pedro-Isaac-CV.pdf",
+};
+
+// TESTIMONIAL
+export const testimonial = {
+  quote:
+    "It was a pleasure working with Mairo. I truly appreciate his dedication, willingness to listen, and attention to detail. His delivery was excellent, on point, and right on time. I highly recommend working with him!",
+  name: "Augustine Moses",
+  company: "Powerhand Designs",
 };
