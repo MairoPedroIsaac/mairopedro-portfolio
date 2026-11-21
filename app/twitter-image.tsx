@@ -4,9 +4,9 @@ export const alt = "Mairo Pedro Isaac, Full-Stack Developer";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-async function loadAnton() {
+async function loadFont(family: string, weight: number) {
   try {
-    const css = await (await fetch("https://fonts.googleapis.com/css2?family=Anton")).text();
+    const css = await (await fetch(`https://fonts.googleapis.com/css2?family=${family}:wght@${weight}`)).text();
     const url = css.match(/src: url\((.+?)\)/)?.[1];
     return url ? await (await fetch(url)).arrayBuffer() : null;
   } catch {
@@ -15,7 +15,12 @@ async function loadAnton() {
 }
 
 export default async function OgImage() {
-  const anton = await loadAnton();
+  const [bold, regular] = await Promise.all([loadFont("Plus+Jakarta+Sans", 800), loadFont("DM+Sans", 500)]);
+  const fonts = [
+    ...(bold ? [{ name: "Jakarta", data: bold, weight: 800 as const, style: "normal" as const }] : []),
+    ...(regular ? [{ name: "DM Sans", data: regular, weight: 500 as const, style: "normal" as const }] : []),
+  ];
+
   return new ImageResponse(
     (
       <div
@@ -26,21 +31,43 @@ export default async function OgImage() {
           flexDirection: "column",
           justifyContent: "space-between",
           background: "#050505",
-          padding: "72px 80px",
-          color: "#fff",
+          padding: "64px 80px",
+          color: "#FFFFFF",
+          fontFamily: "DM Sans",
         }}
       >
-        <div style={{ display: "flex", fontSize: 22, letterSpacing: 6, color: "#9A9A9A" }}>FULL-STACK DEVELOPER</div>
-        <div style={{ display: "flex", flexDirection: "column", fontFamily: anton ? "Anton" : "sans-serif", fontSize: 168, lineHeight: 0.9, fontWeight: 700 }}>
-          <span>MAIRO</span>
-          <span>PEDRO ISAAC</span>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
+            <svg width="72" height="72" viewBox="0 0 48 48">
+              <rect width="48" height="48" rx="11" fill="#FFFFFF" />
+              <path
+                d="M10.5 35V13.5L19.25 26L28 13.5V35M28 13.5H32.5C36.09 13.5 39 16.41 39 20C39 23.59 36.09 26.5 32.5 26.5H28"
+                fill="none"
+                stroke="#000000"
+                strokeWidth="4.6"
+              />
+            </svg>
+            <div style={{ display: "flex", fontFamily: "Jakarta", fontSize: 26, letterSpacing: 5, textTransform: "uppercase" }}>
+              Mairo Pedro Isaac
+            </div>
+          </div>
+          <div style={{ display: "flex", fontSize: 22, letterSpacing: 4, color: "#9A9A9A", textTransform: "uppercase" }}>
+            Full-Stack Developer
+          </div>
         </div>
+
+        <div style={{ display: "flex", flexDirection: "column", fontFamily: "Jakarta", fontSize: 57, lineHeight: 1.1, letterSpacing: -1.5 }}>
+          <span>Websites, web apps &amp; mobile apps</span>
+          <span>that bring your business</span>
+          <span style={{ color: "#9A9A9A" }}>more customers.</span>
+        </div>
+
         <div style={{ display: "flex", justifyContent: "space-between", borderTop: "1px solid #5E5E5E", paddingTop: 24, fontSize: 24, color: "#CFCFCF" }}>
-          <span>Websites · Web apps · Mobile apps</span>
+          <span>Next.js · Django · Node.js</span>
           <span>mairopedro.com</span>
         </div>
       </div>
     ),
-    { ...size, fonts: anton ? [{ name: "Anton", data: anton, weight: 400, style: "normal" }] : [] }
+    { ...size, fonts }
   );
 }

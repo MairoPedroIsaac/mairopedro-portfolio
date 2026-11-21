@@ -1,5 +1,7 @@
 import Link from "next/link";
-import { Mail, Download, ArrowRight } from "lucide-react";
+import Logo from "@/components/ui/Logo";
+import DownloadCVButton from "@/components/ui/DownloadCVButton";
+import { Mail } from "lucide-react";
 import { FaWhatsapp, FaFacebookF, FaLinkedinIn, FaGithub, FaInstagram } from "react-icons/fa";
 import { contact } from "@/lib/data";
 
@@ -17,29 +19,13 @@ export default function Footer() {
   return (
     <footer className="bg-[#050505] border-t border-white/10">
 
-      {/* CTA Banner */}
-      <div className="border-b border-white/10">
-        <div className="container-custom px-6 md:px-12 lg:px-24 py-10 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div>
-            <h3 className="text-white text-2xl font-bold">Open to new projects</h3>
-            <p className="text-neutral-400 text-sm mt-1">Websites, web apps and mobile apps that bring your business more customers.</p>
-          </div>
-          <Link
-            href="/contact"
-            className="group inline-flex items-center gap-2 px-6 py-3 bg-white text-black font-semibold rounded-lg hover:bg-[#CFCFCF] transition-all duration-300 whitespace-nowrap no-underline"
-          >
-            Start a Conversation <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-          </Link>
-        </div>
-      </div>
-
       {/* Main Footer */}
       <div className="container-custom px-6 md:px-12 lg:px-24 py-14">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
 
           {/* Branding */}
           <div className="space-y-4">
-            <Link href="/" className="font-display text-2xl font-extrabold tracking-tight text-white no-underline">MP</Link>
+            <Link href="/" className="inline-block no-underline" aria-label="Mairo Pedro, home"><Logo /></Link>
             <p className="text-neutral-400 text-sm leading-relaxed max-w-xs">
               Full-Stack Developer building websites, web apps and mobile apps for small and growing businesses.
             </p>
@@ -107,12 +93,12 @@ export default function Footer() {
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <Download className="w-4 h-4 text-[#9A9A9A] mt-0.5 flex-shrink-0" />
                 <div>
-                  <a href={contact.cv} download className="text-neutral-200 text-sm hover:text-white transition-colors no-underline">
-                    Download CV
-                  </a>
-                  <p className="text-neutral-500 text-xs">PDF</p>
+                  <DownloadCVButton
+                    className="inline-flex items-center gap-3 text-neutral-200 text-sm hover:text-white transition-colors no-underline"
+                    iconClassName="w-4 h-4 text-[#9A9A9A]"
+                  />
+                  <p className="text-neutral-500 text-xs pl-7">PDF</p>
                 </div>
               </div>
             </div>

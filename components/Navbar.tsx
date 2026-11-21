@@ -1,9 +1,11 @@
 "use client";
 
+import DownloadCVButton from "@/components/ui/DownloadCVButton";
 import { useState, useEffect } from "react";
-import { Menu, X, Download } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { contact } from "@/lib/data";
 import Link from "next/link";
+import Logo from "@/components/ui/Logo";
 import { usePathname } from "next/navigation";
 
 export default function Navbar() {
@@ -36,8 +38,8 @@ export default function Navbar() {
       <div className="container-custom px-6 md:px-12 lg:px-24">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
-          <Link href="/" className="font-display text-2xl font-extrabold tracking-tight text-white no-underline">
-            MP
+          <Link href="/" className="no-underline" aria-label="Mairo Pedro, home">
+            <Logo />
           </Link>
 
           {/* Desktop Navigation */}
@@ -55,14 +57,7 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
-            <a
-              href={contact.cv}
-              download
-              className="group inline-flex items-center gap-2 pl-4 pr-5 py-2 rounded-full bg-white text-black text-sm font-semibold hover:bg-[#CFCFCF] transition-colors duration-300 no-underline"
-            >
-              <Download className="w-4 h-4 transition-transform group-hover:translate-y-0.5" />
-              Download CV
-            </a>
+            <DownloadCVButton className="inline-flex items-center justify-center min-w-[152px] gap-2 pl-4 pr-5 py-2 rounded-full bg-white text-black text-sm font-semibold hover:bg-[#CFCFCF] transition-colors duration-300 no-underline" iconClassName="w-4 h-4" />
           </div>
 
           {/* Mobile Menu Button */}
@@ -91,13 +86,7 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
-            <a
-              href={contact.cv}
-              download
-              className="mt-3 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-black text-sm font-semibold no-underline"
-            >
-              <Download className="w-4 h-4" /> Download CV
-            </a>
+            <DownloadCVButton className="mt-3 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-black text-sm font-semibold no-underline" iconClassName="w-4 h-4" />
           </div>
         )}
       </div>

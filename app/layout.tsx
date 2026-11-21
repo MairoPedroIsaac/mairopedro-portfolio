@@ -7,6 +7,7 @@ const body = DM_Sans({ subsets: ["latin"], weight: ["400", "500", "600", "700"],
 import TawkToScript from '@/components/TawkToScript';
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Toaster from "@/components/ui/Toaster";
 
 
 const title = "Mairo Pedro Isaac | Full-Stack Developer";
@@ -49,6 +50,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <Toaster />
         <TawkToScript />
       </body>
     </html>

@@ -1,10 +1,10 @@
 "use client";
 
+import DownloadCVButton from "@/components/ui/DownloadCVButton";
 import { skills } from "@/lib/data";
 import { useEffect, useState, useRef } from "react";
 import TechBadge from "@/components/ui/TechBadge";
 import { contact } from "@/lib/data";
-import { Download } from "lucide-react";
 
 export default function About() {
   const [yearsCount, setYearsCount] = useState(0);
@@ -91,13 +91,7 @@ export default function About() {
                 build.
               </p>
             </div>
-            <a
-              href={contact.cv}
-              download
-              className="group inline-flex items-center gap-2 px-6 py-3 bg-black text-white font-semibold rounded-lg hover:bg-[#5E5E5E] transition-colors duration-300 no-underline"
-            >
-              <Download className="w-4 h-4 transition-transform group-hover:translate-y-0.5" /> Download CV
-            </a>
+            <DownloadCVButton className="inline-flex items-center gap-2 px-6 py-3 bg-black text-white font-semibold rounded-lg hover:bg-[#5E5E5E] transition-colors duration-300 no-underline" iconClassName="w-4 h-4" />
           </div>
 
           {/* Right Column - Skills */}

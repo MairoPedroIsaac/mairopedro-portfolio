@@ -1,10 +1,12 @@
+import DownloadCVButton from "@/components/ui/DownloadCVButton";
 import { contact } from "@/lib/data";
-import { Mail, Clock, Download, ArrowUpRight } from "lucide-react";
+import { Clock, Download, ArrowUpRight } from "lucide-react";
 import { FaWhatsapp, FaFacebookF, FaLinkedinIn } from "react-icons/fa";
+import { SiGmail } from "react-icons/si";
 
 export default function Contact() {
   const contactMethods = [
-    { icon: <Mail className="w-5 h-5" />, title: "Email Me", description: contact.email, link: `mailto:${contact.email}`, hover: "group-hover:bg-black" },
+    { icon: <SiGmail className="w-5 h-5" />, title: "Email Me", description: contact.email, link: `mailto:${contact.email}`, hover: "group-hover:bg-[#EA4335]" },
     { icon: <FaWhatsapp className="w-5 h-5" />, title: "Chat on WhatsApp", description: "Quick replies, any time", link: contact.whatsapp, hover: "group-hover:bg-[#25D366]" },
     { icon: <FaFacebookF className="w-5 h-5" />, title: "Facebook Page", description: contact.facebookName, link: contact.facebook, hover: "group-hover:bg-[#1877F2]" },
     { icon: <FaLinkedinIn className="w-5 h-5" />, title: "Connect on LinkedIn", description: "Let's grow our network", link: contact.linkedin, hover: "group-hover:bg-[#0A66C2]" },
@@ -64,13 +66,7 @@ export default function Contact() {
               </div>
             </div>
 
-            <a
-              href={contact.cv}
-              download
-              className="inline-flex items-center gap-2 px-6 py-3 bg-black text-white font-semibold rounded-lg hover:bg-[#5E5E5E] transition-colors duration-300 no-underline"
-            >
-              <Download className="w-4 h-4" /> Download CV
-            </a>
+            <DownloadCVButton className="inline-flex items-center gap-2 px-6 py-3 bg-black text-white font-semibold rounded-lg hover:bg-[#5E5E5E] transition-colors duration-300 no-underline" iconClassName="w-4 h-4" />
           </div>
 
           {/* Right: Contact Cards */}
