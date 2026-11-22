@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import ScrollZoom from "@/components/motion/ScrollZoom";
 
 // A short silent clip of the real project, in full colour. Plays while it's on screen.
 // On desktop the card tilts gently in 3D towards the mouse, with a "View" label that follows it.
@@ -59,7 +58,7 @@ export default function ProjectReel({
           setTilt({ x: 0, y: 0 });
         }}
       >
-        <ScrollZoom className="aspect-[16/7]" from={1.12}>
+        <div className="aspect-[16/7]">
           <video
             ref={vid}
             src={video}
@@ -70,7 +69,7 @@ export default function ProjectReel({
             preload="metadata"
             className="h-full w-full object-cover object-top"
           />
-        </ScrollZoom>
+        </div>
 
         {/* Follow-the-mouse label (desktop only) */}
         <span

@@ -55,7 +55,7 @@ export default function About() {
             <h3 className="text-2xl font-bold text-black">What I work with</h3>
             <div className="flex flex-wrap gap-2.5">
               {updatedSkills.map((skill, index) => (
-                <TechBadge key={index} tech={skill} className="!bg-white !border-neutral-200 hover:!border-black !text-neutral-700 !px-4 !py-2" />
+                <TechBadge key={index} tech={skill} mode="hover" className="!bg-white !border-neutral-200 hover:!border-black !text-neutral-700 !px-4 !py-2" />
               ))}
             </div>
           </Reveal>

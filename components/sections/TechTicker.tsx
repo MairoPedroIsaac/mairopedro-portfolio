@@ -15,8 +15,9 @@ export default function TechTicker() {
         {[...techs, ...techs].map((tech, index) => (
           <TechBadge 
             key={index} 
-            tech={tech} 
-            className="mx-6 !bg-transparent !border-none !text-neutral-400 !text-sm !font-medium !uppercase !tracking-widest"
+            tech={tech}
+            mode="always"
+            className="mx-6 [&_svg]:!w-5 [&_svg]:!h-5 !bg-transparent !border-none !text-neutral-300 !text-sm !font-medium !uppercase !tracking-widest"
           />
         ))}
       </div>

@@ -63,7 +63,7 @@ export default function ScreensToggle({ desktop, mobile }: { desktop: Shot[]; mo
               alt={s.label}
               fill
               sizes="(max-width: 1280px) 100vw, 1280px"
-              className={`object-cover object-top transition-all duration-700 ${k === i ? "opacity-100 scale-100" : "opacity-0 scale-[1.03]"}`}
+              className={`object-contain object-center transition-all duration-700 ${k === i ? "opacity-100 scale-100" : "opacity-0 scale-[1.03]"}`}
             />
           ))}
         </div>

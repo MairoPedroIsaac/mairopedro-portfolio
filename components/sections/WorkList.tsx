@@ -7,8 +7,9 @@ import Reveal from "@/components/motion/Reveal";
 // Client work first, then the products built to push further.
 const order = ["powerhand-design", "swiftbill", "nephrosasa-rwanda", "influence-trading-house"];
 
-export default function WorkList() {
+export default function WorkList({ limit }: { limit?: number }) {
   const list = order
+    .slice(0, limit ?? order.length)
     .map((slug) => projects.find((p) => p.slug === slug))
     .filter((p): p is (typeof projects)[number] => Boolean(p));
 

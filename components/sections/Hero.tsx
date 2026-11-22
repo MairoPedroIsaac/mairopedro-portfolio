@@ -72,13 +72,6 @@ export default function Hero() {
                 sizes="(max-width: 768px) 100vw, 40vw"
                 className="settle object-cover object-[center_30%]"
               />
-              <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/80 to-transparent" />
-              <div className="absolute left-5 right-5 bottom-5 flex items-end justify-between text-sm">
-                <div>
-                  <div className="text-white font-semibold">Mairo Pedro Isaac</div>
-                  <div className="text-grey-1 text-xs mt-0.5">Open to freelance work and full-time roles</div>
-                </div>
-              </div>
             </div>
           </div>
         </div>

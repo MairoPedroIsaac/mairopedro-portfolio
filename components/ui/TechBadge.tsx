@@ -42,9 +42,10 @@ const techMap: Record<string, IconConfig> = {
   "Express.js": { icon: SiExpress, color: "#000000", isDarkBrand: true },
   "Prisma": { icon: SiPrisma, color: "#2D3748", isDarkBrand: true },
   "Vercel": { icon: SiVercel, color: "#000000", isDarkBrand: true },
-  "Django": { icon: SiDjango, color: "#092E20", isDarkBrand: true },
-  "Django REST": { icon: SiDjango, color: "#092E20", isDarkBrand: true },
-  "AWS": { icon: FaAws, color: "#232F3E", isDarkBrand: true },
+  "Django": { icon: SiDjango, color: "#44B78B" },
+  "Django REST": { icon: SiDjango, color: "#44B78B" },
+  "Django REST Framework": { icon: SiDjango, color: "#44B78B" },
+  "AWS": { icon: FaAws, color: "#FF9900" },
 
   // Non-Branded (Fallback to icons from react-icons/fa)
   "RESTful APIs": { icon: FaNetworkWired, color: "#6B7280" },
@@ -55,13 +56,41 @@ const techMap: Record<string, IconConfig> = {
   "SendGrid": { icon: TbBrandTwilio, color: "#F22F46" },
 };
 
-export default function TechBadge({ tech, className = "" }: { tech: string; className?: string }) {
-  const Icon = techMap[tech]?.icon;
+type Mode = "always" | "hover" | "none";
 
-  // Monochrome on purpose: the site palette is black, white and grey only.
+// Real technology logos. mode="always" shows brand colours, "hover" shows them on hover,
+// "none" keeps them grey. Black brands (Next.js, Vercel...) follow the text colour.
+export default function TechBadge({
+  tech,
+  className = "",
+  mode = "none",
+}: {
+  tech: string;
+  className?: string;
+  mode?: Mode;
+}) {
+  const cfg = techMap[tech];
+  const Icon = cfg?.icon;
+  const brand = cfg && !cfg.isDarkBrand ? cfg.color : undefined;
+
+  const iconStyle =
+    brand && mode !== "none" ? ({ "--brand": brand } as React.CSSProperties) : undefined;
+  const iconClass =
+    !brand || mode === "none"
+      ? "opacity-80"
+      : mode === "always"
+      ? "text-[var(--brand)]"
+      : "transition-colors duration-300 group-hover/tech:text-[var(--brand)]";
+
   return (
-    <span className={`inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 text-neutral-300 text-xs rounded-md font-medium cursor-default select-none ${className}`}>
-      {Icon ? <Icon className="w-4 h-4 opacity-80" aria-hidden /> : <span className="w-1.5 h-1.5 rounded-full bg-current opacity-60 flex-shrink-0 mr-0.5"></span>}
+    <span
+      className={`group/tech inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 text-neutral-300 text-xs rounded-md font-medium cursor-default select-none ${className}`}
+    >
+      {Icon ? (
+        <Icon className={`w-4 h-4 ${iconClass}`} style={iconStyle} aria-hidden />
+      ) : (
+        <span className="w-1.5 h-1.5 rounded-full bg-current opacity-60 flex-shrink-0 mr-0.5"></span>
+      )}
       {tech}
     </span>
   );

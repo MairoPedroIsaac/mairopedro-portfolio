@@ -24,16 +24,16 @@ export default function Home() {
             />
             <Reveal className="md:col-span-5">
               <p className="text-neutral-400 leading-relaxed">
-                One website for a client, and products I built to push myself further. Each one taught me something
-                the last one didn&apos;t.
+                A website I built for a client, and an app I built for freelancers. There&apos;s more on the projects
+                page.
               </p>
               <Link href="/projects" className="draw-link inline-block mt-4 text-sm font-semibold text-white pb-0.5">
-                All projects →
+                See all 4 projects →
               </Link>
             </Reveal>
           </div>
 
-          <WorkList />
+          <WorkList limit={2} />
         </div>
       </section>
 
