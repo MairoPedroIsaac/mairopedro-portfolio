@@ -9,7 +9,7 @@ export default function HomepageCTA() {
         <LineReveal
           as="h2"
           className="md:col-span-8 text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-[-0.035em] leading-[0.98] text-black"
-          lines={["Got something", <span key="g" className="text-[#5E5E5E]">to build?</span>]}
+          lines={["Got something", <span key="g" className="text-grey-3">to build?</span>]}
         />
         <Reveal className="md:col-span-4" delay={200}>
           <p className="text-neutral-600 text-lg leading-relaxed">
@@ -18,7 +18,7 @@ export default function HomepageCTA() {
           <div className="flex flex-wrap items-center gap-x-8 gap-y-4 pt-8">
             <Link
               href="/contact"
-              className="group inline-flex items-center gap-3 px-7 py-4 bg-black text-white font-semibold rounded-[6px] hover:bg-[#5E5E5E] hover:text-white transition-colors duration-300"
+              className="group inline-flex items-center gap-3 px-7 py-4 bg-black text-white font-semibold rounded-[6px] hover:bg-grey-3 hover:text-white transition-colors duration-300"
             >
               Message me
               <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>

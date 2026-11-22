@@ -1,18 +1,24 @@
 @import "tailwindcss";
 
 @theme {
+  /* Brand greys and panels. Light mode below swaps these values. */
+  --color-grey-1: #CFCFCF;
+  --color-grey-2: #9A9A9A;
+  --color-grey-3: #5E5E5E;
+  --color-panel: #0d0d0d;
+  --color-coal: #050505;
   --font-sans: var(--font-body), system-ui, -apple-system, sans-serif;
   --font-display: var(--font-heading), var(--font-body), system-ui, sans-serif;
 }
 
 @layer base {
   * {
-    border-color: rgba(255, 255, 255, 0.1);
+    border-color: color-mix(in srgb, var(--color-white) 10%, transparent);
   }
 
   body, html {
-    background-color: #000000;
-    color: #FFFFFF;
+    background-color: var(--color-black);
+    color: var(--color-white);
     margin: 0;
     padding: 0;
     font-family: var(--font-body), system-ui, -apple-system, sans-serif;
@@ -84,7 +90,7 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #000000;
+  background: var(--color-black);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -98,8 +104,8 @@
 
 /* Selection */
 ::selection {
-  background-color: #ffffff;
-  color: #000000;
+  background-color: var(--color-white);
+  color: var(--color-black);
 }
 
 @keyframes ticker {
@@ -167,4 +173,34 @@
 @media (prefers-reduced-motion: reduce) {
   .line-in, .fade-up { transform: none !important; opacity: 1 !important; }
   .settle { animation: none; }
+}
+
+/* Light mode: the sharp white version. Everything flips, greys are tuned for white paper. */
+:root[data-theme="light"] {
+  color-scheme: light;
+  --color-black: #ffffff;
+  --color-white: #0a0a0a;
+  --color-coal: #ffffff;
+  --color-panel: #f3f3f1;
+  --color-grey-1: #333333;
+  --color-grey-2: #6b6b6b;
+  --color-grey-3: #9A9A9A;
+  --color-neutral-50: #0a0a0a;
+  --color-neutral-100: #171717;
+  --color-neutral-200: #2a2a2a;
+  --color-neutral-300: #3f3f3f;
+  --color-neutral-400: #4f4f4f;
+  --color-neutral-500: #6b6b6b;
+  --color-neutral-600: #a3a3a3;
+  --color-neutral-700: #c4c4c4;
+  --color-neutral-800: #e5e5e5;
+  --color-neutral-900: #f3f3f1;
+  --color-neutral-950: #fafafa;
+}
+:root[data-theme="light"] .shadow-lg { box-shadow: 0 1px 0 rgba(0,0,0,0.08); }
+:root[data-theme="light"] .grain::after { opacity: 0.04; }
+
+/* Smooth colour change when switching themes */
+.theme-fade, .theme-fade * {
+  transition: background-color 0.45s ease, color 0.45s ease, border-color 0.45s ease !important;
 }

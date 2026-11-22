@@ -25,7 +25,7 @@ export default function WorkList() {
               <span className="font-display text-5xl md:text-6xl font-extrabold text-white/15 leading-none">
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <span className="text-xs text-[#9A9A9A]">{p.category}</span>
+              <span className="text-xs text-grey-2">{p.category}</span>
             </div>
             <h3 className="text-3xl md:text-4xl font-bold text-white leading-tight">{p.title}</h3>
             <p className="mt-4 text-neutral-400 leading-relaxed">{p.summary}</p>
@@ -39,7 +39,7 @@ export default function WorkList() {
                   href={p.externalLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="draw-link text-[#CFCFCF] hover:text-white pb-0.5"
+                  className="draw-link text-grey-1 hover:text-white pb-0.5"
                 >
                   Live site ↗
                 </a>

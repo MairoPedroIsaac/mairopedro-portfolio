@@ -43,11 +43,11 @@ export default function Services() {
 
         {/* Header */}
         <div className="text-center space-y-4 mb-16">
-          <span className="text-[#9A9A9A] text-xs font-semibold uppercase tracking-[0.25em]">
+          <span className="text-grey-2 text-xs font-semibold uppercase tracking-[0.25em]">
             What I Do
           </span>
           <h2 className="text-4xl md:text-5xl font-bold text-white">
-            My <span className="text-[#9A9A9A]">Services</span>
+            My <span className="text-grey-2">Services</span>
           </h2>
           <p className="text-neutral-400 text-lg max-w-xl mx-auto">
             Three things, done properly.
@@ -61,7 +61,7 @@ export default function Services() {
             return (
               <div
                 key={service.title}
-                className="group relative p-8 md:p-10 bg-[#0d0d0d] rounded-2xl border border-white/10 hover:border-white/40 hover:-translate-y-1 transition-all duration-300 flex flex-col"
+                className="group relative p-8 md:p-10 bg-panel rounded-2xl border border-white/10 hover:border-white/40 hover:-translate-y-1 transition-all duration-300 flex flex-col"
               >
                 <span className="absolute top-8 right-8 text-sm font-semibold text-neutral-600">0{index + 1}</span>
                 <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-white transition-colors duration-300">
@@ -71,7 +71,7 @@ export default function Services() {
                 <p className="mt-3 text-neutral-400 leading-relaxed">{service.description}</p>
                 <div className="mt-8 pt-6 border-t border-white/10 flex flex-wrap gap-2">
                   {service.deliverables.map((item) => (
-                    <span key={item} className="px-3 py-1 rounded-full border border-white/10 text-xs text-[#CFCFCF]">
+                    <span key={item} className="px-3 py-1 rounded-full border border-white/10 text-xs text-grey-1">
                       {item}
                     </span>
                   ))}
@@ -82,10 +82,10 @@ export default function Services() {
         </div>
 
         {/* CTA */}
-        <div className="mt-16 p-10 md:p-14 bg-[#0d0d0d] rounded-2xl border border-white/10 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+        <div className="mt-16 p-10 md:p-14 bg-panel rounded-2xl border border-white/10 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
           <div className="space-y-3">
             <h3 className="text-3xl md:text-4xl font-bold text-white">
-              From idea to launch. <span className="text-[#9A9A9A]">Let&apos;s talk.</span>
+              From idea to launch. <span className="text-grey-2">Let&apos;s talk.</span>
             </h3>
             <p className="text-neutral-400 max-w-lg">
               Free first call, a clear plan and regular updates until your project is live.
@@ -93,7 +93,7 @@ export default function Services() {
           </div>
           <a
             href="/contact"
-            className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-black font-semibold rounded-lg hover:bg-[#CFCFCF] transition-colors duration-300 no-underline whitespace-nowrap"
+            className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-black font-semibold rounded-lg hover:bg-grey-1 transition-colors duration-300 no-underline whitespace-nowrap"
           >
             Work With Me <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
           </a>

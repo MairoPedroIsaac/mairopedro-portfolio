@@ -13,12 +13,12 @@ export default function Testimonial() {
         {/* Header: same style as Featured Projects */}
         <div className="mb-12 md:mb-16">
           <h2 className="text-4xl md:text-6xl font-extrabold tracking-[-0.03em] text-white">
-            In a client&apos;s <span className="text-[#9A9A9A]">words</span>
+            In a client&apos;s <span className="text-grey-2">words</span>
           </h2>
         </div>
 
         <Reveal>
-        <figure className="grid md:grid-cols-12 overflow-hidden rounded-[6px] border border-white/10 bg-[#0d0d0d]">
+        <figure className="grid md:grid-cols-12 overflow-hidden rounded-[6px] border border-white/10 bg-panel">
           {/* Photo */}
           <ScrollZoom className="relative md:col-span-5 aspect-[4/3] md:aspect-auto md:min-h-[460px] bg-[#e9e9e9]" from={1.1}>
             <div className="relative h-full w-full aspect-[4/3] md:aspect-auto md:min-h-[460px]">
@@ -27,7 +27,7 @@ export default function Testimonial() {
               alt={`${testimonial.name}, ${testimonial.role}`}
               fill
               sizes="(max-width: 768px) 100vw, 40vw"
-              className="object-cover object-top grayscale"
+              className="object-cover object-top"
             />
             </div>
           </ScrollZoom>
@@ -44,11 +44,11 @@ export default function Testimonial() {
             <figcaption className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 pt-8 border-t border-white/10">
               <div>
                 <div className="text-white text-lg font-bold">{testimonial.name}</div>
-                <div className="text-[#9A9A9A] text-sm mt-1">{testimonial.role}</div>
+                <div className="text-grey-2 text-sm mt-1">{testimonial.role}</div>
               </div>
               <Link
                 href={testimonial.caseStudy}
-                className="group inline-flex items-center gap-2 text-sm font-semibold text-[#CFCFCF] hover:text-white transition-colors no-underline"
+                className="group inline-flex items-center gap-2 text-sm font-semibold text-grey-1 hover:text-white transition-colors no-underline"
               >
                 See the project <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </Link>

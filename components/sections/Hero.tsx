@@ -24,7 +24,7 @@ export default function Hero() {
                   Mairo Pedro Isaac
                 </span>
                 <span className="hidden sm:block h-5 w-px bg-white/30" aria-hidden></span>
-                <span className="text-[#CFCFCF] text-sm md:text-base font-semibold uppercase tracking-[0.18em]">
+                <span className="text-grey-1 text-sm md:text-base font-semibold uppercase tracking-[0.18em]">
                   Full-Stack Developer
                 </span>
               </div>
@@ -36,7 +36,7 @@ export default function Hero() {
               className="text-[2.7rem] sm:text-6xl lg:text-[5rem] font-extrabold leading-[1.02] tracking-[-0.035em] text-white"
               lines={[
                 "Built properly.",
-                <span key="g" className="text-[#9A9A9A]">Delivered on time.</span>,
+                <span key="g" className="text-grey-2">Delivered on time.</span>,
               ]}
             />
 
@@ -49,7 +49,7 @@ export default function Hero() {
               <div className="flex flex-wrap items-center gap-x-8 gap-y-4 pt-9">
                 <a
                   href="/contact"
-                  className="group inline-flex items-center gap-3 px-7 py-4 bg-white text-black font-semibold rounded-[6px] hover:bg-[#CFCFCF] transition-colors duration-300"
+                  className="group inline-flex items-center gap-3 px-7 py-4 bg-white text-black font-semibold rounded-[6px] hover:bg-grey-1 transition-colors duration-300"
                 >
                   Message me
                   <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
@@ -63,20 +63,20 @@ export default function Hero() {
 
           {/* Portrait */}
           <div className="md:col-span-5 lg:col-span-4">
-            <div className="relative grain aspect-[4/5] w-full max-w-md md:ml-auto overflow-hidden rounded-[6px] bg-[#0d0d0d]">
+            <div className="relative grain aspect-[4/5] w-full max-w-md md:ml-auto overflow-hidden rounded-[6px] bg-panel">
               <Image
                 src="/images/profile.jpg"
                 alt="Mairo Pedro Isaac"
                 fill
                 priority
                 sizes="(max-width: 768px) 100vw, 40vw"
-                className="settle object-cover object-[center_30%] grayscale contrast-[1.08]"
+                className="settle object-cover object-[center_30%]"
               />
               <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/80 to-transparent" />
               <div className="absolute left-5 right-5 bottom-5 flex items-end justify-between text-sm">
                 <div>
                   <div className="text-white font-semibold">Mairo Pedro Isaac</div>
-                  <div className="text-[#CFCFCF] text-xs mt-0.5">Open to freelance work and full-time roles</div>
+                  <div className="text-grey-1 text-xs mt-0.5">Open to freelance work and full-time roles</div>
                 </div>
               </div>
             </div>

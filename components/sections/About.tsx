@@ -5,11 +5,12 @@ import { skills } from "@/lib/data";
 import TechBadge from "@/components/ui/TechBadge";
 import LineReveal from "@/components/motion/LineReveal";
 import Reveal from "@/components/motion/Reveal";
+import CountUp from "@/components/motion/CountUp";
 
 const facts = [
-  { value: "4", label: "Projects built and online" },
-  { value: "1", label: "Client website delivered on time" },
-  { value: "< 1 day", label: "To reply to your message" },
+  { value: 4, suffix: "+", label: "Years of experience" },
+  { value: 4, suffix: "", label: "Projects built and online" },
+  { value: 100, suffix: "%", label: "Delivered on time" },
 ];
 
 export default function About() {
@@ -25,7 +26,7 @@ export default function About() {
             <LineReveal
               as="h2"
               className="text-4xl md:text-6xl font-extrabold tracking-[-0.03em] text-black leading-[1.02]"
-              lines={["One step", <span key="g" className="text-[#5E5E5E]">at a time.</span>]}
+              lines={["One step", <span key="g" className="text-grey-3">at a time.</span>]}
             />
             <Reveal className="space-y-5 text-neutral-700 text-lg leading-relaxed max-w-2xl">
               <p>
@@ -46,7 +47,7 @@ export default function About() {
                 don&apos;t hand over work I&apos;m not proud of.
               </p>
             </Reveal>
-            <DownloadCVButton className="inline-flex items-center gap-2 px-6 py-3 bg-black text-white font-semibold rounded-[6px] hover:bg-[#5E5E5E] transition-colors duration-300 no-underline" iconClassName="w-4 h-4" />
+            <DownloadCVButton className="inline-flex items-center gap-2 px-6 py-3 bg-black text-white font-semibold rounded-[6px] hover:bg-grey-3 transition-colors duration-300 no-underline" iconClassName="w-4 h-4" />
           </div>
 
           {/* Tools */}
@@ -64,7 +65,7 @@ export default function About() {
         <div className="grid sm:grid-cols-3 border-t border-neutral-200">
           {facts.map((f, i) => (
             <Reveal key={f.label} delay={i * 120} className="pt-8 sm:pr-8">
-              <div className="font-display text-5xl font-extrabold tracking-tight text-black">{f.value}</div>
+              <CountUp to={f.value} suffix={f.suffix} className="block font-display text-5xl md:text-6xl font-extrabold tracking-tight text-black" />
               <div className="text-neutral-500 text-sm mt-2">{f.label}</div>
             </Reveal>
           ))}

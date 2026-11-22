@@ -18,11 +18,11 @@ export default function Contact() {
 
         {/* Header */}
         <div className="text-center space-y-4 mb-16">
-          <span className="text-[#5E5E5E] text-xs font-semibold uppercase tracking-[0.25em]">
+          <span className="text-grey-3 text-xs font-semibold uppercase tracking-[0.25em]">
             Get In Touch
           </span>
           <h2 className="text-4xl md:text-5xl font-bold text-black tracking-tight">
-            Let&apos;s <span className="text-[#9A9A9A]">Work Together</span>
+            Let&apos;s <span className="text-grey-2">Work Together</span>
           </h2>
           <p className="text-neutral-500 text-lg max-w-2xl mx-auto">
             Need a website, web app or mobile app for your business? Let&apos;s talk about it.
@@ -66,7 +66,7 @@ export default function Contact() {
               </div>
             </div>
 
-            <DownloadCVButton className="inline-flex items-center gap-2 px-6 py-3 bg-black text-white font-semibold rounded-lg hover:bg-[#5E5E5E] transition-colors duration-300 no-underline" iconClassName="w-4 h-4" />
+            <DownloadCVButton className="inline-flex items-center gap-2 px-6 py-3 bg-black text-white font-semibold rounded-lg hover:bg-grey-3 transition-colors duration-300 no-underline" iconClassName="w-4 h-4" />
           </div>
 
           {/* Right: Contact Cards */}

@@ -6,6 +6,7 @@ import { Menu, X } from "lucide-react";
 import { contact } from "@/lib/data";
 import Link from "next/link";
 import Logo from "@/components/ui/Logo";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 import { usePathname } from "next/navigation";
 
 export default function Navbar() {
@@ -32,7 +33,7 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? "bg-[#050505]/95 backdrop-blur-sm shadow-lg" : "bg-transparent"
+        scrolled ? "bg-coal/95 backdrop-blur-sm shadow-lg" : "bg-transparent"
       }`}
     >
       <div className="container-custom px-6 md:px-12 lg:px-24">
@@ -57,21 +58,25 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
-            <DownloadCVButton className="inline-flex items-center justify-center min-w-[152px] gap-2 pl-4 pr-5 py-2 rounded-full bg-white text-black text-sm font-semibold hover:bg-[#CFCFCF] transition-colors duration-300 no-underline" iconClassName="w-4 h-4" />
+            <ThemeToggle />
+            <DownloadCVButton className="inline-flex items-center justify-center min-w-[152px] gap-2 pl-4 pr-5 py-2 rounded-full bg-white text-black text-sm font-semibold hover:bg-grey-1 transition-colors duration-300 no-underline" iconClassName="w-4 h-4" />
           </div>
 
           {/* Mobile Menu Button */}
+          <div className="md:hidden flex items-center gap-4">
+          <ThemeToggle />
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="md:hidden text-white transition-colors" aria-label="Menu"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden pb-6 bg-[#050505] border-t border-white/10">
+          <div className="md:hidden pb-6 bg-coal border-t border-white/10">
             {navLinks.map((link) => (
               <Link
                 key={link.name}

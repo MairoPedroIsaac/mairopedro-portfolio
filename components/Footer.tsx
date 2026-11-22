@@ -17,7 +17,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#050505] border-t border-white/10">
+    <footer className="bg-coal border-t border-white/10">
 
       {/* Main Footer */}
       <div className="container-custom px-6 md:px-12 lg:px-24 py-14">
@@ -34,7 +34,7 @@ export default function Footer() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-60"></span>
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-white"></span>
               </span>
-              <span className="text-[#CFCFCF] text-sm">Available for work</span>
+              <span className="text-grey-1 text-sm">Available for work</span>
             </div>
             <div className="flex gap-3 pt-2">
               {socials.map(({ label, href, Icon }) => (
@@ -44,7 +44,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="w-9 h-9 flex items-center justify-center rounded-full border border-white/15 text-[#CFCFCF] hover:bg-white hover:text-black hover:border-white transition-all duration-300"
+                  className="w-9 h-9 flex items-center justify-center rounded-full border border-white/15 text-grey-1 hover:bg-white hover:text-black hover:border-white transition-all duration-300"
                 >
                   <Icon className="w-4 h-4" />
                 </a>
@@ -75,7 +75,7 @@ export default function Footer() {
             <h4 className="text-white text-xs font-semibold uppercase tracking-[0.25em]">Contact</h4>
             <div className="flex flex-col gap-4">
               <div className="flex items-start gap-3">
-                <Mail className="w-4 h-4 text-[#9A9A9A] mt-0.5 flex-shrink-0" />
+                <Mail className="w-4 h-4 text-grey-2 mt-0.5 flex-shrink-0" />
                 <div>
                   <a href={`mailto:${contact.email}`} className="text-neutral-200 text-sm hover:text-white transition-colors no-underline">
                     {contact.email}
@@ -84,7 +84,7 @@ export default function Footer() {
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <FaFacebookF className="w-4 h-4 text-[#9A9A9A] mt-0.5 flex-shrink-0" />
+                <FaFacebookF className="w-4 h-4 text-grey-2 mt-0.5 flex-shrink-0" />
                 <div>
                   <a href={contact.facebook} target="_blank" rel="noopener noreferrer" className="text-neutral-200 text-sm hover:text-white transition-colors no-underline">
                     {contact.facebookName}
@@ -96,7 +96,7 @@ export default function Footer() {
                 <div>
                   <DownloadCVButton
                     className="inline-flex items-center gap-3 text-neutral-200 text-sm hover:text-white transition-colors no-underline"
-                    iconClassName="w-4 h-4 text-[#9A9A9A]"
+                    iconClassName="w-4 h-4 text-grey-2"
                   />
                   <p className="text-neutral-500 text-xs pl-7">PDF</p>
                 </div>

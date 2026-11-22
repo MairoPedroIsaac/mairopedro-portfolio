@@ -40,10 +40,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`bg-black ${heading.variable} ${body.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`bg-black ${heading.variable} ${body.variable}`}>
       <head>
         <meta name="theme-color" content="#000000" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{var t=localStorage.getItem("theme");if(t==="light")document.documentElement.dataset.theme="light"}catch(e){}`,
+          }}
+        />
       </head>
       <body className="font-sans bg-black text-white min-h-screen">
         <div className="fixed inset-0 bg-black -z-10" />

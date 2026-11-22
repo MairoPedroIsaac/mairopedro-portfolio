@@ -3,8 +3,9 @@
  * Pure SVG so it stays sharp everywhere and needs no font.
  */
 export function LogoMark({ size = 36, inverted = false, className = "" }: { size?: number; inverted?: boolean; className?: string }) {
-  const bg = inverted ? "#000000" : "#FFFFFF";
-  const fg = inverted ? "#FFFFFF" : "#000000";
+  // Theme colours, so the mark flips with light and dark mode.
+  const bg = inverted ? "var(--color-black, #000)" : "var(--color-white, #fff)";
+  const fg = inverted ? "var(--color-white, #fff)" : "var(--color-black, #000)";
   return (
     <svg width={size} height={size} viewBox="0 0 48 48" className={className} role="img" aria-label="MP logo">
       <rect width="48" height="48" rx="11" fill={bg} />
