@@ -1,29 +1,31 @@
-import Projects from "@/components/sections/Projects";
+import LineReveal from "@/components/motion/LineReveal";
+import Reveal from "@/components/motion/Reveal";
+import WorkList from "@/components/sections/WorkList";
 
 export default function ProjectsPage() {
   return (
     <main className="min-h-screen">
-
-      {/* Page Hero */}
-      <section className="bg-[#050505] pt-32 pb-16 border-b border-white/10">
-        <div className="container-custom px-6 md:px-12 lg:px-24">
-          <p className="text-[#9A9A9A] text-xs font-semibold uppercase tracking-widest mb-4">Selected Work</p>
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <div>
-              <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight">Projects</h1>
-              <p className="text-neutral-400 mt-4 max-w-xl text-lg leading-relaxed">
-                Real-world platforms built for fintech, healthcare, and trading. Live, deployed and used by real people.
-              </p>
-            </div>
-            <div className="text-right flex-shrink-0">
-              <p className="text-7xl font-bold text-white">4</p>
-              <p className="text-neutral-500 text-sm mt-1">Live Platforms</p>
-            </div>
-          </div>
+      <section className="bg-black pt-36 md:pt-44 pb-16 md:pb-24 px-6 md:px-12 lg:px-24">
+        <div className="container-custom grid md:grid-cols-12 gap-8 items-end">
+          <LineReveal
+            as="h1"
+            className="md:col-span-7 text-6xl md:text-8xl font-extrabold tracking-[-0.04em] text-white leading-none"
+            lines={["Projects"]}
+          />
+          <Reveal className="md:col-span-5" delay={150}>
+            <p className="text-neutral-400 text-lg leading-relaxed">
+              One website for a client, and three products I built to push myself: invoicing, health records and
+              trading. Every clip below is the real product. Click one to read how I built it.
+            </p>
+          </Reveal>
         </div>
       </section>
 
-      <Projects />
+      <section className="bg-black pb-28 md:pb-36 px-6 md:px-12 lg:px-24">
+        <div className="container-custom">
+          <WorkList />
+        </div>
+      </section>
     </main>
   );
 }

@@ -1,34 +1,34 @@
 import Link from "next/link";
+import LineReveal from "@/components/motion/LineReveal";
+import Reveal from "@/components/motion/Reveal";
 
 export default function HomepageCTA() {
   return (
-    <section className="bg-white py-16 px-6">
-      <div className="container-custom">
-        <div className="bg-[#050505] border border-white/10 rounded-2xl px-8 md:px-16 py-16 text-center space-y-6">
-          <span className="inline-block px-4 py-1.5 bg-white/10 text-neutral-300 text-xs font-semibold uppercase tracking-widest rounded-full">
-            Available for Work
-          </span>
-          <h2 className="text-4xl md:text-6xl font-bold text-white leading-tight">
-            Ready to work <span className="text-[#9A9A9A]">together?</span>
-          </h2>
-          <p className="text-neutral-400 text-lg max-w-xl mx-auto leading-relaxed">
-            Open to freelance projects and full-time roles. Tell me what your business needs and let's build it.
+    <section className="bg-white text-black py-24 md:py-36 px-6 md:px-12 lg:px-24">
+      <div className="container-custom grid md:grid-cols-12 gap-10 items-end">
+        <LineReveal
+          as="h2"
+          className="md:col-span-8 text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-[-0.035em] leading-[0.98] text-black"
+          lines={["Got something", <span key="g" className="text-[#5E5E5E]">to build?</span>]}
+        />
+        <Reveal className="md:col-span-4" delay={200}>
+          <p className="text-neutral-600 text-lg leading-relaxed">
+            Tell me what you need. I&apos;ll reply within a day and tell you straight if I&apos;m the right person for it.
           </p>
-          <div className="flex flex-wrap justify-center gap-4 pt-2">
+          <div className="flex flex-wrap items-center gap-x-8 gap-y-4 pt-8">
             <Link
               href="/contact"
-              className="px-8 py-4 bg-white text-black font-semibold rounded-lg hover:bg-[#CFCFCF] transition-all duration-300 hover:scale-105 no-underline"
+              className="group inline-flex items-center gap-3 px-7 py-4 bg-black text-white font-semibold rounded-[6px] hover:bg-[#5E5E5E] hover:text-white transition-colors duration-300"
             >
-              Start a Conversation →
+              Message me
+              <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
             </Link>
-            <Link
-              href="/projects"
-              className="px-8 py-4 border border-white/20 text-white font-semibold rounded-lg hover:bg-white/10 transition-all duration-300 no-underline"
-            >
-              View My Work
+            <Link href="/projects" className="draw-link font-semibold text-black hover:text-black pb-0.5">
+              See my work
             </Link>
           </div>
-        </div>
+          <p className="mt-8 text-sm text-neutral-500">Open to freelance projects and full-time roles.</p>
+        </Reveal>
       </div>
     </section>
   );

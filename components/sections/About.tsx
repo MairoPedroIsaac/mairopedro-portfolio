@@ -2,134 +2,73 @@
 
 import DownloadCVButton from "@/components/ui/DownloadCVButton";
 import { skills } from "@/lib/data";
-import { useEffect, useState, useRef } from "react";
 import TechBadge from "@/components/ui/TechBadge";
-import { contact } from "@/lib/data";
+import LineReveal from "@/components/motion/LineReveal";
+import Reveal from "@/components/motion/Reveal";
+
+const facts = [
+  { value: "4", label: "Projects built and online" },
+  { value: "1", label: "Client website delivered on time" },
+  { value: "< 1 day", label: "To reply to your message" },
+];
 
 export default function About() {
-  const [yearsCount, setYearsCount] = useState(0);
-  const [projectsCount, setProjectsCount] = useState(0);
-  const [satisfactionCount, setSatisfactionCount] = useState(0);
-  const [hasAnimated, setHasAnimated] = useState(false);
-
-  const statsRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!statsRef.current || hasAnimated) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          animateCounters();
-          setHasAnimated(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.5 }
-    );
-
-    observer.observe(statsRef.current);
-    return () => observer.disconnect();
-  }, [hasAnimated]);
-
-  const animateCounters = () => {
-    const duration = 2000;
-    const steps = 60;
-    let step = 0;
-
-    const timer = setInterval(() => {
-      step++;
-      const progress = step / steps;
-      setYearsCount(Math.min(Math.round(4 * progress), 4));
-      setProjectsCount(Math.min(Math.round(4 * progress), 4));
-      setSatisfactionCount(Math.min(Math.round(100 * progress), 100));
-
-      if (step >= steps) {
-        clearInterval(timer);
-        setYearsCount(4);
-        setProjectsCount(4);
-        setSatisfactionCount(100);
-      }
-    }, duration / steps);
-  };
-
   const updatedSkills = [...skills, "Node.js", "Express.js", "MongoDB", "Docker", "AWS", "Scikit-Learn"];
 
   return (
     <section id="about" className="section-padding bg-white">
-      <div className="container-custom space-y-16">
+      <div className="container-custom space-y-20">
+        <div className="grid md:grid-cols-12 gap-14 items-start">
 
-        {/* Top: 2-column grid */}
-        <div className="grid md:grid-cols-2 gap-16 items-start">
-
-          {/* Left Column - Story */}
-          <div className="space-y-6">
-            <h2 className="text-4xl md:text-5xl font-bold text-black">
-              About <span className="text-[#5E5E5E]">Me</span>
-            </h2>
-            <div className="space-y-4 text-neutral-600 leading-relaxed">
+          {/* Story */}
+          <div className="md:col-span-7 space-y-6">
+            <LineReveal
+              as="h2"
+              className="text-4xl md:text-6xl font-extrabold tracking-[-0.03em] text-black leading-[1.02]"
+              lines={["One step", <span key="g" className="text-[#5E5E5E]">at a time.</span>]}
+            />
+            <Reveal className="space-y-5 text-neutral-700 text-lg leading-relaxed max-w-2xl">
               <p>
-                Full-stack developer building websites, web apps and mobile apps
-                for small and growing businesses, with deep experience in fintech, healthcare, and AI.
+                I&apos;m Mairo, a full-stack developer. I build websites, web apps and mobile apps with Next.js,
+                Django, Python and Node.js.
               </p>
               <p>
-                I work with Next.js, Django, Python, and Node.js to deliver
-                solutions that are fast, scalable, and built for real-world
-                impact. Having developed and tested trading strategies for 5+
-                years, I bring a rare combination: technical expertise plus deep
-                understanding of financial markets, risk management, and
-                quantitative analysis.
+                Before I wrote code for a living, I spent years studying and testing trading strategies. That&apos;s
+                where my patience for detail comes from, and why I enjoy building things around money and numbers,
+                like SwiftBill and Influence Trading House.
               </p>
               <p>
-                Recent work includes NephroSasa (an AI-powered kidney
-                risk classification, health tracking, and teleconsultation platform),
-                Powerhand Designs (website for a Pan-African branding agency), and
-                SwiftBill (a full-stack invoice platform for freelancers).
+                Powerhand Designs was built for a client. SwiftBill, NephroSasa and Influence Trading House I built
+                to push myself further. Every project is a step up, and I give each one my full attention.
               </p>
               <p>
-                If you need an engineer who speaks both code and business, let's
-                build.
+                If you message me, I&apos;ll be there. I reply quickly, I keep to the dates we agree on, and I
+                don&apos;t hand over work I&apos;m not proud of.
               </p>
-            </div>
-            <DownloadCVButton className="inline-flex items-center gap-2 px-6 py-3 bg-black text-white font-semibold rounded-lg hover:bg-[#5E5E5E] transition-colors duration-300 no-underline" iconClassName="w-4 h-4" />
+            </Reveal>
+            <DownloadCVButton className="inline-flex items-center gap-2 px-6 py-3 bg-black text-white font-semibold rounded-[6px] hover:bg-[#5E5E5E] transition-colors duration-300 no-underline" iconClassName="w-4 h-4" />
           </div>
 
-          {/* Right Column - Skills */}
-          <div className="space-y-6">
-            <h3 className="text-4xl md:text-5xl font-bold text-black">
-              Technical <span className="text-[#5E5E5E]">Skills</span>
-            </h3>
-            <p className="text-neutral-500">
-              Technologies and tools I work with to bring ideas to life
-            </p>
-
-            <div className="flex flex-wrap gap-3">
+          {/* Tools */}
+          <Reveal className="md:col-span-5 space-y-6" delay={150}>
+            <h3 className="text-2xl font-bold text-black">What I work with</h3>
+            <div className="flex flex-wrap gap-2.5">
               {updatedSkills.map((skill, index) => (
-                <TechBadge key={index} tech={skill} className="!bg-neutral-50 !border-neutral-200 hover:!border-black hover:!bg-white !text-neutral-700 !px-4 !py-2 hover:-translate-y-1 transition-transform duration-300" />
+                <TechBadge key={index} tech={skill} className="!bg-white !border-neutral-200 hover:!border-black !text-neutral-700 !px-4 !py-2" />
               ))}
             </div>
-          </div>
+          </Reveal>
         </div>
 
-        {/* Stats */}
-        <div
-          ref={statsRef}
-          className="grid grid-cols-3 gap-8 max-w-2xl mx-auto text-center border-t border-neutral-200 pt-16"
-        >
-          <div className="flex flex-col items-center">
-            <div className="text-4xl font-bold text-black">{yearsCount}+</div>
-            <div className="text-neutral-500 text-sm mt-1">Years Experience</div>
-          </div>
-          <div className="flex flex-col items-center">
-            <div className="text-4xl font-bold text-black">{projectsCount}+</div>
-            <div className="text-neutral-500 text-sm mt-1">Projects Completed</div>
-          </div>
-          <div className="flex flex-col items-center">
-            <div className="text-4xl font-bold text-black">{satisfactionCount}%</div>
-            <div className="text-neutral-500 text-sm mt-1">Client Satisfaction</div>
-          </div>
+        {/* Plain facts */}
+        <div className="grid sm:grid-cols-3 border-t border-neutral-200">
+          {facts.map((f, i) => (
+            <Reveal key={f.label} delay={i * 120} className="pt-8 sm:pr-8">
+              <div className="font-display text-5xl font-extrabold tracking-tight text-black">{f.value}</div>
+              <div className="text-neutral-500 text-sm mt-2">{f.label}</div>
+            </Reveal>
+          ))}
         </div>
-
       </div>
     </section>
   );

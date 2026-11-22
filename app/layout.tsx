@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, DM_Sans } from "next/font/google";
 import "./globals.css";
+import "lenis/dist/lenis.css";
 
 const heading = Plus_Jakarta_Sans({ subsets: ["latin"], weight: ["600", "700", "800"], variable: "--font-heading", display: "swap" });
 const body = DM_Sans({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-body", display: "swap" });
@@ -8,6 +9,7 @@ import TawkToScript from '@/components/TawkToScript';
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Toaster from "@/components/ui/Toaster";
+import SmoothScroll from "@/components/motion/SmoothScroll";
 
 
 const title = "Mairo Pedro Isaac | Full-Stack Developer";
@@ -50,6 +52,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <SmoothScroll />
         <Toaster />
         <TawkToScript />
       </body>

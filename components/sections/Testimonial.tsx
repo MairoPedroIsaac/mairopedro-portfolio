@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Quote, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import Reveal from "@/components/motion/Reveal";
+import ScrollZoom from "@/components/motion/ScrollZoom";
 import { testimonial } from "@/lib/data";
 
 export default function Testimonial() {
@@ -10,15 +12,16 @@ export default function Testimonial() {
 
         {/* Header: same style as Featured Projects */}
         <div className="mb-12 md:mb-16">
-          <p className="text-[#9A9A9A] text-xs font-semibold uppercase tracking-[0.25em] mb-3">Client Words</p>
-          <h2 className="text-4xl md:text-5xl font-bold text-white">
-            What clients <span className="text-[#9A9A9A]">say</span>
+          <h2 className="text-4xl md:text-6xl font-extrabold tracking-[-0.03em] text-white">
+            In a client&apos;s <span className="text-[#9A9A9A]">words</span>
           </h2>
         </div>
 
-        <figure className="grid md:grid-cols-12 overflow-hidden rounded-2xl border border-white/10 bg-[#0d0d0d]">
+        <Reveal>
+        <figure className="grid md:grid-cols-12 overflow-hidden rounded-[6px] border border-white/10 bg-[#0d0d0d]">
           {/* Photo */}
-          <div className="relative md:col-span-5 aspect-[4/3] md:aspect-auto md:min-h-[460px] bg-[#e9e9e9]">
+          <ScrollZoom className="relative md:col-span-5 aspect-[4/3] md:aspect-auto md:min-h-[460px] bg-[#e9e9e9]" from={1.1}>
+            <div className="relative h-full w-full aspect-[4/3] md:aspect-auto md:min-h-[460px]">
             <Image
               src={testimonial.photo}
               alt={`${testimonial.name}, ${testimonial.role}`}
@@ -26,12 +29,13 @@ export default function Testimonial() {
               sizes="(max-width: 768px) 100vw, 40vw"
               className="object-cover object-top grayscale"
             />
-          </div>
+            </div>
+          </ScrollZoom>
 
           {/* Quote */}
           <div className="md:col-span-7 p-8 md:p-12 lg:p-14 flex flex-col justify-between gap-10">
             <div>
-              <Quote className="w-10 h-10 text-white/25 mb-6" aria-hidden />
+              <div className="font-display text-7xl leading-none text-white/20 mb-2" aria-hidden>&ldquo;</div>
               <blockquote className="text-xl md:text-2xl lg:text-[1.75rem] leading-relaxed text-white font-medium">
                 {testimonial.quote}
               </blockquote>
@@ -51,6 +55,7 @@ export default function Testimonial() {
             </figcaption>
           </div>
         </figure>
+        </Reveal>
       </div>
     </section>
   );
