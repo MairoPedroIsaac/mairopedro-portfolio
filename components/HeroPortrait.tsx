@@ -70,42 +70,73 @@ function linkNearest(nodes: P[], k: number, max: number) {
   return edges;
 }
 
-// Low-poly shards where the shoulders break up
-function buildShards(r: () => number) {
-  const cols = 13;
-  const rows = 6;
-  const grid: P[] = [];
-  for (let row = 0; row < rows; row++) {
-    for (let col = 0; col < cols; col++) {
-      const u = -0.22 + (col / (cols - 1)) * 1.44 + (r() - 0.5) * 0.07;
-      const v = 0.6 + row * 0.085 + (r() - 0.5) * 0.05 + (row === rows - 1 ? r() * 0.06 : 0);
-      grid.push(makePoint(r, u, v, 0.18));
-    }
+// Where the suit ends: a jagged V along the bottom of the photo (fractions of the photo box).
+// The photo is clipped to this line, and small triangles break away below it.
+const ZIG: [number, number][] = (() => {
+  const r = rand(19);
+  const pts: [number, number][] = [];
+  const n = 17;
+  for (let i = 0; i < n; i++) {
+    const u = 0.02 + (i / (n - 1)) * 0.96;
+    const base = 0.68 + 0.25 * Math.pow(1 - Math.abs(u - 0.5) / 0.48, 1.3);
+    const tooth = i % 2 ? 0.018 + r() * 0.02 : -0.01 - r() * 0.01;
+    pts.push([u, Math.min(0.985, base + tooth)]);
   }
-  const tris: { a: number; b: number; c: number; shade: number }[] = [];
-  for (let row = 0; row < rows - 1; row++) {
-    for (let col = 0; col < cols - 1; col++) {
-      const i = row * cols + col;
-      const quad = [i, i + 1, i + cols, i + cols + 1];
-      const flip = r() < 0.5;
-      const pair = flip
-        ? [[quad[0], quad[1], quad[3]], [quad[0], quad[3], quad[2]]]
-        : [[quad[0], quad[1], quad[2]], [quad[1], quad[3], quad[2]]];
-      pair.forEach(([a, b, c]) => {
-        const cu = (grid[a].bu + grid[b].bu + grid[c].bu) / 3;
-        const cv = (grid[a].bv + grid[b].bv + grid[c].bv) / 3;
-        // keep the chest and the top of the shoulders as the real photo
-        if (Math.abs(cu - 0.5) < 0.3 && cv < 0.8) return;
-        if (cv < 0.66 && Math.abs(cu - 0.5) < 0.5) return;
-        // drop some shards at the edges so it breaks apart
-        const edge = Math.max(0, Math.abs(cu - 0.5) - 0.45) * 3 + Math.max(0, cv - 0.9) * 4;
-        if (r() < edge) return;
-        tris.push({ a, b, c, shade: 0.35 + r() * 0.65 });
-      });
-    }
+  return pts;
+})();
+
+// CSS clip-path for the photo, so the suit ends on the jagged line
+const PHOTO_CLIP = `polygon(0% 0%, 100% 0%, 100% ${(ZIG[ZIG.length - 1][1] * 100).toFixed(1)}%, ${[...ZIG]
+  .reverse()
+  .map(([u, v]) => `${(u * 100).toFixed(1)}% ${(v * 100).toFixed(1)}%`)
+  .join(", ")}, 0% ${(ZIG[0][1] * 100).toFixed(1)}%)`;
+
+type Tone = "suit" | "grey" | "accent";
+const tone = (r: () => number): Tone => {
+  const x = r();
+  return x < 0.55 ? "suit" : x < 0.82 ? "grey" : "accent";
+};
+
+function buildBottom(r: () => number) {
+  // the jagged line itself, as moving points
+  const edge = ZIG.map(([u, v]) => makePoint(r, u, v, 0.35));
+  edge.forEach((p) => (p.amp *= 0.4));
+
+  // triangles hanging from the line, like the suit breaking apart
+  const hang: { a: P; b: P; apex: P; tone: Tone }[] = [];
+  for (let i = 0; i < edge.length - 1; i++) {
+    if (r() < 0.3) continue;
+    const lo = Math.max(edge[i].bv, edge[i + 1].bv);
+    const apex = makePoint(r, (edge[i].bu + edge[i + 1].bu) / 2 + (r() - 0.5) * 0.04, lo + 0.018 + r() * 0.035, 0);
+    hang.push({ a: edge[i], b: edge[i + 1], apex, tone: tone(r) });
   }
-  const used = new Set(tris.flatMap((t) => [t.a, t.b, t.c]));
-  return { grid: grid.map((g, i) => ({ ...g, used: used.has(i) })), tris };
+
+  // small loose pieces drifting below
+  const bits: { c: P; size: number; rot: number; tone: Tone; dist: number }[] = [];
+  for (let i = 0; i < 22; i++) {
+    const k = r() * (ZIG.length - 1);
+    const j = Math.floor(k);
+    const u = ZIG[j][0] + (ZIG[j + 1][0] - ZIG[j][0]) * (k - j);
+    const vEdge = ZIG[j][1] + (ZIG[j + 1][1] - ZIG[j][1]) * (k - j);
+    const dist = 0.03 + r() * 0.13;
+    bits.push({ c: makePoint(r, u + (r() - 0.5) * 0.05, vEdge + dist, 0), size: 0.012 + r() * 0.026 * (1 - dist * 3), rot: r() * Math.PI * 2, tone: tone(r), dist });
+  }
+
+  // a thin network over the shoulders and chest (never the face)
+  const net: P[] = [];
+  let tries = 0;
+  while (net.length < 22 && tries++ < 3000) {
+    const u = 0.05 + r() * 0.9;
+    const k = Math.min(ZIG.length - 2, Math.floor((u - 0.02) / (0.96 / (ZIG.length - 1))));
+    const bottom = Math.min(ZIG[k][1], ZIG[k + 1][1]) - 0.02;
+    const top = Math.abs(u - 0.5) < 0.2 ? 0.66 : 0.62;
+    const v = top + r() * (bottom - top);
+    if (v >= bottom) continue;
+    net.push(makePoint(r, u, v, 0.55));
+  }
+  const netNodes = [...net, ...edge];
+  const netEdges = linkNearest(netNodes, 2, 0.2);
+  return { edge, hang, bits, netNodes, netEdges };
 }
 
 // Orbit rings around the head
@@ -133,8 +164,8 @@ export default function HeroPortrait() {
     const r = rand(7);
     const side = buildSideNodes(r);
     const sideEdges = linkNearest(side, 2, 0.32);
-    const { grid, tris } = buildShards(r);
-    const all: (P & { used?: boolean })[] = [...side, ...grid];
+    const { edge, hang, bits, netNodes, netEdges } = buildBottom(r);
+    const all: P[] = [...side, ...netNodes, ...hang.map((h) => h.apex), ...bits.map((b) => b.c)];
 
     let colours = { line: "rgba(255,255,255,0.3)", node: "#fff", accent: "#F5B800", shard: "60,60,60" };
     const readColours = () => {
@@ -191,9 +222,10 @@ export default function HeroPortrait() {
     const draw = (now: number) => {
       frame = requestAnimationFrame(draw);
       if (!visible && !reduce) return;
-      const t = (now - start) / 1000;
+      const t = Math.max(0, (now - start) / 1000);
+      const t0 = t;
       const intro = reduce ? 1 : Math.min(1, t / 1.6);
-      const ease = 1 - (1 - intro) ** 3;
+      const ease = Math.max(0, 1 - (1 - intro) ** 3);
 
       all.forEach((n) => {
         const bx = X(n.bu);
@@ -222,37 +254,59 @@ export default function HeroPortrait() {
         c.lineCap = "round";
       });
 
-      // FRONT CANVAS: shoulder shards, the only part that sits over the photo
-      tris.forEach(({ a, b, c, shade }) => {
-        const A = grid[a], B = grid[b], C = grid[c];
-        const cy = (A.bv + B.bv + C.bv) / 3;
-        const fade = Math.max(0, Math.min(1, (1.08 - cy) / 0.3));
-        fctx.globalAlpha = intro * fade;
-        fctx.fillStyle = `rgba(${colours.shard},${shade})`;
+      // FRONT CANVAS: only the shoulders. The suit stays, a thin network runs over it,
+      // and the bottom edge breaks into small triangles.
+      const fill = (t: Tone, alpha: number) => {
+        fctx.globalAlpha = alpha * intro;
+        fctx.fillStyle =
+          t === "accent" ? colours.accent : t === "suit" ? `rgb(${colours.shard})` : `rgba(${colours.shard},0.45)`;
+      };
+      hang.forEach(({ a, b, apex, tone: t }) => {
+        fill(t, t === "grey" ? 1 : 0.92);
         fctx.beginPath();
-        fctx.moveTo(A.x, A.y);
-        fctx.lineTo(B.x, B.y);
-        fctx.lineTo(C.x, C.y);
+        fctx.moveTo(a.x, a.y);
+        fctx.lineTo(b.x, b.y);
+        fctx.lineTo(apex.x, apex.y);
         fctx.closePath();
         fctx.fill();
-        fctx.strokeStyle = colours.line;
-        fctx.lineWidth = 0.8;
-        fctx.stroke();
       });
-      grid.forEach((n) => {
-        if (!n.used) return;
-        fctx.globalAlpha = intro * Math.max(0, Math.min(1, (1.08 - n.bv) / 0.3));
-        fctx.fillStyle = n.hot ? colours.accent : colours.node;
+      bits.forEach(({ c, size, rot, tone: t, dist }) => {
+        const s = size * box.w;
+        const spin = rot + (reduce ? 0 : Math.sin(t0 * 0.4 + rot) * 0.25);
+        fill(t, Math.max(0, 1 - dist / 0.17) * (t === "grey" ? 1 : 0.9));
         fctx.beginPath();
-        fctx.arc(n.x, n.y, n.hot ? n.size + 0.8 : n.size * 0.8, 0, Math.PI * 2);
+        for (let k = 0; k < 3; k++) {
+          const ang = spin + (k * Math.PI * 2) / 3;
+          const px = c.x + Math.cos(ang) * s, py = c.y + Math.sin(ang) * s * 0.8;
+          if (k === 0) fctx.moveTo(px, py);
+          else fctx.lineTo(px, py);
+        }
+        fctx.closePath();
         fctx.fill();
       });
+      fctx.strokeStyle = colours.accent;
+      fctx.lineWidth = 0.9;
+      netEdges.forEach(([a, b]) => {
+        fctx.globalAlpha = 0.7 * intro;
+        fctx.beginPath();
+        fctx.moveTo(netNodes[a].x, netNodes[a].y);
+        fctx.lineTo(netNodes[b].x, netNodes[b].y);
+        fctx.stroke();
+      });
+      netNodes.forEach((n) => {
+        fctx.globalAlpha = intro;
+        fctx.fillStyle = n.hot ? colours.accent : colours.node;
+        fctx.beginPath();
+        fctx.arc(n.x, n.y, n.hot ? n.size * 0.9 + 0.6 : n.size * 0.6, 0, Math.PI * 2);
+        fctx.fill();
+      });
+      void edge;
 
       // BACK CANVAS (behind the photo): orbits, side network and nodes, so nothing covers the face
       const orbit = (o: (typeof ORBITS)[number], i: number, front: boolean) => {
         const tilt = o.tilt + (reduce ? 0 : Math.sin(t * 0.25 + i) * 0.05);
         const cx = X(HEAD.u), cy = Y(0.35 + 0.015 * i);
-        const rx = o.ru * box.w * ease, ry = o.rv * box.h * ease;
+        const rx = Math.max(0, o.ru * box.w * ease), ry = Math.max(0, o.rv * box.h * ease);
         ctx.save();
         ctx.translate(cx, cy);
         ctx.rotate(tilt);
@@ -329,7 +383,7 @@ export default function HeroPortrait() {
         className="absolute -left-[45%] -right-[25%] -top-[10%] -bottom-[8%] h-[118%] w-[170%] pointer-events-none"
       />
       {/* Photo box: 90% of the width, 2:3, sitting on the bottom (matches the canvas maths) */}
-      <div className="absolute bottom-0 left-[5%] w-[90%] aspect-[2/3] portrait-in">
+      <div className="absolute bottom-0 left-[5%] w-[90%] aspect-[2/3] portrait-in" style={{ clipPath: PHOTO_CLIP }}>
         <Image
           src="/images/profile-cutout.webp"
           alt="Mairo Pedro Isaac"
@@ -338,10 +392,6 @@ export default function HeroPortrait() {
           sizes="(max-width: 768px) 90vw, 440px"
           quality={90}
           className="object-contain object-bottom"
-          style={{
-            WebkitMaskImage: "radial-gradient(ellipse 70% 78% at 50% 36%, #000 70%, transparent 100%)",
-            maskImage: "radial-gradient(ellipse 70% 78% at 50% 36%, #000 70%, transparent 100%)",
-          }}
         />
       </div>
       {/* Only the shoulder shards are drawn in front of the photo */}

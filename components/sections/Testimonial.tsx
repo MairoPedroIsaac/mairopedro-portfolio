@@ -16,7 +16,7 @@ export default function Testimonial() {
             </p>
 
             {/* The words sit between an opening and a closing quotation mark */}
-            <div className="relative mt-8 md:mt-10 px-10 sm:px-14 md:px-20">
+            <div className="relative mt-8 md:mt-10 pl-10 sm:pl-14 md:pl-20">
               <span
                 aria-hidden
                 className="absolute left-0 -top-3 md:-top-5 font-display text-[4.5rem] sm:text-[6rem] md:text-[7.5rem] leading-none text-white/25 select-none"
@@ -25,13 +25,14 @@ export default function Testimonial() {
               </span>
               <blockquote className="text-[1.3rem] sm:text-[1.7rem] lg:text-[2rem] font-semibold leading-[1.38] tracking-[-0.015em] text-white text-balance">
                 {testimonial.quote}
+                {/* closing mark sits right after the last word */}
+                <span
+                  aria-hidden
+                  className="font-display inline-block align-top ml-2 h-[0.6em] text-[2.6em] leading-[0.85] text-white/25 select-none"
+                >
+                  &rdquo;
+                </span>
               </blockquote>
-              <span
-                aria-hidden
-                className="absolute right-0 -bottom-12 sm:-bottom-16 md:-bottom-20 font-display text-[4.5rem] sm:text-[6rem] md:text-[7.5rem] leading-none text-white/25 select-none"
-              >
-                &rdquo;
-              </span>
             </div>
 
             <figcaption className="mt-14 md:mt-16 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 pt-7 border-t border-white/15">
