@@ -6,6 +6,7 @@ import TechBadge from "@/components/ui/TechBadge";
 import LineReveal from "@/components/motion/LineReveal";
 import Reveal from "@/components/motion/Reveal";
 import CountUp from "@/components/motion/CountUp";
+import LightUpOnView from "@/components/motion/LightUpOnView";
 
 const facts = [
   { value: 4, suffix: "+", label: "Years of experience" },
@@ -53,11 +54,11 @@ export default function About() {
           {/* Tools */}
           <Reveal className="md:col-span-5 space-y-6" delay={150}>
             <h3 className="text-2xl font-bold text-black">What I work with</h3>
-            <div className="flex flex-wrap gap-2.5">
+            <LightUpOnView className="flex flex-wrap gap-2.5">
               {updatedSkills.map((skill, index) => (
-                <TechBadge key={index} tech={skill} mode="hover" className="!bg-white !border-neutral-200 hover:!border-black !text-neutral-700 !px-4 !py-2" />
+                <TechBadge key={index} tech={skill} mode="hover" className="!bg-white !border-neutral-200 !text-neutral-700 !px-4 !py-2" />
               ))}
-            </div>
+            </LightUpOnView>
           </Reveal>
         </div>
 

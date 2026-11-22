@@ -204,3 +204,40 @@
 .theme-fade, .theme-fade * {
   transition: background-color 0.45s ease, color 0.45s ease, border-color 0.45s ease !important;
 }
+
+/* Tech chips: grey at rest, real brand colour with a small lift on hover.
+   On touch screens they light up one by one as they scroll into view. */
+.tech-chip {
+  transition: transform 0.4s cubic-bezier(0.2, 0.75, 0.15, 1), border-color 0.4s ease,
+    background-color 0.4s ease, box-shadow 0.4s ease, color 0.4s ease;
+}
+.tech-chip svg {
+  color: var(--color-grey-2);
+  transition: color 0.4s ease, transform 0.5s cubic-bezier(0.2, 0.75, 0.15, 1);
+}
+.tech-chip.is-lit svg { color: var(--brand); }
+.tech-chip.is-lit { border-color: color-mix(in srgb, var(--brand) 45%, transparent) !important; }
+@media (hover: hover) {
+  .tech-chip:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--brand) 60%, transparent) !important;
+    background-color: color-mix(in srgb, var(--brand) 9%, transparent) !important;
+    box-shadow: 0 14px 28px -16px var(--brand);
+  }
+  .tech-chip:hover svg { color: var(--brand); transform: scale(1.18) rotate(-8deg); }
+}
+
+/* Brand icons (footer, small icons): grey at rest, colour and lift on hover.
+   Touch screens have no hover, so they simply stay in colour there. */
+@media (hover: hover) {
+  .brand-icon {
+    filter: grayscale(1);
+    opacity: 0.7;
+    transition: filter 0.4s ease, opacity 0.4s ease, transform 0.45s cubic-bezier(0.2, 0.75, 0.15, 1);
+  }
+  .brand-icon:hover, .group:hover .brand-icon {
+    filter: grayscale(0);
+    opacity: 1;
+    transform: translateY(-3px) scale(1.12);
+  }
+}

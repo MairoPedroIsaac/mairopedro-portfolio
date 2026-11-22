@@ -73,21 +73,25 @@ export default function TechBadge({
   const Icon = cfg?.icon;
   const brand = cfg && !cfg.isDarkBrand ? cfg.color : undefined;
 
-  const iconStyle =
-    brand && mode !== "none" ? ({ "--brand": brand } as React.CSSProperties) : undefined;
+  // In hover mode, dark brands (Next.js, Vercel...) light up in the text colour.
+  const brandVar = brand ?? (cfg ? "currentColor" : undefined);
+  const chipStyle = brandVar && mode !== "none" ? ({ "--brand": brandVar } as React.CSSProperties) : undefined;
   const iconClass =
-    !brand || mode === "none"
+    !brand && mode === "always"
+      ? ""
+      : mode === "none"
       ? "opacity-80"
       : mode === "always"
       ? "text-[var(--brand)]"
-      : "transition-colors duration-300 group-hover/tech:text-[var(--brand)]";
+      : "";
 
   return (
     <span
-      className={`group/tech inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 text-neutral-300 text-xs rounded-md font-medium cursor-default select-none ${className}`}
+      style={chipStyle}
+      className={`${mode === "hover" ? "tech-chip " : ""}group/tech inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 text-neutral-300 text-xs rounded-md font-medium cursor-default select-none ${className}`}
     >
       {Icon ? (
-        <Icon className={`w-4 h-4 ${iconClass}`} style={iconStyle} aria-hidden />
+        <Icon className={`w-4 h-4 ${iconClass}`} aria-hidden />
       ) : (
         <span className="w-1.5 h-1.5 rounded-full bg-current opacity-60 flex-shrink-0 mr-0.5"></span>
       )}

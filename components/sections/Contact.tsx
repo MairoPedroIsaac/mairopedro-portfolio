@@ -38,14 +38,18 @@ export default function Contact() {
                 href={link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center gap-5 py-5"
+                className="group relative flex items-center gap-5 py-5"
               >
-                <Logo className="w-8 h-8 shrink-0 transition-transform duration-300 group-hover:scale-110" />
-                <div className="min-w-0 flex-1">
+                <Logo className="w-8 h-8 shrink-0 transition-transform duration-500 ease-[cubic-bezier(0.2,0.75,0.15,1)] group-hover:scale-[1.18] group-hover:-rotate-6" />
+                <div className="min-w-0 flex-1 transition-transform duration-500 ease-[cubic-bezier(0.2,0.75,0.15,1)] group-hover:translate-x-2">
                   <div className="text-xl md:text-2xl font-semibold text-white">{title}</div>
                   <div className="text-sm text-neutral-500 mt-0.5 break-all">{detail}</div>
                 </div>
-                <ArrowUpRight className="w-5 h-5 text-grey-2 transition-all duration-300 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                <span className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-white/15 transition-colors duration-300 group-hover:bg-white group-hover:border-white">
+                  <ArrowUpRight className="w-4 h-4 text-grey-2 transition-all duration-500 group-hover:text-black group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:opacity-0" />
+                  <ArrowUpRight className="absolute w-4 h-4 text-black -translate-x-3 translate-y-3 opacity-0 transition-all duration-500 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100" />
+                </span>
+                <span aria-hidden className="pointer-events-none absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 bg-white/40 transition-transform duration-700 ease-[cubic-bezier(0.2,0.75,0.15,1)] group-hover:scale-x-100" />
               </a>
             </Reveal>
           ))}

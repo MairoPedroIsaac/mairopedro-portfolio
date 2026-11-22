@@ -43,9 +43,9 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="flex items-center justify-center transition-transform duration-300 hover:scale-110"
+                  className="group flex items-center justify-center"
                 >
-                  <Icon className="w-6 h-6" />
+                  <Icon className="brand-icon w-6 h-6" />
                 </a>
               ))}
             </div>
@@ -74,7 +74,7 @@ export default function Footer() {
             <h4 className="text-white text-xs font-semibold uppercase tracking-[0.25em]">Contact</h4>
             <div className="flex flex-col gap-4">
               <div className="flex items-start gap-3">
-                <GmailLogo className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                <GmailLogo className="brand-icon w-4 h-4 mt-0.5 flex-shrink-0" />
                 <div>
                   <a href={`mailto:${contact.email}`} className="text-neutral-200 text-sm hover:text-white transition-colors no-underline">
                     {contact.email}
@@ -83,7 +83,7 @@ export default function Footer() {
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <FacebookLogo className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                <FacebookLogo className="brand-icon w-4 h-4 mt-0.5 flex-shrink-0" />
                 <div>
                   <a href={contact.facebook} target="_blank" rel="noopener noreferrer" className="text-neutral-200 text-sm hover:text-white transition-colors no-underline">
                     {contact.facebookName}
