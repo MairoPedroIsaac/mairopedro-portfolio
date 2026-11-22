@@ -5,26 +5,22 @@ import { useEffect, useRef } from "react";
 
 /**
  * Hero portrait: Mairo's real photo cut out from its background, with a live
- * network drawn in code around it. Lines flow out from the head, the shoulders
- * dissolve into a geometric mesh, small pulses travel along the lines, and the
- * nodes move away gently from the mouse.
+ * network drawn in code around it.
+ *  - Orbit lines circle the head, with small dots travelling along them.
+ *  - Connected nodes spread out to both sides of the head.
+ *  - The shoulders break up into low-poly shards at the bottom.
+ * Everything drifts slowly and moves away from the mouse.
  *
- * Colours come from CSS variables (--hero-line, --hero-node, --hero-accent),
- * so light and dark mode work, and the accent can be changed in one place.
+ * Colours come from CSS variables in globals.css (--hero-line, --hero-node,
+ * --hero-accent, --hero-shard, --hero-glow), so light and dark mode both work
+ * and the accent colour can be changed in one place.
  */
 
-// Outline of the head and shoulders, as fractions of the photo (x, y).
-const OUTLINE: [number, number][] = [
-  [0.03, 0.574], [0.174, 0.545], [0.3, 0.505], [0.307, 0.44], [0.205, 0.372],
-  [0.214, 0.314], [0.194, 0.285], [0.24, 0.24], [0.27, 0.198], [0.307, 0.165],
-  [0.366, 0.138], [0.434, 0.122], [0.505, 0.11], [0.584, 0.107], [0.653, 0.14],
-  [0.72, 0.169], [0.755, 0.227], [0.77, 0.285], [0.786, 0.343], [0.773, 0.4],
-  [0.748, 0.445], [0.725, 0.51], [0.746, 0.545], [0.821, 0.574], [0.92, 0.61],
-];
-const HEAD = { x: 0.49, y: 0.33 };
-const FACE = { x: 0.49, y: 0.36, rx: 0.22, ry: 0.2 };
+// All positions are fractions of the photo box (u across, v down).
+const HEAD = { u: 0.5, v: 0.3 };
+const FACE = { u: 0.5, v: 0.3, ru: 0.36, rv: 0.33 }; // kept clear of nodes and lines
 
-type Node = { bx: number; by: number; x: number; y: number; ox: number; oy: number; phase: number; amp: number; hot: boolean; mesh: boolean };
+type P = { bu: number; bv: number; x: number; y: number; ox: number; oy: number; phase: number; amp: number; hot: boolean; size: number };
 
 function rand(seed: number) {
   let s = seed;
@@ -34,73 +30,90 @@ function rand(seed: number) {
   };
 }
 
-function buildNodes(): Node[] {
-  const r = rand(42);
-  const nodes: Node[] = [];
-  const add = (u: number, v: number, mesh = false) =>
-    nodes.push({ bx: u, by: v, x: 0, y: 0, ox: 0, oy: 0, phase: r() * Math.PI * 2, amp: 0.004 + r() * 0.006, hot: r() < 0.12, mesh });
+const inFace = (u: number, v: number) => ((u - FACE.u) / FACE.ru) ** 2 + ((v - FACE.v) / FACE.rv) ** 2 < 1;
 
-  // 1. Just outside the outline of the head and shoulders
-  OUTLINE.forEach(([u, v]) => add(HEAD.x + (u - HEAD.x) * 1.07, HEAD.y + (v - HEAD.y) * 1.05));
-  // 2. A halo of nodes around the head, mostly above and to the sides
-  for (let i = 0; i < 30; i++) {
-    const a = Math.PI * (0.95 + r() * 1.15); // upper arc
-    const k = 1 + r() * 0.55;
-    add(HEAD.x + Math.cos(a) * 0.36 * k, HEAD.y + Math.sin(a) * 0.27 * k);
-  }
-  // 3. A mesh where the shoulders dissolve
-  for (let row = 0; row < 5; row++) {
-    for (let col = 0; col < 8; col++) {
-      const u = -0.06 + col * 0.16 + (r() - 0.5) * 0.08 + (row % 2) * 0.08;
-      const v = 0.6 + row * 0.095 + (r() - 0.5) * 0.04;
-      add(u, v, true);
-    }
-  }
-  // Keep the face clear
-  return nodes.filter((n) => ((n.bx - FACE.x) / FACE.rx) ** 2 + ((n.by - FACE.y) / FACE.ry) ** 2 > 1);
+function makePoint(r: () => number, u: number, v: number, hotChance: number): P {
+  return { bu: u, bv: v, x: 0, y: 0, ox: 0, oy: 0, phase: r() * Math.PI * 2, amp: 0.004 + r() * 0.008, hot: r() < hotChance, size: 1.4 + r() * 2.4 };
 }
 
-function buildEdges(nodes: Node[]) {
+// Nodes that spread out from the sides of the head
+function buildSideNodes(r: () => number) {
+  const nodes: P[] = [];
+  let tries = 0;
+  while (nodes.length < 34 && tries++ < 2000) {
+    const left = nodes.length % 2 === 0;
+    const u = left ? -0.42 + r() * 0.62 : 0.8 + r() * 0.6;
+    const v = 0.02 + r() * 0.62;
+    if (inFace(u, v)) continue;
+    nodes.push(makePoint(r, u, v, 0.4));
+  }
+  return nodes;
+}
+
+function linkNearest(nodes: P[], k: number, max: number) {
   const edges: [number, number][] = [];
   const seen = new Set<string>();
   nodes.forEach((a, i) => {
-    const near = nodes
-      .map((b, j) => ({ j, d: Math.hypot(a.bx - b.bx, (a.by - b.by) * 1.4) }))
-      .filter((o) => o.j !== i)
+    nodes
+      .map((b, j) => ({ j, d: Math.hypot(a.bu - b.bu, a.bv - b.bv) }))
+      .filter((o) => o.j !== i && o.d < max)
       .sort((p, q) => p.d - q.d)
-      .slice(0, a.mesh ? 3 : 2);
-    near.forEach(({ j, d }) => {
-      if (d > (a.mesh ? 0.26 : 0.2)) return;
-      const key = i < j ? `${i}-${j}` : `${j}-${i}`;
-      if (seen.has(key)) return;
-      const mx = (a.bx + nodes[j].bx) / 2;
-      const my = (a.by + nodes[j].by) / 2;
-      if (((mx - FACE.x) / FACE.rx) ** 2 + ((my - FACE.y) / FACE.ry) ** 2 < 1) return;
-      seen.add(key);
-      edges.push([i, j]);
-    });
+      .slice(0, k)
+      .forEach(({ j }) => {
+        const key = i < j ? `${i}-${j}` : `${j}-${i}`;
+        if (seen.has(key)) return;
+        if (inFace((a.bu + nodes[j].bu) / 2, (a.bv + nodes[j].bv) / 2)) return;
+        seen.add(key);
+        edges.push([i, j]);
+      });
   });
   return edges;
 }
 
-// Triangles in the mesh, filled very faintly for the low-poly look
-function buildTriangles(nodes: Node[], edges: [number, number][]) {
-  const adj = new Map<number, Set<number>>();
-  edges.forEach(([a, b]) => {
-    if (!adj.has(a)) adj.set(a, new Set());
-    if (!adj.has(b)) adj.set(b, new Set());
-    adj.get(a)!.add(b);
-    adj.get(b)!.add(a);
-  });
-  const tris: [number, number, number][] = [];
-  edges.forEach(([a, b]) => {
-    if (!nodes[a].mesh || !nodes[b].mesh) return;
-    adj.get(a)!.forEach((c) => {
-      if (c > b && adj.get(b)!.has(c) && nodes[c].mesh) tris.push([a, b, c]);
-    });
-  });
-  return tris;
+// Low-poly shards where the shoulders break up
+function buildShards(r: () => number) {
+  const cols = 13;
+  const rows = 6;
+  const grid: P[] = [];
+  for (let row = 0; row < rows; row++) {
+    for (let col = 0; col < cols; col++) {
+      const u = -0.22 + (col / (cols - 1)) * 1.44 + (r() - 0.5) * 0.07;
+      const v = 0.6 + row * 0.085 + (r() - 0.5) * 0.05 + (row === rows - 1 ? r() * 0.06 : 0);
+      grid.push(makePoint(r, u, v, 0.18));
+    }
+  }
+  const tris: { a: number; b: number; c: number; shade: number }[] = [];
+  for (let row = 0; row < rows - 1; row++) {
+    for (let col = 0; col < cols - 1; col++) {
+      const i = row * cols + col;
+      const quad = [i, i + 1, i + cols, i + cols + 1];
+      const flip = r() < 0.5;
+      const pair = flip
+        ? [[quad[0], quad[1], quad[3]], [quad[0], quad[3], quad[2]]]
+        : [[quad[0], quad[1], quad[2]], [quad[1], quad[3], quad[2]]];
+      pair.forEach(([a, b, c]) => {
+        const cu = (grid[a].bu + grid[b].bu + grid[c].bu) / 3;
+        const cv = (grid[a].bv + grid[b].bv + grid[c].bv) / 3;
+        // keep the chest and the top of the shoulders as the real photo
+        if (Math.abs(cu - 0.5) < 0.3 && cv < 0.8) return;
+        if (cv < 0.66 && Math.abs(cu - 0.5) < 0.5) return;
+        // drop some shards at the edges so it breaks apart
+        const edge = Math.max(0, Math.abs(cu - 0.5) - 0.45) * 3 + Math.max(0, cv - 0.9) * 4;
+        if (r() < edge) return;
+        tris.push({ a, b, c, shade: 0.35 + r() * 0.65 });
+      });
+    }
+  }
+  const used = new Set(tris.flatMap((t) => [t.a, t.b, t.c]));
+  return { grid: grid.map((g, i) => ({ ...g, used: used.has(i) })), tris };
 }
+
+// Orbit rings around the head
+const ORBITS = [
+  { ru: 0.6, rv: 0.19, tilt: -0.12, width: 1.6, speed: 0.22, dots: 3 },
+  { ru: 0.7, rv: 0.22, tilt: 0.1, width: 1.1, speed: -0.16, dots: 2 },
+  { ru: 0.5, rv: 0.17, tilt: -0.04, width: 1.3, speed: 0.3, dots: 2 },
+];
 
 export default function HeroPortrait() {
   const wrap = useRef<HTMLDivElement>(null);
@@ -114,151 +127,170 @@ export default function HeroPortrait() {
     if (!ctx) return;
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const nodes = buildNodes();
-    const edges = buildEdges(nodes);
-    const tris = buildTriangles(nodes, edges);
-    const pulses = Array.from({ length: 9 }, (_, i) => ({ e: (i * 7) % edges.length, t: i / 9, speed: 0.004 + (i % 3) * 0.002 }));
+    const r = rand(7);
+    const side = buildSideNodes(r);
+    const sideEdges = linkNearest(side, 2, 0.32);
+    const { grid, tris } = buildShards(r);
+    const all: (P & { used?: boolean })[] = [...side, ...grid];
 
-    let colours = { line: "rgba(255,255,255,0.3)", node: "#fff", accent: "#CFCFCF", fill: "rgba(255,255,255,0.03)" };
+    let colours = { line: "rgba(255,255,255,0.3)", node: "#fff", accent: "#F5B800", shard: "60,60,60" };
     const readColours = () => {
       const s = getComputedStyle(el);
       colours = {
         line: s.getPropertyValue("--hero-line").trim() || colours.line,
         node: s.getPropertyValue("--hero-node").trim() || colours.node,
         accent: s.getPropertyValue("--hero-accent").trim() || colours.accent,
-        fill: s.getPropertyValue("--hero-fill").trim() || colours.fill,
+        shard: s.getPropertyValue("--hero-shard").trim() || colours.shard,
       };
     };
     readColours();
     const themeWatch = new MutationObserver(readColours);
     themeWatch.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
 
+    // The canvas is larger than the photo so the network can spread out.
     let w = 0, h = 0, dpr = 1;
-    // The photo sits centred, in the bottom 90% of the box
-    const img = { x: 0, y: 0, w: 0, h: 0 };
+    const box = { x: 0, y: 0, w: 0, h: 0 };
     const resize = () => {
-      const r = el.getBoundingClientRect();
+      const c = cv.getBoundingClientRect();
+      const p = el.getBoundingClientRect();
       dpr = Math.min(window.devicePixelRatio || 1, 2);
-      w = r.width;
-      h = r.height;
+      w = c.width;
+      h = c.height;
       cv.width = w * dpr;
       cv.height = h * dpr;
-      cv.style.width = `${w}px`;
-      cv.style.height = `${h}px`;
-      img.h = h * 0.9;
-      img.w = img.h * (2 / 3);
-      img.x = (w - img.w) / 2;
-      img.y = h * 0.1;
+      // the photo box inside the wrapper (matches the markup below)
+      box.w = p.width * 0.9;
+      box.h = box.w * 1.5;
+      box.x = p.left - c.left + (p.width - box.w) / 2;
+      box.y = p.top - c.top + p.height - box.h;
     };
     resize();
     const ro = new ResizeObserver(resize);
     ro.observe(el);
 
-    const mouse = { x: -9999, y: -9999, active: false };
+    const mouse = { x: -9999, y: -9999 };
     const onMove = (e: PointerEvent) => {
-      const r = el.getBoundingClientRect();
-      mouse.x = e.clientX - r.left;
-      mouse.y = e.clientY - r.top;
-      mouse.active = true;
+      const c = cv.getBoundingClientRect();
+      mouse.x = e.clientX - c.left;
+      mouse.y = e.clientY - c.top;
     };
-    const onLeave = () => (mouse.active = false);
-    el.addEventListener("pointermove", onMove);
-    el.addEventListener("pointerleave", onLeave);
+    window.addEventListener("pointermove", onMove, { passive: true });
 
     let visible = true;
     const io = new IntersectionObserver(([entry]) => (visible = entry.isIntersecting));
-    io.observe(el);
+    io.observe(cv);
 
     const start = performance.now();
     let frame = 0;
+    const X = (u: number) => box.x + u * box.w;
+    const Y = (v: number) => box.y + v * box.h;
 
     const draw = (now: number) => {
       frame = requestAnimationFrame(draw);
       if (!visible && !reduce) return;
       const t = (now - start) / 1000;
-      const intro = reduce ? 1 : Math.min(1, t / 1.8);
+      const intro = reduce ? 1 : Math.min(1, t / 1.6);
+      const ease = 1 - (1 - intro) ** 3;
 
-      // Positions: gentle drift, plus a soft push away from the mouse
-      nodes.forEach((n) => {
-        const bx = img.x + n.bx * img.w;
-        const by = img.y + n.by * img.h;
-        const dx = reduce ? 0 : Math.sin(t * 0.6 + n.phase) * n.amp * img.w;
-        const dy = reduce ? 0 : Math.cos(t * 0.5 + n.phase) * n.amp * img.w;
+      all.forEach((n) => {
+        const bx = X(n.bu);
+        const by = Y(n.bv);
+        const dx = reduce ? 0 : Math.sin(t * 0.6 + n.phase) * n.amp * box.w;
+        const dy = reduce ? 0 : Math.cos(t * 0.5 + n.phase) * n.amp * box.w;
         let tx = 0, ty = 0;
-        if (mouse.active) {
-          const mx = bx - mouse.x, my = by - mouse.y;
-          const d = Math.hypot(mx, my);
-          const R = 110;
-          if (d < R && d > 0.1) {
-            const f = (1 - d / R) ** 2 * 26;
-            tx = (mx / d) * f;
-            ty = (my / d) * f;
-          }
+        const mx = bx - mouse.x, my = by - mouse.y;
+        const d = Math.hypot(mx, my);
+        const R = 120;
+        if (d < R && d > 0.1) {
+          const f = (1 - d / R) ** 2 * 30;
+          tx = (mx / d) * f;
+          ty = (my / d) * f;
         }
         n.ox += (tx - n.ox) * 0.08;
         n.oy += (ty - n.oy) * 0.08;
-        n.x = bx + dx + n.ox;
-        n.y = by + dy + n.oy;
+        // during the intro, points fly in from the head
+        n.x = X(HEAD.u) + (bx + dx + n.ox - X(HEAD.u)) * ease;
+        n.y = Y(HEAD.v) + (by + dy + n.oy - Y(HEAD.v)) * ease;
       });
 
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, w, h);
+      ctx.lineCap = "round";
 
-      // Faint low-poly fill
-      ctx.fillStyle = colours.fill;
-      tris.forEach(([a, b, c], i) => {
-        if (i % 2) return;
-        ctx.globalAlpha = intro;
+      // 1. Shards
+      tris.forEach(({ a, b, c, shade }) => {
+        const A = grid[a], B = grid[b], C = grid[c];
+        const cy = (A.bv + B.bv + C.bv) / 3;
+        const fade = Math.max(0, Math.min(1, (1.08 - cy) / 0.3));
+        ctx.globalAlpha = intro * fade;
+        ctx.fillStyle = `rgba(${colours.shard},${shade})`;
         ctx.beginPath();
-        ctx.moveTo(nodes[a].x, nodes[a].y);
-        ctx.lineTo(nodes[b].x, nodes[b].y);
-        ctx.lineTo(nodes[c].x, nodes[c].y);
+        ctx.moveTo(A.x, A.y);
+        ctx.lineTo(B.x, B.y);
+        ctx.lineTo(C.x, C.y);
         ctx.closePath();
         ctx.fill();
-      });
-
-      // Lines, drawn in one by one at the start
-      ctx.strokeStyle = colours.line;
-      ctx.lineWidth = 1;
-      edges.forEach(([a, b], i) => {
-        const p = Math.min(1, Math.max(0, intro * 1.6 - (i / edges.length) * 0.6));
-        if (p <= 0) return;
-        ctx.globalAlpha = p;
-        ctx.beginPath();
-        ctx.moveTo(nodes[a].x, nodes[a].y);
-        ctx.lineTo(nodes[a].x + (nodes[b].x - nodes[a].x) * p, nodes[a].y + (nodes[b].y - nodes[a].y) * p);
+        ctx.strokeStyle = colours.line;
+        ctx.lineWidth = 0.8;
         ctx.stroke();
       });
 
-      // Nodes
-      nodes.forEach((n, i) => {
-        ctx.globalAlpha = Math.min(1, intro * 1.5 - (i / nodes.length) * 0.4);
+      // 2. Back half of the orbits (behind the head, fainter)
+      const orbit = (o: (typeof ORBITS)[number], i: number, front: boolean) => {
+        const tilt = o.tilt + (reduce ? 0 : Math.sin(t * 0.25 + i) * 0.05);
+        const cx = X(HEAD.u), cy = Y(0.35 + 0.015 * i);
+        const rx = o.ru * box.w * ease, ry = o.rv * box.h * ease;
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate(tilt);
+        ctx.strokeStyle = colours.accent;
+        ctx.lineWidth = o.width;
+        ctx.globalAlpha = (front ? 0.85 : 0.25) * intro;
+        ctx.beginPath();
+        // front = lower half of the ellipse (in front of the face), back = upper half
+        if (front) ctx.ellipse(0, 0, rx, ry, 0, 0.08 * Math.PI, 0.92 * Math.PI);
+        else ctx.ellipse(0, 0, rx, ry, 0, 1.05 * Math.PI, 1.95 * Math.PI);
+        ctx.stroke();
+        // dots travelling along the ring
+        for (let k = 0; k < o.dots; k++) {
+          const a = ((t * o.speed + k / o.dots) % 1) * Math.PI * 2;
+          const isFront = Math.sin(a) > 0;
+          if (isFront !== front) continue;
+          ctx.globalAlpha = (front ? 1 : 0.45) * intro;
+          ctx.fillStyle = colours.accent;
+          ctx.beginPath();
+          ctx.arc(Math.cos(a) * rx, Math.sin(a) * ry, front ? 4 : 2.6, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.restore();
+      };
+      ORBITS.forEach((o, i) => orbit(o, i, false));
+
+      // 3. Network lines at the sides
+      ctx.strokeStyle = colours.line;
+      ctx.lineWidth = 1;
+      sideEdges.forEach(([a, b]) => {
+        ctx.globalAlpha = intro;
+        ctx.beginPath();
+        ctx.moveTo(side[a].x, side[a].y);
+        ctx.lineTo(side[b].x, side[b].y);
+        ctx.stroke();
+      });
+
+      // 4. Nodes
+      all.forEach((n) => {
+        if (n.used === false) return;
+        const fade = n.bv > 0.6 ? Math.max(0, Math.min(1, (1.08 - n.bv) / 0.3)) : 1;
+        ctx.globalAlpha = intro * fade;
         ctx.fillStyle = n.hot ? colours.accent : colours.node;
         ctx.beginPath();
-        ctx.arc(n.x, n.y, n.hot ? 3.2 : n.mesh ? 1.6 : 2.1, 0, Math.PI * 2);
+        ctx.arc(n.x, n.y, n.hot ? n.size + 0.8 : n.size * 0.8, 0, Math.PI * 2);
         ctx.fill();
       });
 
-      // Pulses travelling along the lines, like data moving
-      if (!reduce && intro >= 1) {
-        ctx.fillStyle = colours.accent;
-        pulses.forEach((p) => {
-          p.t += p.speed;
-          if (p.t >= 1) {
-            const [, end] = edges[p.e];
-            const next = edges.findIndex(([a], k) => a === end && k !== p.e);
-            p.e = next >= 0 ? next : Math.floor(Math.random() * edges.length);
-            p.t = 0;
-          }
-          const [a, b] = edges[p.e];
-          const x = nodes[a].x + (nodes[b].x - nodes[a].x) * p.t;
-          const y = nodes[a].y + (nodes[b].y - nodes[a].y) * p.t;
-          ctx.globalAlpha = Math.sin(p.t * Math.PI);
-          ctx.beginPath();
-          ctx.arc(x, y, 2.4, 0, Math.PI * 2);
-          ctx.fill();
-        });
-      }
+      // 5. Front half of the orbits, over the photo
+      ORBITS.forEach((o, i) => orbit(o, i, true));
+
       ctx.globalAlpha = 1;
       if (reduce) cancelAnimationFrame(frame);
     };
@@ -269,20 +301,20 @@ export default function HeroPortrait() {
       ro.disconnect();
       io.disconnect();
       themeWatch.disconnect();
-      el.removeEventListener("pointermove", onMove);
-      el.removeEventListener("pointerleave", onLeave);
+      window.removeEventListener("pointermove", onMove);
     };
   }, []);
 
   return (
-    <div ref={wrap} className="hero-portrait relative aspect-[5/6] w-full max-w-[520px] md:ml-auto select-none">
+    <div ref={wrap} className="hero-portrait relative aspect-[3/4] w-full max-w-[460px] mx-auto md:mr-0 md:-mt-16 select-none">
       {/* Soft light behind the head */}
       <div
         aria-hidden
-        className="absolute left-1/2 top-[30%] h-[62%] w-[78%] -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl"
+        className="absolute left-1/2 top-[32%] h-[70%] w-[110%] -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl"
         style={{ background: "radial-gradient(closest-side, var(--hero-glow), transparent)" }}
       />
-      <div className="absolute bottom-0 top-[10%] left-[14%] w-[72%] portrait-in">
+      {/* Photo box: 90% of the width, 2:3, sitting on the bottom (matches the canvas maths) */}
+      <div className="absolute bottom-0 left-[5%] w-[90%] aspect-[2/3] portrait-in">
         <Image
           src="/images/profile-cutout.webp"
           alt="Mairo Pedro Isaac"
@@ -291,12 +323,17 @@ export default function HeroPortrait() {
           sizes="(max-width: 768px) 90vw, 420px"
           className="object-contain object-bottom"
           style={{
-            WebkitMaskImage: "radial-gradient(ellipse 62% 72% at 50% 36%, #000 66%, transparent 100%)",
-            maskImage: "radial-gradient(ellipse 62% 72% at 50% 36%, #000 66%, transparent 100%)",
+            WebkitMaskImage: "radial-gradient(ellipse 70% 78% at 50% 36%, #000 70%, transparent 100%)",
+            maskImage: "radial-gradient(ellipse 70% 78% at 50% 36%, #000 70%, transparent 100%)",
           }}
         />
       </div>
-      <canvas ref={canvas} aria-hidden className="absolute inset-0 pointer-events-none" />
+      {/* The network spreads past the photo on every side */}
+      <canvas
+        ref={canvas}
+        aria-hidden
+        className="absolute -left-[45%] -right-[25%] -top-[10%] -bottom-[8%] h-[118%] w-[170%] pointer-events-none"
+      />
     </div>
   );
 }

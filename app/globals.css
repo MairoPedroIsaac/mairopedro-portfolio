@@ -244,17 +244,17 @@
 
 /* Hero portrait network. Change --hero-accent to switch the accent colour. */
 :root {
-  --hero-line: rgba(255, 255, 255, 0.22);
-  --hero-node: rgba(255, 255, 255, 0.85);
-  --hero-accent: #ffffff;
-  --hero-fill: rgba(255, 255, 255, 0.035);
+  --hero-line: rgba(255, 255, 255, 0.28);
+  --hero-node: rgba(255, 255, 255, 0.9);
+  --hero-accent: #f5b800;
+  --hero-shard: 58, 58, 58;
   --hero-glow: rgba(255, 255, 255, 0.13);
 }
 :root[data-theme="light"] {
-  --hero-line: rgba(0, 0, 0, 0.2);
-  --hero-node: rgba(0, 0, 0, 0.75);
-  --hero-accent: #0a0a0a;
-  --hero-fill: rgba(0, 0, 0, 0.035);
+  --hero-line: rgba(0, 0, 0, 0.28);
+  --hero-node: rgba(0, 0, 0, 0.85);
+  --hero-accent: #e0a800;
+  --hero-shard: 18, 18, 18;
   --hero-glow: rgba(0, 0, 0, 0.07);
 }
 @keyframes portrait-in {
