@@ -117,14 +117,17 @@ const ORBITS = [
 
 export default function HeroPortrait() {
   const wrap = useRef<HTMLDivElement>(null);
-  const canvas = useRef<HTMLCanvasElement>(null);
+  const canvas = useRef<HTMLCanvasElement>(null); // behind the photo
+  const frontCanvas = useRef<HTMLCanvasElement>(null); // in front, only the shoulder shards
 
   useEffect(() => {
     const el = wrap.current;
     const cv = canvas.current;
-    if (!el || !cv) return;
+    const fcv = frontCanvas.current;
+    if (!el || !cv || !fcv) return;
     const ctx = cv.getContext("2d");
-    if (!ctx) return;
+    const fctx = fcv.getContext("2d");
+    if (!ctx || !fctx) return;
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const r = rand(7);
@@ -156,8 +159,8 @@ export default function HeroPortrait() {
       dpr = Math.min(window.devicePixelRatio || 1, 2);
       w = c.width;
       h = c.height;
-      cv.width = w * dpr;
-      cv.height = h * dpr;
+      cv.width = fcv.width = w * dpr;
+      cv.height = fcv.height = h * dpr;
       // the photo box inside the wrapper (matches the markup below)
       box.w = p.width * 0.9;
       box.h = box.w * 1.5;
@@ -213,29 +216,39 @@ export default function HeroPortrait() {
         n.y = Y(HEAD.v) + (by + dy + n.oy - Y(HEAD.v)) * ease;
       });
 
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.clearRect(0, 0, w, h);
-      ctx.lineCap = "round";
+      [ctx, fctx].forEach((c) => {
+        c.setTransform(dpr, 0, 0, dpr, 0, 0);
+        c.clearRect(0, 0, w, h);
+        c.lineCap = "round";
+      });
 
-      // 1. Shards
+      // FRONT CANVAS: shoulder shards, the only part that sits over the photo
       tris.forEach(({ a, b, c, shade }) => {
         const A = grid[a], B = grid[b], C = grid[c];
         const cy = (A.bv + B.bv + C.bv) / 3;
         const fade = Math.max(0, Math.min(1, (1.08 - cy) / 0.3));
-        ctx.globalAlpha = intro * fade;
-        ctx.fillStyle = `rgba(${colours.shard},${shade})`;
-        ctx.beginPath();
-        ctx.moveTo(A.x, A.y);
-        ctx.lineTo(B.x, B.y);
-        ctx.lineTo(C.x, C.y);
-        ctx.closePath();
-        ctx.fill();
-        ctx.strokeStyle = colours.line;
-        ctx.lineWidth = 0.8;
-        ctx.stroke();
+        fctx.globalAlpha = intro * fade;
+        fctx.fillStyle = `rgba(${colours.shard},${shade})`;
+        fctx.beginPath();
+        fctx.moveTo(A.x, A.y);
+        fctx.lineTo(B.x, B.y);
+        fctx.lineTo(C.x, C.y);
+        fctx.closePath();
+        fctx.fill();
+        fctx.strokeStyle = colours.line;
+        fctx.lineWidth = 0.8;
+        fctx.stroke();
+      });
+      grid.forEach((n) => {
+        if (!n.used) return;
+        fctx.globalAlpha = intro * Math.max(0, Math.min(1, (1.08 - n.bv) / 0.3));
+        fctx.fillStyle = n.hot ? colours.accent : colours.node;
+        fctx.beginPath();
+        fctx.arc(n.x, n.y, n.hot ? n.size + 0.8 : n.size * 0.8, 0, Math.PI * 2);
+        fctx.fill();
       });
 
-      // 2. Back half of the orbits (behind the head, fainter)
+      // BACK CANVAS (behind the photo): orbits, side network and nodes, so nothing covers the face
       const orbit = (o: (typeof ORBITS)[number], i: number, front: boolean) => {
         const tilt = o.tilt + (reduce ? 0 : Math.sin(t * 0.25 + i) * 0.05);
         const cx = X(HEAD.u), cy = Y(0.35 + 0.015 * i);
@@ -245,7 +258,7 @@ export default function HeroPortrait() {
         ctx.rotate(tilt);
         ctx.strokeStyle = colours.accent;
         ctx.lineWidth = o.width;
-        ctx.globalAlpha = (front ? 0.85 : 0.25) * intro;
+        ctx.globalAlpha = (front ? 0.9 : 0.45) * intro;
         ctx.beginPath();
         // front = lower half of the ellipse (in front of the face), back = upper half
         if (front) ctx.ellipse(0, 0, rx, ry, 0, 0.08 * Math.PI, 0.92 * Math.PI);
@@ -256,7 +269,7 @@ export default function HeroPortrait() {
           const a = ((t * o.speed + k / o.dots) % 1) * Math.PI * 2;
           const isFront = Math.sin(a) > 0;
           if (isFront !== front) continue;
-          ctx.globalAlpha = (front ? 1 : 0.45) * intro;
+          ctx.globalAlpha = (front ? 1 : 0.6) * intro;
           ctx.fillStyle = colours.accent;
           ctx.beginPath();
           ctx.arc(Math.cos(a) * rx, Math.sin(a) * ry, front ? 4 : 2.6, 0, Math.PI * 2);
@@ -266,7 +279,6 @@ export default function HeroPortrait() {
       };
       ORBITS.forEach((o, i) => orbit(o, i, false));
 
-      // 3. Network lines at the sides
       ctx.strokeStyle = colours.line;
       ctx.lineWidth = 1;
       sideEdges.forEach(([a, b]) => {
@@ -277,21 +289,18 @@ export default function HeroPortrait() {
         ctx.stroke();
       });
 
-      // 4. Nodes
-      all.forEach((n) => {
-        if (n.used === false) return;
-        const fade = n.bv > 0.6 ? Math.max(0, Math.min(1, (1.08 - n.bv) / 0.3)) : 1;
-        ctx.globalAlpha = intro * fade;
+      side.forEach((n) => {
+        ctx.globalAlpha = intro;
         ctx.fillStyle = n.hot ? colours.accent : colours.node;
         ctx.beginPath();
         ctx.arc(n.x, n.y, n.hot ? n.size + 0.8 : n.size * 0.8, 0, Math.PI * 2);
         ctx.fill();
       });
 
-      // 5. Front half of the orbits, over the photo
       ORBITS.forEach((o, i) => orbit(o, i, true));
 
       ctx.globalAlpha = 1;
+      fctx.globalAlpha = 1;
       if (reduce) cancelAnimationFrame(frame);
     };
     frame = requestAnimationFrame(draw);
@@ -313,6 +322,12 @@ export default function HeroPortrait() {
         className="absolute left-1/2 top-[32%] h-[70%] w-[110%] -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl"
         style={{ background: "radial-gradient(closest-side, var(--hero-glow), transparent)" }}
       />
+      {/* The network spreads past the photo on every side. This layer sits behind the photo. */}
+      <canvas
+        ref={canvas}
+        aria-hidden
+        className="absolute -left-[45%] -right-[25%] -top-[10%] -bottom-[8%] h-[118%] w-[170%] pointer-events-none"
+      />
       {/* Photo box: 90% of the width, 2:3, sitting on the bottom (matches the canvas maths) */}
       <div className="absolute bottom-0 left-[5%] w-[90%] aspect-[2/3] portrait-in">
         <Image
@@ -320,7 +335,8 @@ export default function HeroPortrait() {
           alt="Mairo Pedro Isaac"
           fill
           priority
-          sizes="(max-width: 768px) 90vw, 420px"
+          sizes="(max-width: 768px) 90vw, 440px"
+          quality={90}
           className="object-contain object-bottom"
           style={{
             WebkitMaskImage: "radial-gradient(ellipse 70% 78% at 50% 36%, #000 70%, transparent 100%)",
@@ -328,9 +344,9 @@ export default function HeroPortrait() {
           }}
         />
       </div>
-      {/* The network spreads past the photo on every side */}
+      {/* Only the shoulder shards are drawn in front of the photo */}
       <canvas
-        ref={canvas}
+        ref={frontCanvas}
         aria-hidden
         className="absolute -left-[45%] -right-[25%] -top-[10%] -bottom-[8%] h-[118%] w-[170%] pointer-events-none"
       />
