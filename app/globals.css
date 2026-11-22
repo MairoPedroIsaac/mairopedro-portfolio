@@ -241,3 +241,25 @@
     transform: translateY(-3px) scale(1.12);
   }
 }
+
+/* Hero portrait network. Change --hero-accent to switch the accent colour. */
+:root {
+  --hero-line: rgba(255, 255, 255, 0.22);
+  --hero-node: rgba(255, 255, 255, 0.85);
+  --hero-accent: #ffffff;
+  --hero-fill: rgba(255, 255, 255, 0.035);
+  --hero-glow: rgba(255, 255, 255, 0.13);
+}
+:root[data-theme="light"] {
+  --hero-line: rgba(0, 0, 0, 0.2);
+  --hero-node: rgba(0, 0, 0, 0.75);
+  --hero-accent: #0a0a0a;
+  --hero-fill: rgba(0, 0, 0, 0.035);
+  --hero-glow: rgba(0, 0, 0, 0.07);
+}
+@keyframes portrait-in {
+  from { opacity: 0; transform: translateY(24px) scale(1.03); }
+  to { opacity: 1; transform: none; }
+}
+.portrait-in { animation: portrait-in 1.4s cubic-bezier(0.2, 0.75, 0.15, 1) both; }
+@media (prefers-reduced-motion: reduce) { .portrait-in { animation: none; } }

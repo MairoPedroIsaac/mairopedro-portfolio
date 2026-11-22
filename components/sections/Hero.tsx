@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import HeroPortrait from "@/components/HeroPortrait";
 import LineReveal from "@/components/motion/LineReveal";
 import Reveal from "@/components/motion/Reveal";
 
@@ -63,16 +63,7 @@ export default function Hero() {
 
           {/* Portrait */}
           <div className="md:col-span-5 lg:col-span-4">
-            <div className="relative grain aspect-[4/5] w-full max-w-md md:ml-auto overflow-hidden rounded-[6px] bg-panel">
-              <Image
-                src="/images/profile.jpg"
-                alt="Mairo Pedro Isaac"
-                fill
-                priority
-                sizes="(max-width: 768px) 100vw, 40vw"
-                className="settle object-cover object-[center_30%]"
-              />
-            </div>
+            <HeroPortrait />
           </div>
         </div>
 
