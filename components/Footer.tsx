@@ -1,16 +1,15 @@
 import Link from "next/link";
 import Logo from "@/components/ui/Logo";
 import DownloadCVButton from "@/components/ui/DownloadCVButton";
-import { Mail } from "lucide-react";
-import { FaWhatsapp, FaFacebookF, FaLinkedinIn, FaGithub, FaInstagram } from "react-icons/fa";
+import { GmailLogo, WhatsAppLogo, FacebookLogo, LinkedInLogo, GitHubLogo, InstagramLogo } from "@/components/ui/BrandIcons";
 import { contact } from "@/lib/data";
 
 const socials = [
-  { label: "WhatsApp", href: contact.whatsapp, Icon: FaWhatsapp },
-  { label: "Facebook", href: contact.facebook, Icon: FaFacebookF },
-  { label: "LinkedIn", href: contact.linkedin, Icon: FaLinkedinIn },
-  { label: "GitHub", href: contact.github, Icon: FaGithub },
-  { label: "Instagram", href: contact.instagram, Icon: FaInstagram },
+  { label: "WhatsApp", href: contact.whatsapp, Icon: WhatsAppLogo },
+  { label: "Facebook", href: contact.facebook, Icon: FacebookLogo },
+  { label: "LinkedIn", href: contact.linkedin, Icon: LinkedInLogo },
+  { label: "GitHub", href: contact.github, Icon: GitHubLogo },
+  { label: "Instagram", href: contact.instagram, Icon: InstagramLogo },
 ];
 
 export default function Footer() {
@@ -36,7 +35,7 @@ export default function Footer() {
               </span>
               <span className="text-grey-1 text-sm">Available for work</span>
             </div>
-            <div className="flex gap-3 pt-2">
+            <div className="flex gap-5 pt-3">
               {socials.map(({ label, href, Icon }) => (
                 <a
                   key={label}
@@ -44,9 +43,9 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="w-9 h-9 flex items-center justify-center rounded-full border border-white/15 text-grey-1 hover:bg-white hover:text-black hover:border-white transition-all duration-300"
+                  className="flex items-center justify-center transition-transform duration-300 hover:scale-110"
                 >
-                  <Icon className="w-4 h-4" />
+                  <Icon className="w-6 h-6" />
                 </a>
               ))}
             </div>
@@ -75,7 +74,7 @@ export default function Footer() {
             <h4 className="text-white text-xs font-semibold uppercase tracking-[0.25em]">Contact</h4>
             <div className="flex flex-col gap-4">
               <div className="flex items-start gap-3">
-                <Mail className="w-4 h-4 text-grey-2 mt-0.5 flex-shrink-0" />
+                <GmailLogo className="w-4 h-4 mt-0.5 flex-shrink-0" />
                 <div>
                   <a href={`mailto:${contact.email}`} className="text-neutral-200 text-sm hover:text-white transition-colors no-underline">
                     {contact.email}
@@ -84,7 +83,7 @@ export default function Footer() {
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <FaFacebookF className="w-4 h-4 text-grey-2 mt-0.5 flex-shrink-0" />
+                <FacebookLogo className="w-4 h-4 mt-0.5 flex-shrink-0" />
                 <div>
                   <a href={contact.facebook} target="_blank" rel="noopener noreferrer" className="text-neutral-200 text-sm hover:text-white transition-colors no-underline">
                     {contact.facebookName}
