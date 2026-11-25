@@ -21,7 +21,7 @@ export default function WorkList({ limit }: { limit?: number }) {
 
           <Reveal className={`md:col-span-4 ${i % 2 ? "md:order-1" : ""}`}>
             <div className="flex items-baseline justify-between border-b border-white/15 pb-4 mb-5">
-              <span className="font-display text-5xl md:text-6xl font-extrabold text-white/15 leading-none">
+              <span className="font-display text-5xl md:text-6xl font-extrabold text-grey-1 leading-none tabular-nums">
                 {String(i + 1).padStart(2, "0")}
               </span>
               <span className="text-xs text-grey-2">{p.category}</span>

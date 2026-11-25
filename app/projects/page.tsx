@@ -1,29 +1,16 @@
 import LineReveal from "@/components/motion/LineReveal";
-import Reveal from "@/components/motion/Reveal";
 import WorkList from "@/components/sections/WorkList";
-import { projectOrder, projects } from "@/lib/data";
-
-// Counted from the project list, so the line stays right when a project is added.
-const words = ["No", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve"];
-const say = (n: number) => words[n] ?? String(n);
-const total = projectOrder.length;
-const forClients = projects.filter((p) => projectOrder.includes(p.slug) && p.category.startsWith("Client")).length;
-const own = total - forClients;
-const intro = `${say(total)} projects. ${say(forClients)} for ${forClients === 1 ? "a client" : "clients"}, ${say(own).toLowerCase()} of my own.`;
 
 export default function ProjectsPage() {
   return (
     <main className="min-h-screen">
       <section className="bg-black pt-36 md:pt-44 pb-16 md:pb-24 px-6 md:px-12 lg:px-24">
-        <div className="container-custom grid md:grid-cols-12 gap-8 items-end">
+        <div className="container-custom text-center">
           <LineReveal
             as="h1"
-            className="md:col-span-7 text-6xl md:text-8xl font-extrabold tracking-[-0.04em] text-white leading-none"
+            className="text-6xl md:text-8xl font-extrabold tracking-[-0.04em] text-white leading-none"
             lines={["Projects"]}
           />
-          <Reveal className="md:col-span-5" delay={150}>
-            <p className="text-neutral-400 text-lg md:text-xl leading-relaxed text-balance">{intro}</p>
-          </Reveal>
         </div>
       </section>
 
