@@ -13,6 +13,15 @@ export type CaseStudy = {
   intro: string;
   live?: string;
   github?: string;
+  links?: { label: string; href: string }[];
+  app?: {
+    heading: string;
+    text: string[];
+    image: string;
+    templates?: string;
+    download: string;
+    code: string;
+  };
   video: string;
   poster: string;
   stats: Stat[];
@@ -82,49 +91,77 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "swiftbill",
     title: "SwiftBill",
-    kind: "Web app I built",
+    kind: "Web and Android app I built",
     year: "2026",
-    role: "Product, design and full-stack build",
-    status: "Live",
+    role: "Product, design, web and mobile build",
+    status: "Live on the web, Android app out",
     intro:
-      "Invoices for freelancers. Try it as a guest and download a PDF straight away, or sign up to keep your clients, items and invoice history.",
+      "Invoices for freelancers and small teams. Make one on the website or on your Android phone, send a clean PDF, and get paid. One account works on both.",
     live: "https://swiftbill-swart.vercel.app/",
     github: "https://github.com/MairoPedroIsaac/swiftbill",
+    links: [
+      { label: "Android app code", href: "https://github.com/MairoPedroIsaac/swiftbill-mobile" },
+      { label: "Download the Android app", href: "https://github.com/MairoPedroIsaac/swiftbill-mobile/releases/latest" },
+    ],
+    app: {
+      heading: "On your phone too",
+      text: [
+        "I built the Android app with React Native and Expo. It signs in to the same account as the website, so an invoice you make on the phone is there when you open your laptop, and the other way round.",
+        "Pick a customer, add your items, choose a design and share the PDF straight to WhatsApp or email. You can sign in with Google or with your email, and add your business logo from the phone.",
+      ],
+      image: "/images/projects/swiftbill-android-app.webp",
+      templates: "/images/projects/swiftbill-android-templates.webp",
+      download: "https://github.com/MairoPedroIsaac/swiftbill-mobile/releases/latest",
+      code: "https://github.com/MairoPedroIsaac/swiftbill-mobile",
+    },
     video: "/videos/swiftbill.mp4",
     poster: "/videos/swiftbill-poster.jpg",
     stats: [
-      { value: 8, suffix: "+", label: "Pages built" },
-      { value: 3, label: "PDF templates" },
-      { text: "Next.js 15", label: "Main stack" },
+      { value: 2, label: "Apps, one account" },
+      { value: 3, label: "Invoice designs" },
+      { value: 12, label: "Currencies, RWF included" },
       { text: "Live", label: "Status" },
     ],
     problem: [
       "Most accounting tools are too heavy for a freelancer who just needs a clean invoice. Many also make you create an account before you can even try them.",
+      "And a lot of people run their whole business from their phone. A website alone was not enough.",
     ],
     approach: [
-      "SwiftBill gives two paths. A guest invoice builder right on the landing page, with drafts saved in the browser so nothing gets lost.",
-      "And a full dashboard behind sign in, using NextAuth, PostgreSQL and Prisma, for people who want to keep clients, items and past invoices.",
+      "I gave the website a bolder new design and added what people kept needing: three invoice designs, your own logo on every invoice, RWF and other currencies, Google sign in and a forgot password flow. You can still try it without an account and download the PDF straight away.",
+      "Then I built the Android app on top of the same backend and database, so web and phone always show the same invoices.",
     ],
     desktop: [
-      { src: "/images/projects/swiftbill-landing_page.png", label: "Landing page" },
-      { src: "/images/projects/swiftbill-dashboard.png", label: "Dashboard" },
-      { src: "/images/projects/swiftbill-invoice_builder1.png", label: "Invoice builder" },
-      { src: "/images/projects/swiftbill-invoice_builder2.png", label: "Invoice settings" },
+      { src: "/images/projects/swiftbill-web-landing.webp", label: "Landing page" },
+      { src: "/images/projects/swiftbill-web-dashboard.webp", label: "Dashboard" },
+      { src: "/images/projects/swiftbill-web-builder.webp", label: "Invoice builder" },
+      { src: "/images/projects/swiftbill-web-invoices.webp", label: "All invoices" },
+      { src: "/images/projects/swiftbill-web-settings.webp", label: "Business settings" },
+      { src: "/images/projects/swiftbill-web-signin.webp", label: "Sign in" },
     ],
     mobile: [
-      { src: "/images/projects/swiftbill-mobile-homepage.jpeg", label: "Landing page" },
-      { src: "/images/projects/swiftbill-mobile-dashboard.jpeg", label: "Dashboard" },
-      { src: "/images/projects/swiftbill-mobile_invoice_builder.jpeg", label: "Invoice builder" },
+      { src: "/images/projects/swiftbill-phone-landing.webp", label: "Landing page" },
+      { src: "/images/projects/swiftbill-phone-dashboard.webp", label: "Dashboard" },
+      { src: "/images/projects/swiftbill-phone-invoices.webp", label: "All invoices" },
+      { src: "/images/projects/swiftbill-phone-builder.webp", label: "Invoice designs" },
+      { src: "/images/projects/swiftbill-phone-settings.webp", label: "Business settings" },
+      { src: "/images/projects/swiftbill-phone-signin.webp", label: "Sign in" },
     ],
     solved: [
-      { problem: "Let visitors try it with zero friction, but still give signed up users saved data.", solution: "A guest builder that only downloads PDFs and autosaves drafts in the browser, next to a full dashboard backed by the database." },
-      { problem: "Two invoices could get the same number if they were created at the same moment.", solution: "Invoice numbers are assigned inside a database transaction with Prisma, so the sequence never repeats." },
-      { problem: "Making good looking PDFs without a heavy server.", solution: "PDFs are generated in the browser, with Minimal, Modern and Classic templates." },
-      { problem: "Keeping the dashboard fast once someone has hundreds of invoices.", solution: "Server side pagination with the Next.js App Router and Prisma, loading only what is on screen." },
+      { problem: "The website signs people in with browser cookies, which a phone app cannot use.", solution: "I added a small mobile layer to the API. The app gets a signed token, and every route accepts either the web cookie or the token. One backend, one database." },
+      { problem: "Google sign in had to work inside the Android app.", solution: "The app opens Google sign in through the website, then comes back with a secure link that only opens SwiftBill, so the token cannot go anywhere else." },
+      { problem: "Two invoices could get the same number, now from two different apps.", solution: "Invoice numbers are given out by the server inside a database transaction, so web and phone never clash." },
+      { problem: "Some currencies, like RWF, have no cents.", solution: "Amounts are formatted per currency, the same way on web and mobile, so FRw 45,000 never shows up as 45,000.00." },
+      { problem: "Logos come in every size, and big files make PDFs slow and heavy.", solution: "Logos and photos are resized and compressed before they are saved, so every invoice stays light and sharp." },
+      { problem: "Making good looking PDFs without a heavy server.", solution: "PDFs are made on the device, with jsPDF on the web and Expo Print on Android, in the same three designs: Minimal, Modern and Classic." },
     ],
-    stack: ["Next.js 15", "TypeScript", "Tailwind CSS", "PostgreSQL", "Prisma", "Supabase", "NextAuth", "jsPDF"],
+    stack: ["Next.js 15", "React Native", "Expo", "TypeScript", "PostgreSQL", "Prisma", "NextAuth", "Supabase", "jsPDF", "EAS Build"],
     result: [
-      "SwiftBill is live on Vercel. Guests can make and download an invoice in a minute, and signed in users keep everything in one place. PDFs are made on the device, so downloads are instant.",
+      "SwiftBill is live on the web, and the Android app is ready to download. Sign in on either one and your clients, items and invoices are already there.",
+      "I tested the app on a real Android phone: sign in with email and Google, making invoices, all three designs, and sharing PDFs on WhatsApp.",
+    ],
+    next: [
+      { label: "Next up", text: "A Google Play release." },
+      { label: "Also planned", text: "Edit and delete invoices on the phone, and drafts that work offline." },
     ],
   },
   {

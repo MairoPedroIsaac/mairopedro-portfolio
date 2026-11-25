@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Download } from "lucide-react";
 import { caseStudies, caseStudyOrder, type CaseStudy } from "@/lib/caseStudies";
 import LineReveal from "@/components/motion/LineReveal";
 import Reveal from "@/components/motion/Reveal";
@@ -47,6 +47,11 @@ export default function CaseStudyPage({ slug }: { slug: string }) {
                     Code on GitHub <ArrowUpRight className="h-4 w-4" />
                   </a>
                 )}
+                {c.links?.map((l) => (
+                  <a key={l.href} href={l.href} target="_blank" rel="noopener noreferrer" className="draw-link pb-0.5 text-grey-1 hover:text-white inline-flex items-center gap-1">
+                    {l.label} <ArrowUpRight className="h-4 w-4" />
+                  </a>
+                ))}
               </div>
             </Reveal>
           </div>
@@ -115,6 +120,50 @@ export default function CaseStudyPage({ slug }: { slug: string }) {
           <ScreensToggle desktop={c.desktop} mobile={c.mobile} />
         </div>
       </section>
+
+      {/* Companion app, when there is one */}
+      {c.app && (
+        <section className="px-6 md:px-12 lg:px-24 pb-24 md:pb-32">
+          <div className="container-custom">
+            <div className="grid md:grid-cols-12 gap-10 md:gap-14 items-end mb-10 md:mb-14">
+              <div className="md:col-span-6">
+                <Reveal>
+                  <p className="text-sm text-grey-2 mb-5">Android app</p>
+                </Reveal>
+                <LineReveal as="h2" className="text-4xl md:text-6xl font-extrabold tracking-[-0.03em] leading-[1.02]" lines={[c.app.heading]} />
+              </div>
+              <Reveal className="md:col-span-6 space-y-4 text-lg text-neutral-400 leading-relaxed" delay={150}>
+                {c.app.text.map((p) => (
+                  <p key={p}>{p}</p>
+                ))}
+                <div className="pt-3 flex flex-wrap items-center gap-x-7 gap-y-4 text-sm font-semibold">
+                  <a
+                    href={c.app.download}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-full bg-white text-black px-5 py-3 transition-transform duration-300 hover:-translate-y-0.5"
+                  >
+                    <Download className="h-4 w-4" /> Download the APK
+                  </a>
+                  <a href={c.app.code} target="_blank" rel="noopener noreferrer" className="draw-link pb-0.5 text-grey-1 hover:text-white inline-flex items-center gap-1">
+                    App code on GitHub <ArrowUpRight className="h-4 w-4" />
+                  </a>
+                </div>
+              </Reveal>
+            </div>
+
+            <Reveal className="relative aspect-[16/9] overflow-hidden rounded-[8px] border border-white/10">
+              <Image src={c.app.image} alt={`${c.title} Android app screens`} fill sizes="(min-width: 1024px) 1100px, 100vw" className="object-cover" />
+            </Reveal>
+
+            {c.app.templates && (
+              <Reveal className="mt-6 md:mt-8 relative aspect-[1600/620] overflow-hidden rounded-[8px] border border-white/10" delay={100}>
+                <Image src={c.app.templates} alt="Minimal, Modern and Classic invoice designs" fill sizes="(min-width: 1024px) 1100px, 100vw" className="object-cover" />
+              </Reveal>
+            )}
+          </div>
+        </section>
+      )}
 
       {/* Problems solved */}
       <section className="bg-white text-black px-6 md:px-12 lg:px-24 py-24 md:py-32">

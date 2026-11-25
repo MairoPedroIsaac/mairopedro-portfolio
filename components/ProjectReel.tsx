@@ -10,30 +10,37 @@ export default function ProjectReel({
   poster,
   title,
   href,
+  phoneVideo,
+  phonePoster,
 }: {
   video: string;
   poster: string;
   title: string;
   href: string;
+  // Optional portrait clip shown on phones instead of the wide one.
+  phoneVideo?: string;
+  phonePoster?: string;
 }) {
   const box = useRef<HTMLAnchorElement>(null);
   const vid = useRef<HTMLVideoElement>(null);
+  const phoneVid = useRef<HTMLVideoElement>(null);
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [hover, setHover] = useState(false);
 
   useEffect(() => {
-    const v = vid.current;
-    if (!v) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) v.play().catch(() => {});
-        else v.pause();
+      (entries) => {
+        entries.forEach((entry) => {
+          const v = entry.target as HTMLVideoElement;
+          if (entry.isIntersecting) v.play().catch(() => {});
+          else v.pause();
+        });
       },
       { threshold: 0.35 }
     );
-    io.observe(v);
+    [vid.current, phoneVid.current].forEach((v) => v && io.observe(v));
     return () => io.disconnect();
   }, []);
 
@@ -58,7 +65,21 @@ export default function ProjectReel({
           setTilt({ x: 0, y: 0 });
         }}
       >
-        <div className="aspect-[16/7]">
+        {phoneVideo && (
+          <div className="aspect-[4/5] md:hidden">
+            <video
+              ref={phoneVid}
+              src={phoneVideo}
+              poster={phonePoster}
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              className="h-full w-full object-cover object-top"
+            />
+          </div>
+        )}
+        <div className={`aspect-[16/7] ${phoneVideo ? "hidden md:block" : ""}`}>
           <video
             ref={vid}
             src={video}

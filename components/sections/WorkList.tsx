@@ -18,7 +18,7 @@ export default function WorkList({ limit }: { limit?: number }) {
       {list.map((p, i) => (
         <article key={p.slug} className="grid md:grid-cols-12 gap-8 md:gap-12 items-end">
           <div className={`md:col-span-8 ${i % 2 ? "md:order-2" : ""}`}>
-            <ProjectReel video={p.video} poster={p.poster} title={p.title} href={p.link} />
+            <ProjectReel video={p.video} poster={p.poster} title={p.title} href={p.link} phoneVideo={p.phoneVideo} phonePoster={p.phonePoster} />
           </div>
 
           <Reveal className={`md:col-span-4 ${i % 2 ? "md:order-1" : ""}`}>
@@ -31,7 +31,7 @@ export default function WorkList({ limit }: { limit?: number }) {
             <h3 className="text-3xl md:text-4xl font-bold text-white leading-tight">{p.title}</h3>
             <p className="mt-4 text-neutral-400 leading-relaxed">{p.summary}</p>
             <p className="mt-5 text-sm text-neutral-500">{p.techStack.slice(0, 4).join("  /  ")}</p>
-            <div className="mt-7 flex gap-6 text-sm font-semibold">
+            <div className="mt-7 flex flex-wrap gap-x-6 gap-y-3 text-sm font-semibold">
               <a href={p.link} className="draw-link text-white pb-0.5">
                 Case study
               </a>
@@ -43,6 +43,16 @@ export default function WorkList({ limit }: { limit?: number }) {
                   className="draw-link text-grey-1 hover:text-white pb-0.5"
                 >
                   Live site ↗
+                </a>
+              )}
+              {p.appLink && (
+                <a
+                  href={p.appLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="draw-link text-grey-1 hover:text-white pb-0.5"
+                >
+                  Android app ↗
                 </a>
               )}
             </div>
