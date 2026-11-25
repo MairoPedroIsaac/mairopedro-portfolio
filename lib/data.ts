@@ -77,7 +77,29 @@ export const projects = [
     link: "/projects/influence-trading-house",
     externalLink: "https://influence-trading-house.vercel.app",
   },
+  {
+    id: 5,
+    title: "Hibare Stays",
+    description: "A Kigali property platform for short and long stays, rentals and moving. Search by property type, neighbourhood and stay length, open a page for each home, price a move in USD or RWF, and discover neighbourhoods through local creators' reels.",
+    techStack: ["Next.js 16", "TypeScript", "React", "CSS"],
+    status: "In Development",
+    category: "Property Platform",
+    images: [
+      "/images/projects/hibare-web-home.webp",
+    ],
+    featured: false,
+    slug: "hibare-stays",
+    summary: "Stays, rentals and moving in Kigali, in one place. Search by neighbourhood and how long you're staying, open a page for each home, and price your move before you book it. Still in progress.",
+    video: "/videos/hibare.mp4",
+    poster: "/videos/hibare-poster.jpg",
+    phoneVideo: "/videos/hibare-phone.mp4",
+    phonePoster: "/videos/hibare-phone-poster.jpg",
+    link: "/projects/hibare-stays",
+  },
 ];
+
+// The order projects appear in. Client work first, then the products built to push further.
+export const projectOrder = ["powerhand-design", "swiftbill", "nephrosasa-rwanda", "hibare-stays", "influence-trading-house"];
 
 // SERVICES DATA
 export const services = [

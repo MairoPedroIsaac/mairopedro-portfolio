@@ -1,6 +1,7 @@
 import LineReveal from "@/components/motion/LineReveal";
 import Reveal from "@/components/motion/Reveal";
 import WorkList from "@/components/sections/WorkList";
+import { projectOrder } from "@/lib/data";
 
 export default function ProjectsPage() {
   return (
@@ -10,12 +11,19 @@ export default function ProjectsPage() {
           <LineReveal
             as="h1"
             className="md:col-span-7 text-6xl md:text-8xl font-extrabold tracking-[-0.04em] text-white leading-none"
-            lines={["Projects"]}
+            lines={[
+              <span key="t">
+                Projects
+                <span className="ml-2 md:ml-4 inline-block align-top pt-[0.2em] text-2xl md:text-4xl leading-none font-bold tracking-normal text-grey-2 tabular-nums">
+                  ({String(projectOrder.length).padStart(2, "0")})
+                </span>
+              </span>,
+            ]}
           />
           <Reveal className="md:col-span-5" delay={150}>
             <p className="text-neutral-400 text-lg leading-relaxed">
-              One website for a client, and three products I built to push myself: invoicing, health records and
-              trading. Every clip below is the real product. Click one to read how I built it.
+              One website for a client, and four products I built to push myself: invoicing, health records, renting
+              in Kigali and trading. Every clip below is the real product. Click one to read how I built it.
             </p>
           </Reveal>
         </div>

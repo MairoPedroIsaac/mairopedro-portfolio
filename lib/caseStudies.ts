@@ -280,6 +280,66 @@ export const caseStudies: CaseStudy[] = [
       { label: "Phase 5", text: "QuantConnect strategies and live trading" },
     ],
   },
+  {
+    slug: "hibare-stays",
+    title: "Hibare Stays",
+    kind: "Web app I'm building",
+    year: "2026",
+    role: "Design and full build",
+    status: "In development",
+    intro:
+      "Stays, rentals and moving in Kigali, in one place. Find a home by neighbourhood and how long you're staying, open its own page, and price your move before you book it. The tagline says it: more than stays, it's a lifestyle.",
+    video: "/videos/hibare.mp4",
+    poster: "/videos/hibare-poster.jpg",
+    stats: [
+      { value: 7, label: "Pages built" },
+      { value: 6, suffix: "+", label: "Neighbourhoods to search" },
+      { value: 2, label: "Currencies for moving quotes" },
+      { text: "$0", label: "Planned running cost" },
+    ],
+    problem: [
+      "Finding a trusted rental in Kigali means scrolling WhatsApp groups and calling agents. Prices are rarely clear, nobody tells you upfront how long you can stay, and once you find a place you are on your own for the move.",
+      "I wanted one place that answers the real questions: where, for how long, how much, and how do I get my things there.",
+    ],
+    approach: [
+      "I designed Hibare first as a static HTML, CSS and JavaScript site to get the look right. Then I rebuilt it as a Next.js app with the App Router and TypeScript, keeping the design pixel for pixel.",
+      "You search by property type, neighbourhood and stay length, from Kiyovu and Kimihurura to Rebero and Kicukiro. Every home gets its own page. Movers prices your move in USD or RWF, Muse Network shows local creators' reels of the area, and landlords can list a property.",
+    ],
+    desktop: [
+      { src: "/images/projects/hibare-web-home.webp", label: "Home" },
+      { src: "/images/projects/hibare-web-search.webp", label: "Property search" },
+      { src: "/images/projects/hibare-web-stays.webp", label: "Stays" },
+      { src: "/images/projects/hibare-web-listing.webp", label: "A listing" },
+      { src: "/images/projects/hibare-web-movers.webp", label: "Movers" },
+      { src: "/images/projects/hibare-web-calculator.webp", label: "Moving cost calculator" },
+      { src: "/images/projects/hibare-web-muse.webp", label: "Muse Network" },
+    ],
+    mobile: [
+      { src: "/images/projects/hibare-phone-home.webp", label: "Home" },
+      { src: "/images/projects/hibare-phone-search.webp", label: "Property search" },
+      { src: "/images/projects/hibare-phone-stays.webp", label: "Stays" },
+      { src: "/images/projects/hibare-phone-listing.webp", label: "A listing" },
+      { src: "/images/projects/hibare-phone-movers.webp", label: "Movers" },
+      { src: "/images/projects/hibare-phone-calculator.webp", label: "Moving cost calculator" },
+      { src: "/images/projects/hibare-phone-muse.webp", label: "Muse Network" },
+    ],
+    solved: [
+      { problem: "Every home needs to show up on Google on its own.", solution: "I chose Next.js so each listing gets a real page with its own address, like /stays/[id], instead of one page that loads everything in the browser." },
+      { problem: "Moving from a static design to an app usually means the design slowly drifts.", solution: "I rebuilt each page against the original design and kept the spacing, type and photos pixel faithful." },
+      { problem: "Stock video would look fake and nothing like Kigali.", solution: "Subtle motion on real photos instead: a glowing sun, drifting haze, birds, rising tea steam and a flickering candle." },
+      { problem: "Motion can bother some people and slip out of place on small screens.", solution: "It switches off for anyone with reduced motion turned on, and every layer stays lined up with its photo on phones." },
+      { problem: "People pay movers in both dollars and francs.", solution: "The calculator shows each quote in RWF and USD, with the rate per km and the base fee spelled out." },
+      { problem: "No budget for servers, a database, image hosting or logins.", solution: "A stack planned to cost nothing to run: Neon Postgres with Prisma, Auth.js logins for landlords, Cloudinary for images and free hosting." },
+    ],
+    stack: ["Next.js 16", "TypeScript", "React 19", "CSS"],
+    result: [
+      "The front end is built: search, stays with a page for every home, the moving calculator, Muse Network, About and List a Property. Listings are sample data for now while I connect the database.",
+    ],
+    next: [
+      { label: "Next up", text: "Neon Postgres and Prisma for real listings, Auth.js logins for landlords and Cloudinary for photos." },
+      { label: "Then", text: "A web app you can install on your phone, then a React Native (Expo) app on the same backend." },
+    ],
+  },
 ];
 
-export const caseStudyOrder = ["powerhand-design", "swiftbill", "nephrosasa-rwanda", "influence-trading-house"];
+export const caseStudyOrder = ["powerhand-design", "swiftbill", "nephrosasa-rwanda", "hibare-stays", "influence-trading-house"];

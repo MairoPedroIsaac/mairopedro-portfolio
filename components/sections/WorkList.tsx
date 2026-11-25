@@ -1,11 +1,9 @@
 "use client";
 
-import { projects } from "@/lib/data";
+import { projects, projectOrder as order } from "@/lib/data";
 import ProjectReel from "@/components/ProjectReel";
 import Reveal from "@/components/motion/Reveal";
 
-// Client work first, then the products built to push further.
-const order = ["powerhand-design", "swiftbill", "nephrosasa-rwanda", "influence-trading-house"];
 
 export default function WorkList({ limit }: { limit?: number }) {
   const list = order
