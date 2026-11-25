@@ -19,7 +19,7 @@ export default function About() {
 
   return (
     <section id="about" className="section-padding bg-white">
-      <div className="container-custom space-y-20">
+      <div className="container-page space-y-20">
         <div className="grid md:grid-cols-12 gap-14 items-start">
 
           {/* Story */}

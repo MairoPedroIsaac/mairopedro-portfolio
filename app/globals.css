@@ -82,6 +82,14 @@
     margin-left: auto;
     margin-right: auto;
   }
+  /* For content inside a section that already has the side padding.
+     68rem = 80rem minus the nav's 6rem padding on each side, so the content
+     lines up with the logo and the Download CV button. */
+  .container-page {
+    max-width: 68rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 /* Scrollbar */

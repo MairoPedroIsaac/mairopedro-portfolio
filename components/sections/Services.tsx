@@ -39,7 +39,7 @@ const services = [
 export default function Services() {
   return (
     <section id="services" className="section-padding bg-black">
-      <div className="container-custom">
+      <div className="container-page">
 
         {/* Header */}
         <div className="text-center space-y-4 mb-16">

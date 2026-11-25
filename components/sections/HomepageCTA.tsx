@@ -5,7 +5,7 @@ import Reveal from "@/components/motion/Reveal";
 export default function HomepageCTA() {
   return (
     <section className="bg-white text-black py-24 md:py-36 px-6 md:px-12 lg:px-24">
-      <div className="container-custom grid md:grid-cols-12 gap-10 items-end">
+      <div className="container-page grid md:grid-cols-12 gap-10 items-end">
         <LineReveal
           as="h2"
           className="md:col-span-8 text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-[-0.035em] leading-[0.98] text-black"

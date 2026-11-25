@@ -14,7 +14,7 @@ export default function Contact() {
 
   return (
     <section id="contact" className="bg-black px-6 md:px-12 lg:px-24 pb-24 md:pb-32">
-      <div className="container-custom grid md:grid-cols-12 gap-14 md:gap-10 items-start">
+      <div className="container-page grid md:grid-cols-12 gap-14 md:gap-10 items-start">
         {/* Left: info */}
         <Reveal className="md:col-span-5 space-y-6">
           <p className="text-lg text-neutral-400 leading-relaxed max-w-md">

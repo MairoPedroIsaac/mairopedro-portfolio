@@ -13,7 +13,7 @@ const promises = [
 export default function Hero() {
   return (
     <section id="home" className="relative bg-black pt-32 md:pt-40 pb-20 md:pb-28 px-6 md:px-12 lg:px-24 overflow-hidden">
-      <div className="container-custom">
+      <div className="container-page">
         <div className="grid md:grid-cols-12 gap-12 md:gap-10 items-end">
 
           {/* Words */}

@@ -18,7 +18,7 @@ export default function CaseStudyPage({ slug }: { slug: string }) {
     <main className="min-h-screen bg-black text-white">
       {/* Hero */}
       <section className="pt-32 md:pt-40 px-6 md:px-12 lg:px-24">
-        <div className="container-custom">
+        <div className="container-page">
           <Link href="/projects" className="inline-flex items-center gap-2 text-sm text-grey-2 hover:text-white transition-colors">
             <ArrowLeft className="h-4 w-4" /> All projects
           </Link>
@@ -75,14 +75,14 @@ export default function CaseStudyPage({ slug }: { slug: string }) {
 
       {/* 3D product stage */}
       <section className="px-6 md:px-12 lg:px-24 pt-16 md:pt-24">
-        <div className="container-custom">
+        <div className="container-page">
           <Stage3D video={c.video} poster={c.poster} phone={c.mobile[0].src} title={c.title} />
         </div>
       </section>
 
       {/* Numbers */}
       <section className="px-6 md:px-12 lg:px-24 py-20 md:py-28">
-        <div className="container-custom grid grid-cols-2 md:grid-cols-4 gap-y-10 border-y border-white/15 py-10 md:py-14">
+        <div className="container-page grid grid-cols-2 md:grid-cols-4 gap-y-10 border-y border-white/15 py-10 md:py-14">
           {c.stats.map((s) => (
             <div key={s.label} className="pr-6">
               <div className="font-display text-3xl sm:text-4xl md:text-6xl font-extrabold tracking-tight">
@@ -96,7 +96,7 @@ export default function CaseStudyPage({ slug }: { slug: string }) {
 
       {/* Problem and approach */}
       <section className="px-6 md:px-12 lg:px-24 pb-20 md:pb-28">
-        <div className="container-custom grid md:grid-cols-2 gap-14 md:gap-20">
+        <div className="container-page grid md:grid-cols-2 gap-14 md:gap-20">
           {[
             ["The problem", c.problem],
             ["What I did", c.approach],
@@ -115,7 +115,7 @@ export default function CaseStudyPage({ slug }: { slug: string }) {
 
       {/* Screens */}
       <section className="px-6 md:px-12 lg:px-24 pb-24 md:pb-32">
-        <div className="container-custom">
+        <div className="container-page">
           <LineReveal as="h2" className="text-4xl md:text-6xl font-extrabold tracking-[-0.03em] mb-10" lines={["The screens"]} />
           <ScreensToggle desktop={c.desktop} mobile={c.mobile} />
         </div>
@@ -124,7 +124,7 @@ export default function CaseStudyPage({ slug }: { slug: string }) {
       {/* Companion app, when there is one */}
       {c.app && (
         <section className="px-6 md:px-12 lg:px-24 pb-24 md:pb-32">
-          <div className="container-custom">
+          <div className="container-page">
             <div className="grid md:grid-cols-12 gap-10 md:gap-14 items-end mb-10 md:mb-14">
               <div className="md:col-span-6">
                 <Reveal>
@@ -167,7 +167,7 @@ export default function CaseStudyPage({ slug }: { slug: string }) {
 
       {/* Problems solved */}
       <section className="bg-white text-black px-6 md:px-12 lg:px-24 py-24 md:py-32">
-        <div className="container-custom grid md:grid-cols-12 gap-10">
+        <div className="container-page grid md:grid-cols-12 gap-10">
           <div className="md:col-span-4">
             <LineReveal
               as="h2"
@@ -193,7 +193,7 @@ export default function CaseStudyPage({ slug }: { slug: string }) {
 
       {/* Result */}
       <section className="px-6 md:px-12 lg:px-24 py-24 md:py-32">
-        <div className="container-custom grid md:grid-cols-12 gap-10">
+        <div className="container-page grid md:grid-cols-12 gap-10">
           <div className="md:col-span-4">
             <h2 className="text-3xl md:text-4xl font-extrabold tracking-[-0.03em]">The result</h2>
           </div>
@@ -220,7 +220,7 @@ export default function CaseStudyPage({ slug }: { slug: string }) {
 
       {/* Next project */}
       <section className="px-6 md:px-12 lg:px-24 pb-24 md:pb-32">
-        <Link href={`/projects/${next.slug}`} className="group container-custom block border-t border-white/15 pt-10">
+        <Link href={`/projects/${next.slug}`} className="group container-page block border-t border-white/15 pt-10">
           <div className="flex items-end justify-between gap-6">
             <div>
               <div className="text-sm text-grey-2">Next project</div>
