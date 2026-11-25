@@ -60,7 +60,7 @@ export default function ScreensToggle({ desktop, mobile }: { desktop: Shot[]; mo
             <Image
               key={s.src}
               src={s.src}
-              alt={s.label}
+              alt={s.alt ?? s.label}
               fill
               sizes="(max-width: 1280px) 100vw, 1280px"
               className={`object-contain object-center transition-all duration-700 ${k === i ? "opacity-100 scale-100" : "opacity-0 scale-[1.03]"}`}
@@ -77,7 +77,7 @@ export default function ScreensToggle({ desktop, mobile }: { desktop: Shot[]; mo
                 k === i ? "border-white" : "border-[#1a1a1a] opacity-60 hover:opacity-100"
               }`}
             >
-              <Image src={s.src} alt={s.label} fill sizes="260px" className="object-cover object-top" />
+              <Image src={s.src} alt={s.alt ?? s.label} fill sizes="260px" className="object-cover object-top" />
             </button>
           ))}
         </div>

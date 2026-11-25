@@ -1,6 +1,6 @@
 // Content for each case study page. One shared layout renders all of them.
 
-export type Shot = { src: string; label: string };
+export type Shot = { src: string; label: string; alt?: string };
 export type Stat = { value: number; suffix?: string; prefix?: string; label: string } | { text: string; label: string };
 
 export type CaseStudy = {
@@ -174,7 +174,7 @@ export const caseStudies: CaseStudy[] = [
     intro:
       "Kidney risk checks and health records for people living with high blood pressure or type 2 diabetes, with secure record sharing and online visits with kidney doctors.",
     live: "https://nephrosasa-rwanda.vercel.app/en",
-    github: "https://github.com/MairoPedroIsaac/healthvault-rwanda",
+    github: "https://github.com/MairoPedroIsaac/nephrosasa-rwanda",
     video: "/videos/nephrosasa.mp4",
     poster: "/videos/nephrosasa-poster.jpg",
     stats: [
@@ -192,22 +192,20 @@ export const caseStudies: CaseStudy[] = [
       "When risk goes up, the care team gets an email, and the patient can share their records with a doctor through an encrypted QR code.",
     ],
     desktop: [
-      { src: "/images/projects/nephrosasa-laptop-homepage.png", label: "Home" },
-      { src: "/images/projects/nephrosasa-laptop-login.png", label: "Sign in by role" },
-      { src: "/images/projects/nephrosasa-patient-dashboard.png", label: "Patient risk over time" },
-      { src: "/images/projects/nephrosasa-patient-vital-log.png", label: "Logging vitals" },
-      { src: "/images/projects/nephrosasa-patient-qrcode-sharing.png", label: "QR record sharing" },
-      { src: "/images/projects/nephrosasa-doctor-dashboard.png", label: "Doctor dashboard" },
-      { src: "/images/projects/nephrosasa-doctor-qrcode-scanner.png", label: "Doctor QR scanner" },
+      { src: "/projects/nephrosasa/nephrosasa-home.webp", label: "Home", alt: "NephroSasa home page: Monitor your kidneys, before it's too late" },
+      { src: "/projects/nephrosasa/nephrosasa-patient-dashboard.webp", label: "Patient dashboard", alt: "Patient dashboard showing a moderate kidney risk level, blood pressure trend and health ID card" },
+      { src: "/projects/nephrosasa/nephrosasa-patient-consultations.webp", label: "Booking a consultation", alt: "Patient booking a virtual consultation with a nephrologist, next appointment confirmed" },
+      { src: "/projects/nephrosasa/nephrosasa-doctor-dashboard.webp", label: "Doctor dashboard", alt: "Doctor dashboard with practice overview, patient alerts and quick actions" },
+      { src: "/projects/nephrosasa/nephrosasa-doctor-schedule.webp", label: "Doctor schedule", alt: "Doctor schedule listing a confirmed virtual consultation" },
+      { src: "/projects/nephrosasa/nephrosasa-patient-dashboard-dark.webp", label: "Dark mode", alt: "Patient dashboard in dark mode" },
     ],
     mobile: [
-      { src: "/images/projects/nephrosasa-mobile-homepage.jpeg", label: "Home" },
-      { src: "/images/projects/nephrosasa-mobile-login.jpeg", label: "Sign in" },
-      { src: "/images/projects/nephrosasa-mobile-dashboard.jpeg", label: "Risk dashboard" },
-      { src: "/images/projects/nephrosasa-mobile-patient-vital-logs.jpeg", label: "Logging vitals" },
-      { src: "/images/projects/nephrosasa-mobile-patient-qrcode-share.jpeg", label: "QR sharing" },
-      { src: "/images/projects/nephrosasa-mobile-doctor-dashboard.jpeg", label: "Doctor portal" },
-      { src: "/images/projects/nephrosasa-mobile-doctor-qrcode-scanner.jpeg", label: "Doctor QR scanner" },
+      { src: "/projects/nephrosasa/nephrosasa-phone-home.webp", label: "Home", alt: "NephroSasa home page on a phone" },
+      { src: "/projects/nephrosasa/nephrosasa-phone-patient-dashboard.webp", label: "Patient dashboard", alt: "Patient dashboard on a phone showing a moderate kidney risk level" },
+      { src: "/projects/nephrosasa/nephrosasa-phone-patient-consultations.webp", label: "Booking a consultation", alt: "Booking a consultation on a phone" },
+      { src: "/projects/nephrosasa/nephrosasa-phone-doctor-dashboard.webp", label: "Doctor dashboard", alt: "Doctor dashboard on a phone" },
+      { src: "/projects/nephrosasa/nephrosasa-phone-doctor-schedule.webp", label: "Doctor schedule", alt: "Doctor schedule on a phone" },
+      { src: "/projects/nephrosasa/nephrosasa-phone-patient-dashboard-dark.webp", label: "Dark mode", alt: "Patient dashboard on a phone in dark mode" },
     ],
     solved: [
       { problem: "The clinical data was very unbalanced, which risks missing people who are actually sick.", solution: "SMOTE, scaling and 5-fold stratified cross validation on 1,659 records, reaching 84.94% accuracy without missing early cases." },
