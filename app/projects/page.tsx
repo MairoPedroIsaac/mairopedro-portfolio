@@ -3,15 +3,13 @@ import Reveal from "@/components/motion/Reveal";
 import WorkList from "@/components/sections/WorkList";
 import { projectOrder, projects } from "@/lib/data";
 
-// Counted from the project list, so the numbers stay right when a project is added.
+// Counted from the project list, so the line stays right when a project is added.
+const words = ["No", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve"];
+const say = (n: number) => words[n] ?? String(n);
 const total = projectOrder.length;
 const forClients = projects.filter((p) => projectOrder.includes(p.slug) && p.category.startsWith("Client")).length;
-const counts = [
-  [total, total === 1 ? "Project" : "Projects"],
-  [forClients, forClients === 1 ? "For a client" : "For clients"],
-  [total - forClients, "Products of my own"],
-] as const;
-const pad = (n: number) => String(n).padStart(2, "0");
+const own = total - forClients;
+const intro = `${say(total)} projects. ${say(forClients)} for ${forClients === 1 ? "a client" : "clients"}, ${say(own).toLowerCase()} of my own.`;
 
 export default function ProjectsPage() {
   return (
@@ -24,21 +22,9 @@ export default function ProjectsPage() {
             lines={["Projects"]}
           />
           <Reveal className="md:col-span-5" delay={150}>
-            <p className="text-neutral-400 text-lg leading-relaxed">
-              One website for a client, and four products I built to push myself: invoicing, health records, renting
-              in Kigali and trading. Every clip below is the real product. Click one to read how I built it.
-            </p>
+            <p className="text-neutral-400 text-lg md:text-xl leading-relaxed text-balance">{intro}</p>
           </Reveal>
         </div>
-
-        <Reveal className="container-custom mt-14 md:mt-20 grid grid-cols-3 border-t border-white/15" delay={250}>
-          {counts.map(([n, label]) => (
-            <div key={label} className="pt-6 pr-4">
-              <div className="font-display text-4xl md:text-6xl font-extrabold tracking-tight text-white tabular-nums">{pad(n)}</div>
-              <div className="mt-2 text-sm text-grey-2">{label}</div>
-            </div>
-          ))}
-        </Reveal>
       </section>
 
       <section className="bg-black pb-28 md:pb-36 px-6 md:px-12 lg:px-24">
