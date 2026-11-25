@@ -8,8 +8,8 @@ export const projects = [
     status: "Completed",
     category: "Capstone Project",
     images: [
-      "/projects/nephrosasa/nephrosasa-patient-dashboard.webp",
       "/projects/nephrosasa/nephrosasa-home.webp",
+      "/projects/nephrosasa/nephrosasa-patient-dashboard.webp",
       "/projects/nephrosasa/nephrosasa-doctor-dashboard.webp",
     ],
     featured: true,

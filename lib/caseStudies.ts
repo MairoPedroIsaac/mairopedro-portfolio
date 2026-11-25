@@ -194,17 +194,19 @@ export const caseStudies: CaseStudy[] = [
     desktop: [
       { src: "/projects/nephrosasa/nephrosasa-home.webp", label: "Home", alt: "NephroSasa home page: Monitor your kidneys, before it's too late" },
       { src: "/projects/nephrosasa/nephrosasa-patient-dashboard.webp", label: "Patient dashboard", alt: "Patient dashboard showing a moderate kidney risk level, blood pressure trend and health ID card" },
-      { src: "/projects/nephrosasa/nephrosasa-patient-consultations.webp", label: "Booking a consultation", alt: "Patient booking a virtual consultation with a nephrologist, next appointment confirmed" },
+      { src: "/projects/nephrosasa/nephrosasa-patient-share-record.webp", label: "Sharing a record by QR", alt: "Patient sharing their health record with an active QR code and share link" },
+      { src: "/projects/nephrosasa/nephrosasa-doctor-scan-qr.webp", label: "Doctor scans the QR", alt: "Doctor portal page for scanning a patient QR code or entering a share token" },
       { src: "/projects/nephrosasa/nephrosasa-doctor-dashboard.webp", label: "Doctor dashboard", alt: "Doctor dashboard with practice overview, patient alerts and quick actions" },
-      { src: "/projects/nephrosasa/nephrosasa-doctor-schedule.webp", label: "Doctor schedule", alt: "Doctor schedule listing a confirmed virtual consultation" },
+      { src: "/projects/nephrosasa/nephrosasa-patient-consultations.webp", label: "Booking a consultation", alt: "Patient booking a virtual consultation with a nephrologist, next appointment confirmed" },
       { src: "/projects/nephrosasa/nephrosasa-patient-dashboard-dark.webp", label: "Dark mode", alt: "Patient dashboard in dark mode" },
     ],
     mobile: [
       { src: "/projects/nephrosasa/nephrosasa-phone-home.webp", label: "Home", alt: "NephroSasa home page on a phone" },
       { src: "/projects/nephrosasa/nephrosasa-phone-patient-dashboard.webp", label: "Patient dashboard", alt: "Patient dashboard on a phone showing a moderate kidney risk level" },
-      { src: "/projects/nephrosasa/nephrosasa-phone-patient-consultations.webp", label: "Booking a consultation", alt: "Booking a consultation on a phone" },
+      { src: "/projects/nephrosasa/nephrosasa-phone-patient-share-record.webp", label: "Sharing a record by QR", alt: "Health record QR code on a phone" },
+      { src: "/projects/nephrosasa/nephrosasa-phone-doctor-scan-qr.webp", label: "Doctor scans the QR", alt: "Scanning a patient QR code on a phone" },
       { src: "/projects/nephrosasa/nephrosasa-phone-doctor-dashboard.webp", label: "Doctor dashboard", alt: "Doctor dashboard on a phone" },
-      { src: "/projects/nephrosasa/nephrosasa-phone-doctor-schedule.webp", label: "Doctor schedule", alt: "Doctor schedule on a phone" },
+      { src: "/projects/nephrosasa/nephrosasa-phone-patient-consultations.webp", label: "Booking a consultation", alt: "Booking a consultation on a phone" },
       { src: "/projects/nephrosasa/nephrosasa-phone-patient-dashboard-dark.webp", label: "Dark mode", alt: "Patient dashboard on a phone in dark mode" },
     ],
     solved: [

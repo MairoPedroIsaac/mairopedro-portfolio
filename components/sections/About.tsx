@@ -1,7 +1,7 @@
 "use client";
 
 import DownloadCVButton from "@/components/ui/DownloadCVButton";
-import { skills } from "@/lib/data";
+import { skills, projectOrder } from "@/lib/data";
 import TechBadge from "@/components/ui/TechBadge";
 import LineReveal from "@/components/motion/LineReveal";
 import Reveal from "@/components/motion/Reveal";
@@ -10,7 +10,8 @@ import LightUpOnView from "@/components/motion/LightUpOnView";
 
 const facts = [
   { value: 4, suffix: "+", label: "Years of experience" },
-  { value: 4, suffix: "", label: "Projects built and online" },
+  // Counted from the project list, so it stays right when a project is added.
+  { value: projectOrder.length, suffix: "", label: "Projects built" },
   { value: 100, suffix: "%", label: "Delivered on time" },
 ];
 

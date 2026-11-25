@@ -6,6 +6,12 @@ import Testimonial from "@/components/sections/Testimonial";
 import WorkList from "@/components/sections/WorkList";
 import LineReveal from "@/components/motion/LineReveal";
 import Reveal from "@/components/motion/Reveal";
+import { projectOrder } from "@/lib/data";
+
+// Counted from the project list, so it stays right when a project is added.
+const total = projectOrder.length;
+const words = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
+const totalWord = words[total] ?? String(total);
 
 export default function Home() {
   return (
@@ -24,11 +30,10 @@ export default function Home() {
             />
             <Reveal className="md:col-span-5">
               <p className="text-neutral-400 leading-relaxed">
-                A website I built for a client, and an app I built for freelancers. There&apos;s more on the projects
-                page.
+                Two of the {totalWord} I&apos;ve built. A website for a client, and an invoicing app for freelancers.
               </p>
               <Link href="/projects" className="draw-link inline-block mt-4 text-sm font-semibold text-white pb-0.5">
-                See all 4 projects →
+                See all {total} projects →
               </Link>
             </Reveal>
           </div>
