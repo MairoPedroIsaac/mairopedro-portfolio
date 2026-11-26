@@ -14,11 +14,12 @@ export default function ProjectsPage() {
             lines={["Projects"]}
           />
           {/* Counts itself from the project list */}
-          <Reveal className="text-right pb-1 md:pb-2" delay={200}>
-            <div className="font-display text-4xl md:text-6xl font-extrabold text-grey-1 leading-none tabular-nums">
+          {/* Smaller and lighter than the 01, 02 project numbers so it reads as a total */}
+          <Reveal className="text-right pb-1.5 md:pb-3" delay={200}>
+            <div className="font-display text-2xl md:text-4xl font-medium text-grey-2 leading-none tabular-nums">
               {String(projectOrder.length).padStart(2, "0")}
             </div>
-            <div className="mt-2 text-xs md:text-sm text-grey-2">In total</div>
+            <div className="mt-1.5 text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-grey-2">In total</div>
           </Reveal>
         </div>
       </section>
