@@ -102,7 +102,10 @@ export const projects = [
 ];
 
 // The order projects appear in. Client work first, then the products built to push further.
-export const projectOrder = ["powerhand-design", "hibare-stays", "swiftbill", "nephrosasa-rwanda", "influence-trading-house"];
+export const projectOrder = ["powerhand-design", "nephrosasa-rwanda", "swiftbill", "hibare-stays", "influence-trading-house"];
+
+// The two projects shown on the home page.
+export const homeProjects = ["powerhand-design", "swiftbill"];
 
 // SERVICES DATA
 export const services = [

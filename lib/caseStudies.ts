@@ -341,4 +341,4 @@ export const caseStudies: CaseStudy[] = [
   },
 ];
 
-export const caseStudyOrder = ["powerhand-design", "hibare-stays", "swiftbill", "nephrosasa-rwanda", "influence-trading-house"];
+export const caseStudyOrder = ["powerhand-design", "nephrosasa-rwanda", "swiftbill", "hibare-stays", "influence-trading-house"];

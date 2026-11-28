@@ -5,9 +5,9 @@ import ProjectReel from "@/components/ProjectReel";
 import Reveal from "@/components/motion/Reveal";
 
 
-export default function WorkList({ limit }: { limit?: number }) {
-  const list = order
-    .slice(0, limit ?? order.length)
+// Pass `slugs` to show only those projects (the home page does), otherwise all of them in order.
+export default function WorkList({ slugs }: { slugs?: string[] }) {
+  const list = (slugs ?? order)
     .map((slug) => projects.find((p) => p.slug === slug))
     .filter((p): p is (typeof projects)[number] => Boolean(p));
 
