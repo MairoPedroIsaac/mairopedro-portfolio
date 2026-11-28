@@ -30,7 +30,7 @@ export default function Home() {
             />
             <Reveal className="md:col-span-5">
               <p className="text-neutral-400 leading-relaxed">
-                Two of the {totalWord} I&apos;ve built. A website for a client, and an invoicing app for freelancers.
+                Three of the {totalWord} I&apos;ve built. A website for a client, a stays and rentals site for Kigali, and an invoicing app for freelancers.
               </p>
               <Link href="/projects" className="draw-link inline-block mt-4 text-sm font-semibold text-white pb-0.5">
                 See all {total} projects →
@@ -38,7 +38,7 @@ export default function Home() {
             </Reveal>
           </div>
 
-          <WorkList limit={2} />
+          <WorkList limit={3} />
         </div>
       </section>
 

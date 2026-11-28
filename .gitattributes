@@ -1,0 +1,7 @@
+# Keep these byte for byte (no line ending changes)
+*.pdf binary
+*.webp binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.mp4 binary

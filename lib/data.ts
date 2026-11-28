@@ -82,26 +82,27 @@ export const projects = [
   {
     id: 5,
     title: "Hibare Stays",
-    description: "A Kigali property platform for short and long stays, rentals and moving. Search by property type, neighbourhood and stay length, open a page for each home, price a move in USD or RWF, and discover neighbourhoods through local creators' reels.",
-    techStack: ["Next.js 16", "TypeScript", "React", "CSS"],
-    status: "In Development",
+    description: "A website for Hibare, a Kigali brand for furnished stays and rentals. Browse and filter homes, send enquiries, get an instant moving quote and list a property, with Google or email sign-in, photo uploads and a private back office for the team.",
+    techStack: ["Next.js 16", "Prisma 7", "Neon Postgres", "Auth.js", "Cloudinary", "TypeScript", "Nodemailer", "Vercel"],
+    status: "Completed",
     category: "Property Platform",
     images: [
       "/images/projects/hibare-web-home.webp",
     ],
-    featured: false,
+    featured: true,
     slug: "hibare-stays",
-    summary: "Stays, rentals and moving in Kigali, in one place. Search by neighbourhood and how long you're staying, open a page for each home, and price your move before you book it. Still in progress.",
+    summary: "Furnished stays and rentals in Kigali. Browse homes, send an enquiry, get a moving quote or list your place, and the team runs it all from a back office.",
     video: "/videos/hibare.mp4",
     poster: "/videos/hibare-poster.jpg",
     phoneVideo: "/videos/hibare-phone.mp4",
     phonePoster: "/videos/hibare-phone-poster.jpg",
     link: "/projects/hibare-stays",
+    externalLink: "https://hibare-stays.vercel.app",
   },
 ];
 
 // The order projects appear in. Client work first, then the products built to push further.
-export const projectOrder = ["powerhand-design", "swiftbill", "nephrosasa-rwanda", "hibare-stays", "influence-trading-house"];
+export const projectOrder = ["powerhand-design", "hibare-stays", "swiftbill", "nephrosasa-rwanda", "influence-trading-house"];
 
 // SERVICES DATA
 export const services = [
